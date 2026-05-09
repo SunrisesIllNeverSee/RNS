@@ -1,0 +1,126 @@
+================================================================
+  SIGSYSTEM -- SIGNAL CLASSIFICATION & MEASUREMENT
+  "Every word is unresolved until the system
+   collapses it."
+================================================================
+  Generated:  2026-03-02 11:17:43
+  Engine:     sigsystem.py v1.0
+
+================================================================
+  SESSION SNR
+================================================================
+  Total Threads:             24
+  Total Messages:            24
+  Total Words Processed:     119,569
+  Signal Words:              35,503
+  Noise Words:               84,066
+  Stop Words:                43,203
+
+  SNR (Normalized 0-1):      0.2969
+  SNR (Ratio S/N):           0.4223
+  SNR (dB):                  -3.74 dB
+  Signal Density:            0.4649
+
+================================================================
+  CLASSIFICATION SUMMARY
+================================================================
+  Total Words Classified:    7,807
+  Classified as SIGNAL:      567  (7.3%)
+  Classified as NOISE:       7,240  (92.7%)
+
+  Signal Trajectories:
+    RISING         1,007 words
+    STABLE         1,185 words
+    DECLINING      1,401 words
+    SPARSE         4,214 words
+
+================================================================
+  TOP 20 SIGNAL WORDS (highest signal weight)
+================================================================
+   1. commitment              SW:0.686  NW:0.314  CTX:0.404  NEC:0.807  STABLE
+   2. conservation            SW:0.662  NW:0.338  CTX:0.334  NEC:0.807  STABLE
+   3. live                    SW:0.658  NW:0.342  CTX:0.387  NEC:0.737  DECLINING
+   4. recursive               SW:0.657  NW:0.343  CTX:0.352  NEC:0.807  DECLINING
+   5. transformation          SW:0.657  NW:0.343  CTX:0.352  NEC:0.807  DECLINING
+   6. moses                   SW:0.654  NW:0.346  CTX:0.527  NEC:0.527  STABLE
+   7. invariant               SW:0.654  NW:0.346  CTX:0.334  NEC:0.807  DECLINING
+   8. backend                 SW:0.649  NW:0.351  CTX:0.334  NEC:0.737  STABLE
+   9. protocol                SW:0.648  NW:0.351  CTX:0.457  NEC:0.597  STABLE
+  10. build                   SW:0.648  NW:0.352  CTX:0.509  NEC:0.527  STABLE
+  11. frontend                SW:0.646  NW:0.354  CTX:0.317  NEC:0.737  RISING
+  12. engine                  SW:0.645  NW:0.355  CTX:0.352  NEC:0.737  DECLINING
+  13. application             SW:0.643  NW:0.357  CTX:0.334  NEC:0.737  STABLE
+  14. signal                  SW:0.641  NW:0.359  CTX:0.492  NEC:0.527  STABLE
+  15. sovereign               SW:0.640  NW:0.360  CTX:0.422  NEC:0.597  STABLE
+  16. semantic                SW:0.639  NW:0.361  CTX:0.299  NEC:0.807  DECLINING
+  17. model                   SW:0.634  NW:0.366  CTX:0.527  NEC:0.457  STABLE
+  18. drift                   SW:0.633  NW:0.367  CTX:0.527  NEC:0.457  STABLE
+  19. system                  SW:0.631  NW:0.369  CTX:0.527  NEC:0.457  STABLE
+  20. branch                  SW:0.629  NW:0.371  CTX:0.282  NEC:0.737  STABLE
+
+================================================================
+  TOP 15 NOISE WORDS (highest noise weight, non-infantry)
+================================================================
+   1. atthe                   SW:0.059  NW:0.941  Rank:Scout
+   2. advice                  SW:0.059  NW:0.941  Rank:Scout
+   3. self-diagnose           SW:0.059  NW:0.941  Rank:Scout
+   4. middle-ground           SW:0.059  NW:0.941  Rank:Scout
+   5. thorough                SW:0.059  NW:0.941  Rank:Scout
+   6. conflation              SW:0.059  NW:0.941  Rank:Scout
+   7. time-consum             SW:0.059  NW:0.941  Rank:Scout
+   8. repetitive              SW:0.059  NW:0.941  Rank:Scout
+   9. re-visit                SW:0.059  NW:0.941  Rank:Scout
+  10. tandem                  SW:0.059  NW:0.941  Rank:Scout
+  11. two-column              SW:0.059  NW:0.941  Rank:Scout
+  12. dialectic               SW:0.059  NW:0.941  Rank:Scout
+  13. vivid                   SW:0.059  NW:0.941  Rank:Scout
+  14. argument-driven         SW:0.059  NW:0.941  Rank:Scout
+  15. contention              SW:0.059  NW:0.941  Rank:Scout
+
+================================================================
+  THREAD SNR LEADERBOARD (by normalized SNR)
+================================================================
+   1. ONE-PAGE PITCH — MO§ES™              SNR:0.3295  dB: -0.55  Words:  581
+   2. Grok_RI_Chart_Sims                   SNR:0.3081  dB: -0.99  Words:1,083
+   3. GPT_GhostTokenLAdder                 SNR:0.2879  dB: -1.83  Words:  735
+   4. Grok_Roadmap_Token                   SNR:0.2877  dB: -1.81  Words:1,145
+   5. Grok_BuildOut_Token                  SNR:0.2832  dB: -1.41  Words:1,070
+   6. Grok_build_out                       SNR:0.2759  dB: -1.98  Words:1,603
+   7. Grok_LaddervChron                    SNR:0.2713  dB: -2.15  Words:1,405
+   8. Grok_Dampening_Formula               SNR:0.2674  dB: -1.96  Words:  576
+   9. Deep_Protocol_Mos_ConS               SNR:0.2558  dB: -2.92  Words:1,925
+  10. Grok_Etheric_Mapping_etc             SNR:0.2420  dB: -3.18  Words:1,232
+  11. Grok_Float_index                     SNR:0.2413  dB: -3.74  Words:1,125
+  12. Deep_Mo§es_infra_Aaron               SNR:0.2403  dB: -3.03  Words:29,452
+  13. Grok_Fracto_Keter                    SNR:0.2369  dB: -3.11  Words:3,081
+  14. grok_marketing_ecomd                 SNR:0.2296  dB: -3.56  Words:18,821
+  15. Deep_Abba                            SNR:0.2210  dB: -3.58  Words:20,501
+  16. Grok_Action_Rent                     SNR:0.2180  dB: -4.08  Words:6,125
+  17. Grok_moat                            SNR:0.2147  dB: -4.51  Words:5,492
+  18. GPT_AAron_Email                      SNR:0.2065  dB: -3.98  Words:6,432
+  19. Grok_Comm_Kom_newRef                 SNR:0.1883  dB: -5.78  Words:2,368
+  20. GPT_Zoran_                           SNR:0.1857  dB: -5.90  Words:4,158
+
+================================================================
+  BOTTOM 5 THREADS (lowest SNR — highest noise)
+================================================================
+   1. Luthen_France.md                     SNR:0.0961  dB:-10.09  Words:5,141
+   2. TEMPLATE_quick_capture               SNR:0.1290  dB: -8.91  Words:   79
+   3. Aaron_skills                         SNR:0.1789  dB: -6.57  Words:  792
+   4. Grok_Coherence_Zoran                 SNR:0.1791  dB: -5.46  Words:4,647
+   5. GPT_Zoran_                           SNR:0.1857  dB: -5.90  Words:4,158
+
+================================================================
+  COMPRESSION ANALYSIS
+================================================================
+  Stop words (pure scaffolding):  43,203
+  Est. removable words:           43,308
+  Compression potential:          36.2% reducible
+  Post-compression signal density: 0.4655
+
+================================================================
+  "Words are not inherently signal or noise.
+   Their classification emerges only in-context
+   during live system use."
+                     -- SIGSYSTEM Foundation Spec
+================================================================

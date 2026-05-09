@@ -1,0 +1,23 @@
+{
+    "id": "C-0005",
+    "type": "component",
+    "title": "Contextual Word/Token SNR Classification",
+    "description": "Classifies words and tokens as signal or noise based on contextual use, not identity.",
+    "version": "1.0",
+    "tags": [
+        "snr",
+        "token analysis",
+        "signal classification",
+        "compression"
+    ],
+    "created": "2025-10-01T16:41:58.324312Z",
+    "lineage": {
+        "parent": "scs-engine",
+        "related_metrics": [
+            "SNR",
+            "SDR",
+            "CID"
+        ],
+        "vault_index": "C-0005"
+    }
+}

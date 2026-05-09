@@ -1,0 +1,22 @@
+---
+word: "everyone-is-wrong-about-notebooklm-802770aa12f7"
+role: user
+rank: "Fireteam"
+count: 2
+threads: 1
+classification: ""
+trajectory: ""
+signal_weight: 0
+noise_weight: 0
+---
+
+# 🔸 everyone-is-wrong-about-notebooklm-802770aa12f7 (User)
+
+**Rank:** Fireteam  |  **Count:** 2  |  **Threads:** 1
+**Classification:**   |  **Trajectory:** 
+**Signal Weight:** 0  |  **Noise Weight:** 0
+
+*First seen: 2025-12-09T04:50:23.942373+00:00*
+
+## Threads
+- [[threads/Resume knowledge comparison|Resume knowledge comparison]]

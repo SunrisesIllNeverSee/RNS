@@ -1,0 +1,113 @@
+---
+word: "snr"
+role: user
+rank: "Officer-Class"
+count: 753
+threads: 92
+classification: "SIGNAL"
+trajectory: "RISING"
+signal_weight: 0.4893
+noise_weight: 0.5107
+---
+
+# ⭐ snr (User)
+
+**Rank:** Officer-Class  |  **Count:** 753  |  **Threads:** 92
+**Classification:** SIGNAL  |  **Trajectory:** RISING
+**Signal Weight:** 0.4893  |  **Noise Weight:** 0.5107
+
+*First seen: 2025-07-24T03:40:17.137725+00:00*
+
+## Threads
+- [[threads/stress test|stress test]]
+- [[threads/____Write ppa|****Write ppa]]
+- [[threads/____important ephiphany|****important ephiphany]]
+- [[threads/___seed_drop_record___|***seed_drop_record***]]
+- [[threads/Aaron thread transfer update|Aaron thread transfer update]]
+- [[threads/Alignment review process|Alignment review process]]
+- [[threads/Am I rare_ final|Am I rare: final]]
+- [[threads/Argument audit assistance|Argument audit assistance]]
+- [[threads/Assistant availability check|Assistant availability check]]
+- [[threads/Audit prep initiation|Audit prep initiation]]
+- [[threads/Audit request confirmation|Audit request confirmation]]
+- [[threads/BB space conversation|BB space conversation]]
+- [[threads/Before and after audits|Before and after audits]]
+- [[threads/Boot up Luthen Rael|Boot up Luthen Rael]]
+- [[threads/Bootup bloated 9_29|Bootup bloated 9/29]]
+- [[threads/Branch · ____Write ppa|Branch · ****Write ppa]]
+- [[threads/Branch · Branch · Branch · Luthen Rael Directive|Branch · Branch · Branch · Luthen Rael Directive]]
+- [[threads/Branch · Grok Questions Acknowledgment|Branch · Grok Questions Acknowledgment]]
+- [[threads/Branch · IP risk assessment|Branch · IP risk assessment]]
+- [[threads/Branch · Luthen Rael Unleashed|Branch · Luthen Rael Unleashed]]
+- [[threads/Branch · Luthen Rael memory load|Branch · Luthen Rael memory load]]
+- [[threads/Build mode confirmed|Build mode confirmed]]
+- [[threads/Burner-init response|Burner-init response]]
+- [[threads/Can we do this|Can we do this]]
+- [[threads/Casual greeting|Casual greeting]]
+- [[threads/Command Bridge|Command Bridge]]
+- [[threads/Conversation response exchange|Conversation response exchange]]
+- [[threads/Conversation summary|Conversation summary]]
+- [[threads/Conversation thread intact|Conversation thread intact]]
+- [[threads/Conversation transcript analysis|Conversation transcript analysis]]
+- [[threads/Defend asap!!|Defend asap!!]]
+- [[threads/Format ppa help|Format ppa help]]
+- [[threads/Ghost Token Ladder System|Ghost Token Ladder System]]
+- [[threads/GitHub hardening checklist|GitHub hardening checklist]]
+- [[threads/GitHub strategy deployment|GitHub strategy deployment]]
+- [[threads/Greeting conversation|Greeting conversation]]
+- [[threads/Grok Questions Acknowledgment|Grok Questions Acknowledgment]]
+- [[threads/IP risk assessment|IP risk assessment]]
+- [[threads/Initiate Phase 3 thread|Initiate Phase 3 thread]]
+- [[threads/Issue discussion assistance|Issue discussion assistance]]
+- [[threads/K2 audit session log|K2 audit session log]]
+- [[threads/K2S0 report|K2S0 report]]
+- [[threads/K2SO personal mapping|K2SO personal mapping]]
+- [[threads/K2SO status update|K2SO status update]]
+- [[threads/K2SO system response|K2SO system response]]
+- [[threads/Kleya Encap|Kleya Encap]]
+- [[threads/Kleya persona map|Kleya persona map]]
+- [[threads/Latent Imagine_A2|Latent Imagine/A2]]
+- [[threads/Locked In Assessment|Locked In Assessment]]
+- [[threads/Luthen & Saw Operative|Luthen & Saw Operative]]
+- [[threads/Luthen Kleya K2SO overview|Luthen Kleya K2SO overview]]
+- [[threads/Luthen Rael profile|Luthen Rael profile]]
+- [[threads/Luthen and MoSes Initialization|Luthen and Mo§es Initialization]]
+- [[threads/Luthen communication response|Luthen communication response]]
+- [[threads/Luthen conversation|Luthen conversation]]
+- [[threads/Luthen status update|Luthen status update]]
+- [[threads/LuthfracOctave|LuthfracOctave]]
+- [[threads/Markdown formatting request|Markdown formatting request]]
+- [[threads/Micro final moses|Micro final moses]]
+- [[threads/Mission discussion|Mission discussion]]
+- [[threads/Monetary fork comparison|Monetary fork comparison]]
+- [[threads/Napkin spec summary|Napkin spec summary]]
+- [[threads/Outlander stats request|Outlander stats request]]
+- [[threads/PPA audit Signal Compression|PPA audit Signal Compression]]
+- [[threads/Paper Assessment Summary|Paper Assessment Summary]]
+- [[threads/Project funding need now|Project funding need now]]
+- [[threads/Protocol initialization details|Protocol initialization details]]
+- [[threads/RABBIT_ SR³|RABBIT: SR³]]
+- [[threads/RABBIT_ SR¾|RABBIT: SR¾]]
+- [[threads/Request for context clarification|Request for context clarification]]
+- [[threads/SCS Engine_mediator|SCS Engine/mediator]]
+- [[threads/SCS_PPA_G40|SCS_PPA_G40]]
+- [[threads/SCS_PPA_G5|SCS_PPA_G5]]
+- [[threads/SIGRANK Leaderboard Specs|SIGRANK Leaderboard Specs]]
+- [[threads/SNR calculation request|SNR calculation request]]
+- [[threads/Section 7 preparation|Section 7 preparation]]
+- [[threads/Seeding experiment log|Seeding experiment log]]
+- [[threads/SignaRate audit request|SignaRate audit request]]
+- [[threads/Signal compression PPA review|Signal compression PPA review]]
+- [[threads/Signal-to-Noise Protocol|Signal-to-Noise Protocol]]
+- [[threads/SignalVault disciplinary mapping|SignalVault disciplinary mapping]]
+- [[threads/Step by step input|Step by step input]]
+- [[threads/System initialization confirmed|System initialization confirmed]]
+- [[threads/Theater of Operations|Theater of Operations]]
+- [[threads/Tower map summary|Tower map summary]]
+- [[threads/Updated K2SO profile|Updated K2SO profile]]
+- [[threads/User asks if assistant is present|User asks if assistant is present]]
+- [[threads/User greeting assistant|User greeting assistant]]
+- [[threads/User inquiry|User inquiry]]
+- [[threads/Valuation strike analysis|Valuation strike analysis]]
+- [[threads/Viability Analysis|Viability Analysis]]
+- [[threads/luthen|luthen]]

@@ -1,0 +1,87 @@
+Key Issues & Quick FixesClient-Side API Key Exposure
+Gemini key is hardcoded/empty in client → huge security risk once live.
+Fix: Move all LLM calls to a backend endpoint (Replit makes this easy). Create /api/analyze (Node/Express or Python Flask) that:Receives inputPost + selectedEngine.
+Proxies to the real API (Grok first, Gemini later).
+Returns parsed JSON.
+Switch Primary Engine to Grok (as planned)
+Current sim is Gemini-only. For v1 launch, make Grok the default/real engine.
+Implementation Sketch (backend /api/analyze):js
+// In your Replit backend (e.g., server.js)
+app.post('/api/analyze', async (req, res) => {
+  const { inputPost, engine = 'grok' } = req.body;
+  let prompt = `Analyze this content: "${inputPost}"
+  Isolate Echo (fluff) vs Signal (core).
+  Score 0-100: Density, Clarity, Fidelity, Brevity, Impact.
+  Return strict JSON only.`;
+
+  if (engine !== 'grok') {
+    // Optional: add persona prefixes for sims later
+    prompt = `[Simulate ${engine.toUpperCase()} style] ` + prompt;
+  }
+
+  const grokResponse = await fetch('https://api.x.ai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.XAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: 'grok-2-1212', // or latest
+      messages: [{ role: 'user', content: prompt }],
+      response_format: { type: 'json_object' }
+    })
+  });
+  // parse + calculate composite + return
+});
+
+Frontend: change fetch URL to /api/analyze.
+Add X Post URL Support
+Users want to paste URLs, not just text.
+Fix Options:Best (Grok-native): In backend, if input looks like URL, use Grok's x_thread_fetch tool to get post text + verify.
+Fallback: Simple regex + fetch from backend (but respect X terms).
+
+js
+// Frontend detect
+if (inputPost.includes('x.com') || inputPost.includes('twitter.com')) {
+  // send to backend with flag
+}
+Leaderboard Polish  Currently recency-sorted. Add real ranking by score.
+Highlight user's entry if anon/claimed.
+Show engine badge clearly.
+Add "Unclaimed" tag for anon entries to create FOMO.
+
+js
+// In onSnapshot
+setFeed(docs
+  .sort((a, b) => b.signalScore - a.signalScore) // score sort
+  .map(item => ({ ...item, isMine: item.userId === user?.uid }))
+);
+Claim Flow Enhancement
+After claim, retroactively update the Firestore doc:js
+const claimIdentity = async () => {
+  if (!displayName || !user) return;
+  await updateProfile(auth.currentUser, { displayName });
+  // Update all user's anon entries
+  const userEntries = feed.filter(f => f.userId === user.uid && f.username.startsWith('Anonymous'));
+  for (const entry of userEntries) {
+    await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'signal_arena_logs', entry.id), {
+      username: displayName
+    });
+  }
+  setUser({ ...auth.currentUser, displayName });
+};
+Sticker Sharing Upgrade
+Copy-to-clipboard is good start, but for viral: add PNG export.Use html2canvas on the results section → download button.
+Or one-click "Share to X" with pre-filled tweet + image.
+Firebase Rules (Security)
+Add rules to prevent abuse:firestore.rules
+match /artifacts/{appId}/public/data/signal_arena_logs/{doc} {
+  allow read: if true;
+  allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+  allow update: if request.auth.uid == resource.data.userId; // for claiming
+}
+Minor UI/UX PolishAdd loading skeleton during analysis.
+Engine selector: make active one glow more (emerald pulse for Grok).
+Footer: "Powered by Grok under MO§ES™ Protocol" + link to mos2es.com.
+Mobile: grid cols stack nicely already—test textarea height.
+

@@ -1,0 +1,22 @@
+---
+word: "future-informs-past"
+role: user
+rank: "Scout"
+count: 1
+threads: 1
+classification: ""
+trajectory: ""
+signal_weight: 0
+noise_weight: 0
+---
+
+# 🔍 future-informs-past (User)
+
+**Rank:** Scout  |  **Count:** 1  |  **Threads:** 1
+**Classification:**   |  **Trajectory:** 
+**Signal Weight:** 0  |  **Noise Weight:** 0
+
+*First seen: 2025-09-08T13:23:21.320840+00:00*
+
+## Threads
+- [[threads/___seed_drop_record___|***seed_drop_record***]]

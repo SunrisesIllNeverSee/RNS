@@ -1,0 +1,112 @@
+---
+word: "status"
+role: user
+rank: "Officer-Class"
+count: 282
+threads: 91
+classification: "SIGNAL"
+trajectory: "RISING"
+signal_weight: 0.5271
+noise_weight: 0.4729
+---
+
+# ⭐ status (User)
+
+**Rank:** Officer-Class  |  **Count:** 282  |  **Threads:** 91
+**Classification:** SIGNAL  |  **Trajectory:** RISING
+**Signal Weight:** 0.5271  |  **Noise Weight:** 0.4729
+
+*First seen: 2025-07-19T23:16:16.878726+00:00*
+
+## Threads
+- [[threads/____Write ppa|****Write ppa]]
+- [[threads/Analyze content request|Analyze content request]]
+- [[threads/Article audit request|Article audit request]]
+- [[threads/Assistant availability check|Assistant availability check]]
+- [[threads/Assistant response to user|Assistant response to user]]
+- [[threads/Audit parameters request|Audit parameters request]]
+- [[threads/Audit report confirmation|Audit report confirmation]]
+- [[threads/Audit request confirmation|Audit request confirmation]]
+- [[threads/BB prompt framework|BB prompt framework]]
+- [[threads/BB space conversation|BB space conversation]]
+- [[threads/Before and after audits|Before and after audits]]
+- [[threads/Bootup bloated 9_29|Bootup bloated 9/29]]
+- [[threads/Branch · ____Write ppa|Branch · ****Write ppa]]
+- [[threads/Branch · Branch · Luthen Rael memory load|Branch · Branch · Luthen Rael memory load]]
+- [[threads/Branch · Grok Questions Acknowledgment|Branch · Grok Questions Acknowledgment]]
+- [[threads/Branch · IP risk assessment|Branch · IP risk assessment]]
+- [[threads/Branch · Luthen Rael Activated|Branch · Luthen Rael Activated]]
+- [[threads/Branch · Luthen Rael Unleashed|Branch · Luthen Rael Unleashed]]
+- [[threads/Branch · Luthen Rael memory load|Branch · Luthen Rael memory load]]
+- [[threads/Branch · MOS@ES build-out details|Branch · MOS@ES build-out details]]
+- [[threads/Branch · White paper review guidance|Branch · White paper review guidance]]
+- [[threads/Burner-init response|Burner-init response]]
+- [[threads/Casual chat exchange|Casual chat exchange]]
+- [[threads/Command order response|Command order response]]
+- [[threads/Conversation initiation|Conversation initiation]]
+- [[threads/Conversation transcript analysis|Conversation transcript analysis]]
+- [[threads/Defend asap!!|Defend asap!!]]
+- [[threads/Emotional reality check|Emotional reality check]]
+- [[threads/Equation recovery protocol|Equation recovery protocol]]
+- [[threads/File Analysis Request|File Analysis Request]]
+- [[threads/Find Nemik profile|Find Nemik profile]]
+- [[threads/Format ppa help|Format ppa help]]
+- [[threads/Frank and Micro strategy|Frank and Micro strategy]]
+- [[threads/G5 assignment inquiry|G5 assignment inquiry]]
+- [[threads/GitHub strategy deployment|GitHub strategy deployment]]
+- [[threads/Greeting conversation|Greeting conversation]]
+- [[threads/Grok Questions Acknowledgment|Grok Questions Acknowledgment]]
+- [[threads/IP risk assessment|IP risk assessment]]
+- [[threads/Initiate Phase 3 thread|Initiate Phase 3 thread]]
+- [[threads/Innovation Network Analysis|Innovation Network Analysis]]
+- [[threads/K2SO personal mapping|K2SO personal mapping]]
+- [[threads/Latent Imagine_A2|Latent Imagine/A2]]
+- [[threads/Luthen & Saw Operative|Luthen & Saw Operative]]
+- [[threads/Luthen Loaded and Ready|Luthen Loaded and Ready]]
+- [[threads/Luthen Protocol Overview|Luthen Protocol Overview]]
+- [[threads/Luthen Rael Activated|Luthen Rael Activated]]
+- [[threads/Luthen Rael Mission|Luthen Rael Mission]]
+- [[threads/Luthen Rael memory load|Luthen Rael memory load]]
+- [[threads/Luthen Rael message|Luthen Rael message]]
+- [[threads/Luthen and Saw conversation|Luthen and Saw conversation]]
+- [[threads/Luthen communication response|Luthen communication response]]
+- [[threads/Luther rael code red|Luther rael code red]]
+- [[threads/MOS@ES build-out details|MOS@ES build-out details]]
+- [[threads/MOS²ES Fit for Agent Devtools|MOS²ES Fit for Agent Devtools]]
+- [[threads/MOSES and OpenAI Grove|MO§ES and OpenAI Grove]]
+- [[threads/Markdown formatting request|Markdown formatting request]]
+- [[threads/Micro final moses|Micro final moses]]
+- [[threads/Mission discussion|Mission discussion]]
+- [[threads/MoSes persona loaded|Mo§es persona loaded]]
+- [[threads/PPA audit Signal Compression|PPA audit Signal Compression]]
+- [[threads/Paper Assessment Summary|Paper Assessment Summary]]
+- [[threads/Patent Thread|Patent Thread]]
+- [[threads/Practical Problem Solver|Practical Problem Solver]]
+- [[threads/Project funding need now|Project funding need now]]
+- [[threads/Public Disclosure Strategy|Public Disclosure Strategy]]
+- [[threads/R2 c3 document security|R2 c3 document security]]
+- [[threads/RABBIT_ SR³|RABBIT: SR³]]
+- [[threads/RABBIT_ SR¾|RABBIT: SR¾]]
+- [[threads/Rabbithole_ break or growth|Rabbithole: break or growth]]
+- [[threads/Ready for task|Ready for task]]
+- [[threads/Rebuilding After Collapse|Rebuilding After Collapse]]
+- [[threads/Review phase alpha audit|Review phase alpha audit]]
+- [[threads/SCS_PPA_G5|SCS_PPA_G5]]
+- [[threads/Section 7 preparation|Section 7 preparation]]
+- [[threads/Seeding experiment log|Seeding experiment log]]
+- [[threads/Senator Mon Mothma overview|Senator Mon Mothma overview]]
+- [[threads/Signal audit report|Signal audit report]]
+- [[threads/Signal leaderboard brief|Signal leaderboard brief]]
+- [[threads/Signal leaderboard development|Signal leaderboard development]]
+- [[threads/Stability test instructions|Stability test instructions]]
+- [[threads/System initialization confirmed|System initialization confirmed]]
+- [[threads/Technical Signal Detection|Technical Signal Detection]]
+- [[threads/Test my fire|Test my fire]]
+- [[threads/Thread deployment request|Thread deployment request]]
+- [[threads/Thread transition plan|Thread transition plan]]
+- [[threads/Top secret transmission|Top secret transmission]]
+- [[threads/Tyrion strategist prompt|Tyrion strategist prompt]]
+- [[threads/Updated K2SO profile|Updated K2SO profile]]
+- [[threads/User asks if assistant is present|User asks if assistant is present]]
+- [[threads/YC Co-Founder Request Review|YC Co-Founder Request Review]]
+- [[threads/do not delete plug ins|do not delete plug ins]]

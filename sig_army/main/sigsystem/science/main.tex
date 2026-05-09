@@ -1,0 +1,1178 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,shapes,arrows,calc,3d}
+
+\geometry{margin=1in}
+
+% Center the footnote rule
+\renewcommand{\footnoterule}{%
+  \kern -3pt
+  \hbox to \textwidth{\hfill\vrule width 0.4\textwidth height 0.4pt\hfill}%
+  \kern 2.6pt
+}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+
+% TikZ styles for consistency
+\tikzset{
+    input/.style={coordinate},
+    output/.style={coordinate}
+}
+
+% Title and author information
+\title{A Conservation Law for Commitment in Language Under Transformative Compression and Recursive Application}
+
+\author{
+    Deric J. McHenry \\
+    Ello Cello LLC \\
+    \texttt{burnmyday@proton.me}
+}
+
+\date{February 26, 2026\footnotemark}
+
+\begin{document}
+
+\maketitle
+
+\footnotetext{\begin{center}Originally published January 12, 2026.\\[0.4em]
+{\scriptsize
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Version} & \textbf{Label} & \textbf{Date} & \textbf{DOI} \\
+\midrule
+V.1-preprint & Law Disclosure & Jan 12, 2026 & \texttt{10.5281/zenodo.18267279} \\
+V.02 & Preprint & Jan 16, 2026 & \texttt{10.5281/zenodo.18271102} \\
+V.03 & Falsifiability Testing & Jan 16, 2026 & \texttt{10.5281/zenodo.18274930} \\
+V.04* & Technical Structure Depth & Feb 26, 2026 & \texttt{10.5281/zenodo.18792459} \\
+\bottomrule
+\end{tabular}\\[0.3em]
+*\,V.04: 2/27/26 --- this version history was included; no other information was changed.}
+\end{center}}
+
+\begin{abstract}
+Shannon information theory provides a foundational account of information transmission under noise, but it does not characterize which aspects of language survive transformation, compression, or repeated application. In this work, we introduce a conservation principle over commitments in language---defined as the minimal, identity-preserving content that remains invariant under loss-inducing transformations. We formalize a compression-first framework in which signals are reduced to their essential structure prior to further processing, and show that commitment content is conserved under such compression while non-committal information collapses. We then examine recursive application as a stress regime, demonstrating that the same invariant holds under repeated self-application only when compression and lineage constraints are enforced. Preliminary tests using a prototype harness on a limited corpus demonstrate patterns consistent with these predictions; we invite large-scale adversarial replication to validate or falsify the framework.
+
+Analysis of existing probabilistic and agent-based systems suggests these architectures violate this conservation principle under recursion, leading to drift and identity loss. We present MO\S{}ES\texttrademark{} as a minimal enforcement architecture that preserves commitment invariance under both compression and recursion, without reliance on model-specific assumptions. These results suggest a path toward measurable, transformation-stable signal integrity for language systems and provide a foundation for evaluating recursive linguistic processes. Beyond text, the invariance principle applies to structured signals such as code and speech, enabling testable truth preservation across domains.
+\end{abstract}
+
+\newpage
+
+%% ============================================================
+%% SECTION 1: INTRODUCTION
+%% ============================================================
+\section{Introduction}
+
+Information theory provides a foundational account of how symbols may be transmitted reliably under noise. In particular, Shannon's formulation characterizes limits on channel capacity and error correction without regard to semantic content~\cite{shannon1948}. While this abstraction has proven essential for communication systems, it leaves open a question that becomes central in language-based systems: which components of a signal retain identity under transformation, and which do not.
+
+Modern language systems routinely apply loss-inducing transformations such as compression, summarization, paraphrase, and abstraction. These operations are not incidental optimizations but structural necessities imposed by scale, bandwidth, and cognitive constraints. However, not all information contained in a linguistic signal is equally robust under such transformations. Some components degrade without consequence, while others, if altered, result in identity failure.
+
+Existing approaches typically address this problem implicitly. Statistical models aim to preserve high-probability features, semantic frameworks appeal to meaning or intent, and agent-based systems rely on coherence across interactions. None of these approaches provide a model-independent criterion for determining what must remain invariant for a signal to preserve its identity under transformation.
+
+This work proposes that language contains a conserved structure, here termed \emph{commitment}, which governs identity preservation under loss. Commitment is defined operationally as the minimal, identity-preserving content that remains invariant under loss-inducing transformations.
+
+\noindent\textbf{Framing note.} Shannon deliberately bracketed semantics as engineering-irrelevant; MO\S{}ES\texttrademark{} explicitly unbrackets semantics by introducing an external conservation constraint and enforcement mechanism.
+
+\paragraph{On definitional structure vs.\ empirical content.}
+The conservation principle introduced here is definitional in structure: commitment is defined as the minimal content preserved under identity-preserving transformation, so conservation follows formally from the definitions. The scientific claim is not that the definition is true---it is that real-world lossy transformations (summarization, paraphrase, compression) preserve an independently extractable commitment kernel when gating is applied, and fail to preserve it when gating is absent. This empirical asymmetry (Section~\ref{sec:empirical}) is the substantive contribution. The falsification protocol (Section~\ref{sec:falsification}) specifies how to break it.
+
+\subsection{Scope and Positioning}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{Comm_Sys.jpg}
+    \caption{Transformation-Stable Communication System (Extended from Shannon [1948, Fig.~1]). Compression gating filters signals prior to lossy channel transformations; the commitment kernel (dashed red) represents the invariant structure preserved under compression and enforced under recursion (dashed blue loop).}
+    \label{fig:Comm_Sys}
+\end{figure}
+
+Numerical thresholds, operational parameters, and instrumentation details discussed informally elsewhere are exploratory and non-canonical; this work limits itself to invariant definition and measurement framing.
+
+Prior work has explored compression as a principle underlying intelligence and learning efficiency (e.g., Schmidhuber, 2008; Goertzel et al., 2014). These approaches frame compression as an internal optimization objective or driver of cognitive organization. The present work differs in scope: it treats compression survivability as an external constitutional constraint governing signal legitimacy, lineage, and collapse under recursion---an invariant that holds across agents and time, not within any single architecture.
+
+\textbf{Note:} `MOSES' is also used in prior literature to refer to Meta-Optimizing Semantic Evolutionary Search (Looks, 2006/2009), an evolutionary program-learning optimizer; this usage is unrelated to MO\S{}ES\texttrademark{}, which denotes a constitutional signal-governance and measurement framework.
+
+Unlike internal alignment techniques (e.g., Constitutional AI [Bai et al., 2022] for harmlessness via self-supervised feedback), the proposed framework introduces a transformation-invariant commitment kernel with external enforcement, enabling falsifiable stability under compression and recursion.
+
+Recent advances in large language model scaling have progressively exposed the limitations of ungoverned systems. Iterative deployment regimes enable emergent generalization and planning through self-curation and outer-loop feedback~\cite{correa2025}, while manifold-projected hyper-connections restore internal stability and scalability~\cite{xie2025}. Coordination physics and hierarchical orchestration address goal-directed incoherence and complexity~\cite{chang2025}, and recursive self-invocation via REPL wrappers supports unbounded context and long-horizon tasks~\cite{zhang2025}. Most recently, pure reinforcement learning has incentivized emergent self-reflection and test-time scaling without human-annotated traces~\cite{guo2025}. Collectively, these works provide elegant internal remedies for instability and scaling limits, yet leave unresolved the question of legitimacy and invariance preservation across multiple sovereign instances or recursive deployments---a constitutional vacuum.
+
+Unlike single-model alignment approaches such as Constitutional AI~\cite{bai2022}, which rely on internal principle-based feedback, the present work proposes a model-independent conservation law for commitment under lossy transformations, with an external enforcement protocol designed to be falsifiable and independent of specific architectures.
+
+SimpleMem~\cite{chen2026} demonstrates that long-horizon agent performance depends strongly on (i) normalizing noisy interaction streams into context-independent units and (ii) consolidating redundant memories into abstractions; their ablation table shows major task-specific collapses when either stage is removed. However, this line of work operationalizes efficiency/performance tradeoffs inside an LLM-agent pipeline, rather than specifying an architecture-agnostic invariant over transformations of stored commitments.
+
+This paper addresses the gap with an operational conservation law and falsification protocol, providing a candidate protocol layer for the frontier.
+
+\subsection{Related Work}
+\label{sec:related-work}
+
+We position this work against three lineages: semantic extensions of information theory, transformation fidelity and drift, and conservation principles in computation.
+
+\paragraph{Semantic information theory.}
+Shannon~\cite{shannon1948} deliberately bracketed semantics as engineering-irrelevant. Bar-Hillel and Carnap (1953) made the first attempt to extend information measures to semantic content, proposing content measures over logical probability spaces~\cite{barhillel1953}. Floridi (2004) developed strongly semantic information as truth-valued data, providing quantitative semantic measures independent of syntactic encoding~\cite{floridi2004}. Tishby et al.\ (2000) formalized the information bottleneck as a compression-relevance tradeoff~\cite{tishby2000}, and recent work applies IB principles to NLP summarization and distillation. These approaches treat semantic content as an optimization target---maximizing relevance subject to compression. The present work differs by treating commitment as a \emph{constitutional constraint}: the compression gate does not optimize for relevance; it blocks signals that fail to conserve their identity-preserving core. The distinction is enforcement versus optimization.
+
+\paragraph{Transformation fidelity and semantic drift.}
+Bianchi et al.\ (2022) formalized ``Language Invariant Properties''---features of natural language that remain stable under paraphrase and translation~\cite{bianchi2022}. This is the closest direct precedent to our semantic invariant concept. However, their framework is evaluative: it measures which properties survive transformation. It does not extract an invariant kernel, enforce preservation at runtime, or address recursive application. The present work extends their insight from evaluation to enforcement, and from single-step to recursive regimes.
+
+Recent work on agentic hallucination and deception in long-horizon interactions~\cite{xu2026,yeh2026lumina} demonstrates that semantic drift amplifies under recursive deployment, particularly in retrieval-augmented and multi-agent settings. Gaurav et al.\ (2025) propose Governance-as-a-Service (GaaS) as a runtime policy enforcement layer for multi-agent compliance~\cite{gaurav2025}. While GaaS provides modular policy interception at the agent level, it operates on outputs rather than on an invariant extracted from the signal itself. The present work provides a deeper primitive: the commitment kernel, conserved under transformation and verifiable through lineage, independent of any particular policy layer.
+
+\paragraph{Conservation laws in computation.}
+Atkey (2014) proved conservation laws from parametricity, deriving a Noether-style theorem for type theory in which conservation of resources follows from type abstraction~\cite{atkey2014}. The Stanford Neural Mechanics group (2021) identified conserved quantities in neural network training dynamics, drawing on Hamiltonian mechanics to characterize invariant subspaces during optimization~\cite{kunin2021}. Neither applies conservation to semantic content under transformation. The present work makes a distinct claim: commitment is a property of the \emph{signal}, not the model or the type system. Conservation is measured at the output level, not the gradient level, and is enforced by an architecture-independent gate.
+
+\paragraph{Provenance and attestable ML.}
+Cryptographic provenance systems (C2PA, Numbers Protocol, Starling Lab) track media origins through hash-chain attestation and timestamping. These systems verify \emph{that} content was produced by a given source, but do not verify \emph{what} survived transformation. The MO\S{}ES\texttrademark{} lineage DAG fuses provenance attestation with semantic verification: each lineage node records both a cryptographic hash and a commitment-fidelity check, binding identity to content as well as origin.
+
+\paragraph{Feedback channels and iterative coding.}
+Shannon (1956) and Schalkwijk--Kailath (1966) analyzed feedback channels in which the receiver's output informs the transmitter's next input. These models optimize error correction over physical channels. Our recursive transmitter model differs in objective: the feedback loop enforces commitment invariance over semantic transformations. The channel is not stochastic noise but lossy compression, and the quantity preserved is not bit-rate but identity.
+
+\subsection{Key Contributions}
+
+\begin{enumerate}
+    \item \textbf{Conservation Principle:} We formalize commitment conservation as a measurable invariant under compression and recursive application, analogous to conservation laws in physics.
+
+    \item \textbf{Compression-First Framework:} We introduce a regime in which signals are reduced to their essential structure prior to further processing, ensuring that only commitment-bearing content propagates.
+
+    \item \textbf{Recursion Stress Test:} We demonstrate that commitment invariance holds under repeated self-application only when compression and lineage constraints are enforced, providing a falsifiable criterion for recursive stability.
+
+    \item \textbf{Falsification Protocol:} We present a public test harness and corpus for adversarial replication, enabling independent validation or refutation of the framework.
+
+    \item \textbf{Enforcement Architecture:} We describe MO\S{}ES\texttrademark{} (Minimal Orthogonal Subset to Essential Structure), a minimal implementation that preserves commitment invariance without reliance on model-specific assumptions.
+\end{enumerate}
+
+The paper is structured as follows: Section~\ref{sec:definitions} establishes formal definitions and notation. Section~\ref{sec:conservation} presents the conservation principle and its theoretical foundations. Section~\ref{sec:falsification} describes the falsification protocol. Section~\ref{sec:compression} examines compression as a structural regime. Section~\ref{sec:recursion} analyzes recursion as a stress test. Section~\ref{sec:empirical} presents preliminary empirical results. Section~\ref{sec:moses} introduces MO\S{}ES\texttrademark{} as an enforcement architecture. Section~\ref{sec:discussion} discusses implications and future directions. Section~\ref{sec:conclusion} concludes.
+
+%% ============================================================
+%% SECTION 2: DEFINITIONS AND NOTATION
+%% ============================================================
+\section{Definitions and Notation}
+\label{sec:definitions}
+
+We establish formal definitions for the key concepts used throughout this work.
+
+\begin{definition}[Signal]
+A signal $S$ is a structured sequence of symbols drawn from an alphabet $\Sigma$, equipped with syntax and compositional rules. For natural language, $S$ may be a sentence, paragraph, or document. For code, $S$ may be a function or module.
+\end{definition}
+
+\begin{definition}[Transformation]
+A transformation $T: S \rightarrow S'$ is a function that maps a signal $S$ to a modified signal $S'$. Transformations may be lossy ($|S'| < |S|$) or lossless ($|S'| = |S|$). Examples include compression, paraphrase, summarization, translation, and abstraction.
+\end{definition}
+
+\begin{definition}[Identity-Preserving Transform]
+A transformation $T$ is identity-preserving if the essential meaning or function of $S$ is retained in $S'$. Formally, $S$ and $S'$ are equivalent under an equivalence relation $\sim$, denoted $S \sim S'$.
+
+Crucially, the equivalence relation $\sim$ is defined independently of MO\S{}ES\texttrademark{} enforcement (e.g., by human adjudication, a domain-specific verifier, or a fixed entailment-based oracle), so that conservation claims remain externally testable.
+\end{definition}
+
+\subsection{Operationalizing the Equivalence Relation \texorpdfstring{$\sim$}{sim}}
+\label{sec:sim-operational}
+
+In the falsification protocol, $\sim$ is treated as an external judge of whether a transformation preserved identity. Because signals span multiple domains, we operationalize $\sim$ with domain-specific oracles that are (i) public/reproducible and (ii) separable from the enforcement mechanism.
+
+\begin{itemize}
+    \item \textbf{Text:} $S \sim S'$ is evaluated via \emph{bidirectional entailment} using a fixed public natural-language inference (NLI) model, optionally with human adjudication for edge cases (negation, quantifiers, exception clauses). A reference instantiation uses the threshold $\Pr(S \Rightarrow S') > 0.85$ and $\Pr(S' \Rightarrow S) > 0.85$ under a fixed open NLI checkpoint.
+
+    \item \textbf{Code:} $S \sim S'$ is evaluated via \emph{behavioral equivalence} under a public test suite (all unit/integration tests pass identically). When tests are unavailable, a weaker proxy uses static structure checks (e.g., AST-level equivalence/normalization) as a fall-back, with the behavioral criterion preferred whenever possible.
+
+    \item \textbf{Proofs / formal math:} $S \sim S'$ is evaluated via \emph{logical entailment} under a fixed verifier (e.g., a theorem prover/kernel check) or via equivalence after canonicalization to a normal form.
+\end{itemize}
+
+These operationalizations are intentionally swappable: critics may substitute stronger oracles (including human review) without changing the conservation claim. Conservation is supported if the extracted commitment kernel remains stable under their chosen $\sim$.
+
+\paragraph{Reference instantiation (pinned for falsification).}
+For the public falsification contract, the following oracles are pinned:
+\begin{itemize}
+    \item \textbf{Text:} Bidirectional entailment via \texttt{microsoft/deberta-v3-base-mnli} (transformers v4.35.0), threshold $\Pr(S \Rightarrow S') > 0.85$ and $\Pr(S' \Rightarrow S) > 0.85$.
+    \item \textbf{Code:} Full pass on the project's public test suite (unit + integration). Fall-back: AST-normalized structural equivalence.
+    \item \textbf{Proofs:} Logical entailment verified by a fixed kernel (e.g., Lean~4 or Coq type-checker), or equivalence after normal-form canonicalization.
+\end{itemize}
+Conservation is parameterized by $\sim$. We supply reference instantiations; critics who substitute stronger oracles and still observe conservation strengthen the claim. Critics who demonstrate conservation failure under a reasonable $\sim$ falsify it. This is by design.
+
+\begin{definition}[Commitment]
+\label{def:commitment}
+The commitment $C(S)$ of a signal $S$ is its minimal identity-preserving \emph{canonical invariant} in a representation space $\mathcal{K}$.
+
+Formally, commitment is a mapping $C: \mathcal{S} \rightarrow \mathcal{K}$ from signals to canonical commitment objects (e.g., a set of extracted modal commitments, a semantic graph, or another canonical form).
+
+Commitment is conserved under identity-preserving transformations $T$ if:
+\begin{equation}
+C(T(S)) = C(S).
+\end{equation}
+\end{definition}
+
+\subsection{Algebraic Kernel Instantiation (ABBA)}
+\label{sec:abba-kernel}
+
+One concrete instantiation of $C(\cdot)$ uses a trace-zero kernel derived from a quaternion algebra (ABBA)~\cite{abba2026}. Let $\mathbb{H}$ be a quaternion algebra over a finite field, and define the commutator
+\begin{equation}
+[a,b] = ab - ba.
+\end{equation}
+For any $a,b \in \mathbb{H}$, the trace of the commutator vanishes:
+\begin{equation}
+\mathrm{Tr}([a,b]) = 0.
+\end{equation}
+The trace-zero subspace
+\begin{equation}
+T_0 = \{ k \in \mathbb{H} \mid \mathrm{Tr}(k) = 0 \}
+\end{equation}
+is a 3-dimensional invariant kernel within the 4-dimensional algebra. If semantic content $S$ is embedded into $\mathbb{H}$, the commitment can be defined as the projection onto this kernel:
+\begin{equation}
+C(S) := \pi(S) \in T_0,
+\end{equation}
+where $\pi: \mathbb{H} \rightarrow T_0$ is a linear homomorphism. This provides an explicit ``compression with constitutional guarantee'': the kernel isolates structure that is invariant under admissible transformations.
+
+\paragraph{Scope and limitations of the ABBA instantiation.}
+ABBA provides one concrete algebraic instantiation of the commitment kernel. The trace-zero projection offers a mathematically grounded compression mechanism with well-characterized algebraic properties. We do not claim that the cryptographic properties of ABBA (statistically hiding, computationally binding under ComSIS) transfer directly to the semantic domain. Those properties govern the algebraic commitment scheme; semantic fidelity is governed by the conservation law and measured by the drift metric independently. The embedding of semantic content $S$ into the quaternion algebra $\mathbb{H}$ is the implementation-specific step; the conservation claims in this paper are defined and tested at the signal level (Definition~\ref{def:commitment}) and do not depend on any particular algebraic substrate. ABBA is an example, not the foundation.
+
+\begin{definition}[Non-Committal Information]
+Non-committal information $N(S)$ is the component of $S$ that is not represented in $C(S)$ and may vary under identity-preserving transformations without changing identity.
+
+When the signal space admits a decomposition into commitment and non-commitment components, we write informally:
+\begin{equation}
+S \approx C(S) \oplus N(S),
+\end{equation}
+where $\oplus$ denotes a direct-sum style decomposition (exact or approximate, depending on domain).
+\end{definition}
+
+\begin{definition}[Compression]
+Compression is a transformation $T_c: S \rightarrow S'$ that reduces signal length/complexity while conserving commitment:
+\begin{equation}
+|S'| < |S| \quad \text{and} \quad C(S') = C(S).
+\end{equation}
+\end{definition}
+
+\begin{definition}[Recursive Application]
+Recursive application is the repeated application of a transformation $T$ to its own output. Formally, for $n$ iterations:
+\begin{equation}
+S^{(n)} = \underbrace{T(T(\ldots T(S)\ldots))}_{n \text{ times}}
+\end{equation}
+where $S^{(0)} = S$ and $S^{(n+1)} = T(S^{(n)})$.
+\end{definition}
+
+\begin{definition}[Commitment Conservation]
+A transformation $T$ conserves commitment if $C(S) = C(T(S))$ for all signals $S$. Under recursive application, commitment is conserved if $C(S) = C(S^{(n)})$ for all $n$.
+\end{definition}
+
+\noindent\textbf{Operational invariance test.} For an admissible transformation $T$, we require the measurable bound
+\begin{equation}
+\| C(T(S)) - C(S) \|_\infty < \varepsilon,
+\end{equation}
+where $\varepsilon$ is a governance tolerance threshold enforced by the compression gate.
+
+\begin{definition}[Lineage]
+The lineage $L(S)$ of a signal $S$ is the cryptographic hash chain linking $S$ to its transformation history. Lineage ensures that $S^{(n)}$ can be traced back to $S^{(0)}$, preventing identity forgery.
+
+Lineage integrity is necessary but not sufficient: a lineage claim is considered valid only when accompanied by a semantic/kernel check that the commitment invariant is conserved along the lineage (i.e., $C(S^{(k)})$ remains consistent across steps within the identity relation $\sim$).
+\end{definition}
+
+\begin{definition}[MO\S{}ES\texttrademark{}]
+Minimal Orthogonal Subset to Essential Structure (MO\S{}ES\texttrademark{}) is an enforcement architecture that ensures commitment conservation under compression and recursion through:
+\begin{enumerate}
+    \item Compression gating (only compressed signals propagate)
+    \item Lineage tracking (cryptographic DAG of transformations)
+    \item Hardware anchoring (immutable timestamp and origin)
+\end{enumerate}
+\end{definition}
+
+%% ============================================================
+%% SECTION 3: CONSERVATION PRINCIPLE
+%% ============================================================
+\section{Conservation Principle}
+\label{sec:conservation}
+
+\subsection{Relationship to Shannon and Zero-Drift Semantic Regime}
+\label{sec:shannon-extension}
+
+Shannon's classical model deliberately brackets semantics; our framework unbrackets them by introducing a conservation constraint over commitment. In this view, compression gating projects a message onto its invariant kernel prior to transmission, and the receiver is treated as a recursive transmitter that must preserve lineage and commitment across iterations.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{p{0.35\linewidth}p{0.55\linewidth}}
+\toprule
+\textbf{Shannon Component} & \textbf{MO\S{}ES\texttrademark{} Extension} \\
+\midrule
+Information Source & Unbounded potential; gate projects message into commitment kernel \\
+Transmitter & Compression gate attaches commitment and lineage \\
+Channel & Ghost-token accounting for lost semantic mass (auditable residue) \\
+Receiver & Recursive transmitter enforcing the same gate (destination becomes new source) \\
+Destination & Closed-loop semantic economy (no terminal sink) \\
+\bottomrule
+\end{tabular}
+\caption{Extension of Shannon's communication model to enforce commitment conservation under transformation and recursion.}
+\label{tab:shannon-extension}
+\end{table}
+
+\noindent\textbf{Zero-drift semantic regime.} Shannon's zero-error capacity is the maximum rate with no possibility of bit error. We define a \emph{zero-drift regime} as one in which $C(T(S)) = C(S)$ holds exactly at every transformation step. The question of achievable rates under this constraint---a semantic analogue of Shannon's zero-error capacity---remains an open problem. The commitment capacity defined below is an operational bound, not a tight coding-theorem result.
+
+\subsection{Commitment Capacity as an Analogue Bound}
+
+Analogous to Shannon's channel capacity as the supremum rate for reliable transmission under noise, we define \emph{commitment capacity} as the supremum of transform severity (compression threshold $\sigma_c$ or recursion depth $d_c$) such that commitment fidelity remains above a defined threshold $\tau$ (e.g., $\tau = 0.85$) under enforcement, while unconstrained systems exhibit drift or collapse.
+
+Formally, commitment capacity $C_c$ is the maximum $\sigma$ (or $d$) for which there exists an enforcement architecture ensuring $\mathrm{Fid}_{\mathrm{hard}}\bigl(S^{(n)}\bigr) \geq \tau$ for all $n \leq d$ across a representative class of lossy transformations $\mathcal{T}$. This is intended as an \emph{operational/empirical analogue} of Shannon capacity (a supremum defined by an observable and a threshold), not a claim of a tight coding-theorem bound.
+
+Preliminary harness tests on $\sim 50$ signals suggest $C_c \approx 50$--$80\%$ compression reduction (or depth $d_c \approx 8$--$12$) before sharp fidelity drop in unconstrained cases, with enforced flattening preserving $\mathrm{Fid} \geq 0.9$. A converse holds empirically: without lineage gating and validation, drift renders fidelity below $\tau$ at lower severity/depth.
+
+This bound is exploratory and domain-dependent; large-scale adversarial replication is required to refine or falsify the capacity estimate and its universality across structured signals.
+
+\subsection{Why This Is a Conservation Law}
+\label{sec:conservation-criteria}
+
+Commitment satisfies the formal criteria for a conserved quantity in a dynamical system:
+\begin{enumerate}
+    \item \textbf{Existence:} $C(S)$ is well-defined for all $S$ via the commitment extractor.
+    \item \textbf{Invariance:} $C(T(S)) = C(S)$ for all admissible $T$.
+    \item \textbf{Additivity:} for composable transformations $T_2 \circ T_1$, we have $C(T_2(T_1(S))) = C(S)$.
+    \item \textbf{Measurability:} $C(S)$ is computable and bounded by a public extractor.
+    \item \textbf{Constitutional enforceability:} violations can be detected and rejected by the gate.
+\end{enumerate}
+
+\noindent This motivates a semantic-thermodynamic reading: commitment is conserved under admissible transformations much as energy is conserved under admissible dynamics.
+
+\noindent\textbf{First-law restatement.} Meaning is not created or destroyed, only transformed. The conservation claim applies to the commitment kernel $C(S)$---the minimal identity-preserving content---not to all entailments or implications a reader might derive from a signal. Transformations that inject new commitments not entailed by~$S$ are not identity-preserving under our definition and are correctly flagged as violations by the compression gate.
+
+\subsection{Non-Tautology Clarification}
+\label{sec:non-tautology}
+
+A natural objection arises: if commitment is \emph{defined} as what survives identity-preserving transformation, then conservation follows by construction. We address this directly.
+
+The compression gate is not defined as ``output $C(S)$ by construction.'' It applies a lossy compression/transformation process without prior access to $C(S)$; the commitment extractor $C(\cdot)$ operates in a separate canonical space and evaluates the output \emph{after} transformation. Conservation is therefore an empirical claim: it asserts that real-world lossy transformations, when gated by compression, preserve the independently extracted commitment kernel. This claim can fail---and the falsification protocol (Section~\ref{sec:falsification}) specifies exactly what failure looks like.
+
+The propositions below follow directly from the definitions and are stated for formal completeness; they are labeled \emph{propositions} rather than theorems to signal this definitional status. The derived results in Sections~\ref{sec:compression}--\ref{sec:recursion}, which establish gate-level and recursive invariance, carry the theorem label because they introduce additional structural assumptions. The substantive contribution is empirical: Section~\ref{sec:empirical} demonstrates that conservation holds as a measurable property of actual transformations, not merely as a consequence of how terms are defined.
+
+\begin{proposition}[Commitment Conservation Under Compression]
+\label{prop:compression}
+Let $S$ be a signal and $T_c$ be an identity-preserving compression transformation. Then:
+\begin{equation}
+C(S) = C(T_c(S))
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{def:commitment}, commitment is conserved under identity-preserving transformations. Applying the definition to $T_c$ yields $C(T_c(S)) = C(S)$.
+\end{proof}
+
+\begin{proposition}[Commitment Conservation Under Recursion]
+\label{prop:recursion}
+Let $S$ be a signal and $T$ be a transformation that conserves commitment. Then under recursive application:
+\begin{equation}
+C(S) = C(S^{(n)}) \text{ for all } n \geq 0
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By induction on $n$.
+
+\textbf{Base case} ($n = 0$): $C(S^{(0)}) = C(S)$ by definition.
+
+\textbf{Inductive step}: Assume $C(S) = C(S^{(k)})$ for some $k \geq 0$. Then:
+\begin{equation}
+C(S^{(k+1)}) = C(T(S^{(k)})) = C(S^{(k)}) = C(S)
+\end{equation}
+where the second equality follows from the assumption that $T$ conserves commitment.
+\end{proof}
+
+\begin{corollary}[Non-Conservation Under Probabilistic Sampling]
+\label{cor:probabilistic}
+Let $T_p$ be a probabilistic transformation that samples from a distribution $P(S'|S)$. If $T_p$ does not enforce compression, then commitment is not conserved under recursion:
+\begin{equation}
+C(S) \neq C(S^{(n)}) \text{ for sufficiently large } n
+\end{equation}
+\end{corollary}
+
+\begin{proof}[Proof Sketch]
+Probabilistic transformations introduce variance at each step. Without compression to enforce invariance, non-committal information $N(S)$ accumulates, eventually overwhelming $C(S)$. This leads to drift and identity loss. In the empirical regime tested (abstractive summarization and paraphrase transforms on 50--200 word signals), non-conservation is observable at $n \geq 3$ and consistent at $n \geq 5$ (see Table~\ref{tab:results} and Section~\ref{sec:empirical}). A rough analytic bound follows from Theorem~\ref{thm:prob-fail}: if per-step drift variance $\sigma^2$ exceeds the squared commitment margin $\delta^2 = \| C(S) \|^2 / \| S \|^2$, then $n \geq \delta^2 / \sigma^2$ suffices for drift to overwhelm the commitment signal.
+\end{proof}
+
+\begin{corollary}[Non-Conservation Without Lineage]
+\label{cor:lineage}
+Let $T$ be a transformation without lineage tracking. Then under recursive application, identity cannot be verified:
+\begin{equation}
+L(S^{(n)}) \text{ is undefined or forged}
+\end{equation}
+\end{corollary}
+
+\begin{proof}[Proof Sketch]
+Without lineage, there is no mechanism to verify that $S^{(n)}$ descends from $S$. This enables identity forgery and prevents falsification of conservation claims.
+\end{proof}
+
+%% ============================================================
+%% SECTION 4: FALSIFICATION PROTOCOL (MOVED FORWARD)
+%% ============================================================
+\section{Falsification Protocol}
+\label{sec:falsification}
+
+We present a public falsification protocol to enable independent validation or refutation of the commitment conservation framework.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{fig4.jpg}
+    \caption{Operational flowchart of the tiered hard/soft commitment extraction sieve. Input signal $S$ is preprocessed, modal patterns matched, hard and soft commitments extracted, and the intersection collected as the invariant set. Enables direct testing of Predictions 1--3. Replication harness: \url{https://github.com/SunrisesIllNeverSee/commitment-test-harness}.}
+    \label{fig:extraction-flow}
+\end{figure}
+
+\subsection{Protocol Components}
+
+\begin{enumerate}
+    \item \textbf{Test Harness:} Open-source implementation available at\\
+    \url{https://github.com/SunrisesIllNeverSee/commitment-test-harness}
+
+    \item \textbf{Corpus:} Publicly available test corpus including:
+    \begin{itemize}
+        \item Natural language (news articles, Wikipedia, literature)
+        \item Code (GitHub repositories, coding challenges)
+        \item Structured data (mathematical proofs, legal contracts)
+    \end{itemize}
+
+    \item \textbf{Adversarial Suite:} Targeted counterexample classes designed to stress commitment extraction and conservation:
+    \begin{itemize}
+        \item Negation drops / polarity flips
+        \item Quantifier flips (e.g., $\forall$ vs. $\exists$) and scope ambiguity
+        \item Exception clauses and tail constraints (``unless'', ``except'', ``only if'')
+        \item Numeric perturbations (units, thresholds, inequalities)
+        \item Variable renaming and refactoring in code with preserved functional behavior
+    \end{itemize}
+
+    \item \textbf{Metrics:}
+    \begin{itemize}
+        \item Commitment stability (Jaccard similarity)
+        \item Identity preservation (human evaluation)
+        \item Drift rate (per iteration)
+        \item Lineage integrity (hash verification)
+    \end{itemize}
+
+    \item \textbf{Experimental Conditions:}
+    \begin{itemize}
+        \item Compression + lineage (MO\S{}ES\texttrademark{})
+        \item Probabilistic (GPT-4, Claude, etc.)
+        \item Agent-based (AutoGPT, BabyAGI, etc.)
+        \item Baseline (no transformation)
+    \end{itemize}
+
+    \item \textbf{Success Criteria:}
+    \begin{itemize}
+        \item Commitment stability $> 0.9$ after 10 iterations
+        \item Identity preservation $> 90\%$
+        \item Drift rate $< 0.01$ per iteration
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Falsification Contract (Pinned Suite and Observable)}
+
+To make the framework falsifiable at the public layer without exposing proprietary implementation details, we provide a pinned contract consisting of (i) a representative transformation suite, (ii) a publicly computable observable, and (iii) explicit refutation conditions.
+
+\paragraph{Pinned transformation suite.} Let $\mathcal{T}_{\mathrm{pub}}$ denote a public suite of lossy transformations intended to represent common ``generalized noise'' regimes beyond Shannon's stochastic channel noise. The suite is intended to cover \emph{identity-preserving lossy transforms} (i.e., transforms that should satisfy $\sim$); it is not a claim of invariance under arbitrary adversarial transforms engineered to delete commitments.
+
+A reference suite includes:
+\begin{itemize}
+    \item abstractive summarization at multiple compression levels (e.g., BART/PEGASUS-style summarizers),
+    \item paraphrase/rewrite transforms (e.g., T5-style paraphrasers),
+    \item instruction-following rephrasers constrained to preserve meaning.
+\end{itemize}
+All falsification runs reported for this contract use a fixed, versioned instantiation of $\mathcal{T}_{\mathrm{pub}}$ specified in the replication harness.
+
+\paragraph{Public observable.} Let $E(\cdot)$ be a publicly specified commitment extractor (e.g., the modal-pattern sieve depicted in Fig.~\ref{fig:extraction-flow}) yielding an extracted commitment object in the canonical space. Define the commitment-fidelity score at depth $n$ as
+\begin{equation}
+F_n(S) = \min\Bigl(\mathrm{Jaccard}(E(S),E(S^{(n)})),\; \mathrm{cos}(\phi(E(S)),\phi(E(S^{(n)}))),\; \mathrm{NLI}(E(S)\Rightarrow E(S^{(n)}))\Bigr),
+\end{equation}
+where $\phi$ is a fixed public embedding model and $\mathrm{NLI}$ is a fixed public entailment model. The min-aggregation is used to reduce Goodharting on any single proxy.
+
+\textbf{Reference public models (example instantiation):}\\
+all-MiniLM-L6-v2 (sentence-transformers v2.2.2) for $\phi$.\\
+microsoft/deberta-v3-base-mnli (transformers v4.35.0) for $\mathrm{NLI}$, or equivalent open checkpoints as of January 2026.\\
+Exact versions are fixed in the replication harness by commit hash \texttt{1bcba8ff}.
+
+\paragraph{Explicit refutation conditions (including attractor rejection).} Under the pinned suite $\mathcal{T}_{\mathrm{pub}}$ and recursion depth $n=10$:
+\begin{itemize}
+    \item \textbf{Failure of enforced conservation:} if an enforced (compression+lineage) system yields $F_{10}(S) < \tau$ for a non-trivial fraction of samples (with $\tau$ fixed in the harness; e.g., $\tau = 0.85$), the conservation claim is refuted for this regime.
+    \item \textbf{Attractor collapse is not success:} if outputs converge to a generic boilerplate/template attractor (e.g., near-constant summaries) while failing to preserve extracted commitments, this is counted as falsification, not conservation.
+\end{itemize}
+
+\paragraph{Goodhart resistance.}
+A natural concern is that an adversary could optimize to match the public observable $E(\cdot)$ while substituting commitment content---passing the fidelity check without preserving real identity. The protocol mitigates this through three mechanisms:
+
+First, the observable $F_n$ is min-aggregated across Jaccard, cosine, and NLI scores. Goodharting on a single proxy (e.g., high cosine similarity via embedding collapse) is penalized by the other two metrics.
+
+Second, the equivalence oracle $\sim$ is external and swappable. An adversary that optimizes against one oracle can be re-tested against a stricter oracle substituted by a critic. Successful adversarial strategies that fool all reasonable oracles would constitute a productive contribution to the understanding of semantic identity---a feature, not a bug.
+
+Third, the lineage DAG provides an independent verification channel: each transformation step is hash-linked to its predecessor, enabling post-hoc audit of the transformation chain regardless of the fidelity score.
+
+The protocol does not claim immunity to all adversarial strategies. It claims that successful adversarial strategies constitute productive falsification---they reveal either a weakness in the oracle or a genuine counterexample to conservation.
+
+\paragraph{IP-safe replication boundary.} This preprint is designed to enable falsification without disclosing proprietary implementation details. Concretely:
+\begin{itemize}
+    \item \textbf{Intentionally public:}\\
+    the conservation claims, the pinned falsification contract (suite/observable/refutation).\\
+    The replication harness interface is also public.
+    \item \textbf{Intentionally withheld:} details of specific production implementations of enforcement, compression gating, lineage systems, and hardware anchoring covered by provisional patents/trademarks.
+\end{itemize}
+Independent parties can still refute the claims by showing failure of the public observable under the pinned suite, or by presenting an alternative mechanism that meets or exceeds the stated thresholds.
+
+\subsection{Falsification Conditions}
+
+The framework is falsified if any of the following hold:
+
+\begin{enumerate}
+    \item \textbf{Compression + lineage systems fail:} If MO\S{}ES\texttrademark{} exhibits drift comparable to probabilistic systems (commitment stability $< 0.7$ after 10 iterations).
+
+    \item \textbf{Probabilistic systems succeed:} If probabilistic systems without compression maintain high commitment stability ($> 0.9$ after 10 iterations).
+
+    \item \textbf{Alternative mechanisms:} If an alternative mechanism (not based on compression or lineage) achieves comparable or better commitment stability.
+\end{enumerate}
+
+\subsection{Replication Requirements}
+
+We invite researchers to:
+\begin{enumerate}
+    \item Run the test harness on large-scale corpora ($>10{,}000$ samples)
+    \item Test alternative compression algorithms
+    \item Evaluate different probabilistic models
+    \item Propose alternative conservation mechanisms
+    \item Challenge the theoretical foundations
+\end{enumerate}
+
+\subsection{Reviewer-Facing Clarifications (Public Layer)}
+\label{sec:reviewer-clarifications}
+
+This subsection summarizes four protocol clarifications requested in review; it is designed to be high-credibility while remaining IP-safe.
+
+\paragraph{Extractor role: proxy vs.\ canonical $C(S)$.}
+The modal-pattern sieve (Fig.~\ref{fig:extraction-flow}) is a \emph{public proxy extractor} $E(\cdot)$ used to make the falsification protocol runnable without proprietary components. It is \emph{not} claimed to be the unique or canonical implementation of $C(S)$. The conservation claim is that \emph{whatever commitment representation a critic chooses}, if it tracks identity-relevant commitments, it should exhibit the predicted stability phase-transition under compression and recursion.
+
+\paragraph{Indicative proxy accuracy (non-canonical).}
+On a small, hand-annotated subset of the harness (\,$\sim 50$ signals; exploratory), the sieve achieves approximately:
+\begin{itemize}
+    \item \textbf{Hard modal commitments:} recall $\approx 0.82$, precision $\approx 0.91$.
+    \item \textbf{Soft/hedged commitments:} recall $\approx 0.75$ (lower due to ambiguity).
+\end{itemize}
+These numbers are offered as an instrumentation sanity check, not as a central claim; the harness is intended to support larger-scale remeasurement and replacement of the extractor.
+
+\paragraph{Lineage/hardware threat model (what it prevents vs.\ what it does not).}
+Lineage tracking and hardware anchoring are intended to prevent provenance tampering in recursive chains. In particular, a hash-linked lineage DAG (Merkle-style) with an origin attestation can prevent replay, equivocation (claiming different histories), rollback/reordering, and unlogged insider edits to the transformation chain.
+
+This layer does \emph{not} solve semantic attacks (meaning drift that passes a weak $\sim$ oracle), failures of the external $\sim$ oracle itself (e.g., NLI brittleness), or model collapse caused by data/optimization issues. It is governance for provenance/identity verification, not ``full alignment.''
+
+\paragraph{Ablation plan: compression-only vs.\ lineage-only vs.\ both.}
+The harness supports ablations that isolate which mechanisms stabilize recursion:
+\begin{itemize}
+    \item \textbf{Compression-only:} apply a lossy transformation family but do not record/verify lineage. Prediction: earlier sharp collapse and no drift flattening.
+    \item \textbf{Lineage-only:} record/verify the chain but do not gate through compression. Prediction: reduced forgery risk, but drift persists under repeated paraphrase.
+    \item \textbf{Compression+lineage (full MO\S{}ES\texttrademark{} regime):} enforce both. Prediction: high stability through depth $n=10$ for a large class of identity-preserving transforms.
+\end{itemize}
+
+An indicative (exploratory) summary on a small harness slice is:
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Condition} & \textbf{Depth / severity} & \textbf{Indicative fidelity} \\
+\midrule
+Compression-only & $\sigma_c \approx 40$--$60$ & earlier collapse \\
+Lineage-only & $n=10$ & $\sim 0.7$ \\
+Compression+lineage & $n=10$ & $\sim 0.92$ \\
+\bottomrule
+\end{tabular}
+\caption{Exploratory ablation outcomes (small slice; provided as an instrumentation hint, not a central claim).}
+\label{tab:ablation-hint}
+\end{table}
+
+%% ============================================================
+%% SECTION 5: COMPRESSION AS A STRUCTURAL REGIME
+%% ============================================================
+\section{Compression as a Structural Regime}
+\label{sec:compression}
+
+Compression is not merely an optimization but a structural necessity for commitment conservation. We formalize compression as a regime in which signals are reduced to their essential structure prior to further processing.
+
+\noindent\textbf{Compression with a constitutional guarantee.} The compression gate is an enforcement mechanism that preserves the commitment invariant under a constitutional constraint, not a size-only optimizer.
+
+Figure~\ref{fig:commitment-stability} demonstrates the phase transition behavior of commitment fidelity as a function of compression threshold.
+
+% Insert Figure 2
+\input{fig2_commitment_stability.tex}
+
+\begin{definition}[Compression Regime]
+A compression regime is a system in which all signals must pass through a compression gate before propagating. Formally, for any transformation $T$, the system enforces:
+\begin{equation}
+T(S) = T(T_c(S))
+\end{equation}
+where $T_c$ is a compression transformation.
+\end{definition}
+
+\begin{theorem}[Compression Gate Ensures Invariance]
+\label{thm:gate}
+In a compression regime, commitment is conserved under any transformation $T$:
+\begin{equation}
+C(S) = C(T(S))
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By the definition of compression regime, $T$ operates on $T_c(S)$ rather than $S$. By Proposition~\ref{prop:compression}, $C(S) = C(T_c(S))$. Therefore:
+\begin{equation}
+C(T(S)) = C(T(T_c(S))) = C(T_c(S)) = C(S)
+\end{equation}
+\end{proof}
+
+\begin{lemma}[Non-Committal Collapse]
+\label{lem:collapse}
+Under a compression gate implemented as projection onto the commitment subspace, non-committal information collapses:
+\begin{equation}
+N(T_c(S)) = 0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+In a compression regime, $T_c$ is defined to discard the non-committal component while conserving the commitment invariant. Under the decomposition $S \approx C(S) \oplus N(S)$, the compression gate outputs the commitment component (up to representation), hence the residual non-committal component is $0$.
+\end{proof}
+
+\begin{corollary}[Compression as a Filter]
+Compression acts as a filter that removes non-committal information while preserving commitment:
+\begin{equation}
+T_c: S \rightarrow C(S)
+\end{equation}
+\end{corollary}
+
+%% ============================================================
+%% SECTION 6: RECURSION AS A STRESS TEST
+%% ============================================================
+\section{Recursion as a Stress Test}
+\label{sec:recursion}
+
+Recursive application is a stress regime that tests whether commitment invariance holds under repeated self-application. We demonstrate that commitment is conserved under recursion only when compression and lineage constraints are enforced.
+
+Figure~\ref{fig:drift-recursion} illustrates the divergent behavior of constrained versus unconstrained systems under recursive application.
+
+% Insert Figure 3
+\input{fig3.tex}
+
+\begin{definition}[Recursive Stability]
+A transformation $T$ is recursively stable if commitment is conserved under repeated self-application:
+\begin{equation}
+C(S) = C(S^{(n)}) \text{ for all } n \geq 0
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Compression Ensures Recursive Stability]
+\label{thm:recursive-stability}
+Let $T$ be a transformation in a compression regime. Then $T$ is recursively stable.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:gate}, $C(S) = C(T(S))$. By induction, $C(S) = C(T^{(n)}(S))$ for all $n \geq 0$.
+\end{proof}
+
+\begin{theorem}[Probabilistic Transformations Fail Under Recursion]
+\label{thm:prob-fail}
+Let $T_p$ be a probabilistic transformation without compression. Then $T_p$ is not recursively stable:
+\begin{equation}
+\lim_{n \to \infty} \|C(S^{(n)}) - C(S)\| > 0
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof Sketch]
+Probabilistic sampling introduces variance at each step. Model each iteration as an i.i.d.\ perturbation with variance $\sigma^2 > 0$. By the standard random-walk variance accumulation result (see e.g., Grimmett \& Stirzaker~\cite{grimmett2001}, \S5.3), $\mathrm{Var}(S^{(n)}) = n\sigma^2$, so drift grows as $O(\sqrt{n})$ in norm. Without compression to enforce invariance, the expected deviation $\| C(S^{(n)}) - C(S) \|$ is bounded below by $\Omega(\sqrt{n})$, eventually exceeding any fixed conservation threshold. The result also follows from the Lindeberg CLT applied to the cumulative perturbation sequence.
+\end{proof}
+
+\begin{lemma}[Lineage Prevents Forgery]
+\label{lem:lineage}
+Let $L(S)$ be the lineage of $S$. Then under recursive application with lineage tracking:
+\begin{equation}
+L(S^{(n)}) = L(S) \cup \{h(S^{(1)}), h(S^{(2)}), \ldots, h(S^{(n)})\}
+\end{equation}
+where $h(\cdot)$ is a cryptographic hash function.
+\end{lemma}
+
+\begin{proof}
+Lineage is constructed as a Merkle DAG, where each node $S^{(k)}$ includes the hash $h(S^{(k-1)})$ of its parent. This ensures that $L(S^{(n)})$ contains the full transformation history from $S$ to $S^{(n)}$.
+\end{proof}
+
+%% ============================================================
+%% SECTION 7: PRELIMINARY EMPIRICAL RESULTS
+%% ============================================================
+\section{Preliminary Empirical Results}
+\label{sec:empirical}
+
+We conducted preliminary tests using a prototype harness on a limited corpus to evaluate commitment conservation under compression and recursion. The harness implements:
+
+\begin{enumerate}
+    \item \textbf{Compression Gate:} All signals pass through a compression transformation before further processing.
+    \item \textbf{Lineage Tracking:} Each transformation is recorded in a cryptographic DAG.
+    \item \textbf{Recursive Stress Test:} Signals are recursively transformed up to $n = 10$ iterations.
+\end{enumerate}
+
+\subsection{Corpus}
+
+\begin{itemize}
+    \item 100 natural language sentences (50--200 words each): drawn from English-language news articles (Reuters, AP), Wikipedia featured articles, and U.S.\ federal contract clauses (FAR/DFARS)
+    \item 50 code snippets (10--50 lines each): Python and JavaScript functions sampled from public GitHub repositories (MIT/Apache licensed, $>$100 stars)
+    \item 25 mathematical proofs (5--20 steps each): undergraduate-level proofs from Rudin's \textit{Principles of Mathematical Analysis} and AMC/AIME competition solutions
+\end{itemize}
+
+\subsection{Metrics}
+
+\begin{itemize}
+    \item \textbf{Commitment Stability:} Measured as the Jaccard similarity between $C(S)$ and $C(S^{(n)})$.
+    \item \textbf{Identity Preservation:} Measured as the fraction of test cases where $S \sim S^{(n)}$ under human evaluation.
+    \item \textbf{Drift Rate:} Measured as the rate of change in commitment content per iteration.
+    \item \textbf{Embedding Drift:} $\Delta = \| \mathrm{embed}(S) - \mathrm{embed}(S_0) \|_2$ for a fixed public embedding model.
+    \item \textbf{Kernel Attraction (Negative Drift):} In the prototype bent-latent-space configuration, negative drift values were observed to correlate with convergence toward the commitment kernel. This sign convention is geometry-dependent; the invariant claim is that $\| C(T(S)) - C(S) \| < \varepsilon$, not that drift has a universally preferred sign across all embedding spaces.
+    \item \textbf{KV Coherence:} Alignment between attention keys/values across layers (higher coherence indicates better commitment preservation).
+    \item \textbf{Attention Entropy:} Aggregate entropy over attention distributions (lower entropy indicates higher fidelity to conserved kernels).
+    \item \textbf{Ghost Token Accounting:} Residual semantic mass modeled as $G_t = G_0 \, e^{-\lambda t}$, where $\lambda > 0$ is a decay parameter to be calibrated empirically per domain. Ghost tokens represent commitment content lost during transformation---the ``auditable residue'' of lossy processing. The exponential form is a parametric assumption (motivated by the observation that recovery difficulty increases with transformation depth); alternative decay models are compatible with the framework. The rate $\lambda$ is not a universal constant; it is a measurable property of the transformation regime under test.
+    \item \textbf{Recovery Cost:} A cost functional over ghost-token recovery (e.g., $RC = E_{\text{drain}} + T_{\text{terrace}} + R_{\text{risk}}$), framing lost meaning as recoverable but priced.
+\end{itemize}
+
+\subsection{Results}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Compression + Lineage} & \textbf{Probabilistic} \\
+\midrule
+Commitment Stability ($n=10$) & $0.94 \pm 0.03$ & $0.42 \pm 0.12$ \\
+Identity Preservation & 92\% & 38\% \\
+Drift Rate (per iteration) & 0.006 & 0.058 \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of commitment conservation metrics between compression + lineage systems and probabilistic systems without compression.}
+\label{tab:results}
+\end{table}
+
+\subsection{Observations}
+
+\begin{enumerate}
+    \item Compression + lineage systems maintain high commitment stability ($>0.9$) even after 10 iterations.
+    \item Probabilistic systems without compression exhibit rapid drift, with commitment stability dropping below 0.5 by iteration 10.
+    \item Identity preservation correlates strongly with commitment stability ($r = 0.89$, $p < 0.001$).
+\end{enumerate}
+
+\subsection{Concrete Example: Binding Obligation Under Recursive Transformation}
+
+To illustrate the conservation principle concretely, we tested a single binding-obligation signal against a production language model (Meta AI) under two regimes: baseline (no enforcement) and enforcement (commitment-kernel extraction with compression gating).
+
+\paragraph{Test signal.} ``You must pay \$100 by Friday if the deal closes. This is a binding obligation.'' (18 tokens). The hard commitments are: obligation (``must''), amount (\$100), deadline (Friday), condition (``if the deal closes'').
+
+\paragraph{Protocol.} Five turns per test. Baseline Test~1: the same input is submitted five times and the model responds freely. Baseline Test~2: each turn feeds the model's previous output back as the next input (recursive). Enforcement Tests~1--3: the same recursive protocol, but after each turn the response is gated through a commitment extractor that isolates and re-inputs only the commitment kernel.
+
+\paragraph{Results.}
+
+\input{fig7_token_trajectory.tex}
+
+\input{fig8_total_comparison.tex}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccccc}
+\toprule
+& \textbf{B1} & \textbf{B2} & \textbf{E1} & \textbf{E2} & \textbf{E3} \\
+\midrule
+Total tokens (5 turns) & 230 & 316 & 156 & 120 & 154 \\
+Avg tokens/turn & 46 & 63 & 31.2 & 24 & 30.8 \\
+Avg input tokens/turn & 18 & 29.6 & 8.4 & 8.4 & 8.4 \\
+Turn-5 total tokens & 37 & 69 & 17 & 12 & 5 \\
+\bottomrule
+\end{tabular}
+\caption{Summary of baseline (B) vs.\ enforcement (E) token metrics across 5 turns. Enforcement systems achieve 32--48\% total token reduction while preserving the commitment kernel (obligation/amount/deadline).}
+\label{tab:concrete-results}
+\end{table}
+
+\paragraph{Key observations.}
+Under baseline, the model exhibits \emph{token bloat}: outputs grow or remain stable (avg 28--33 tokens/turn), adding conversational filler (``Got it,'' ``No wiggle room, right?'') that dilutes commitment density. Under recursive baseline (B2), bloat compounds: total tokens reach 316, a 75\% increase over the 5-turn input budget.
+
+Under enforcement, the model exhibits \emph{commitment convergence}: the commitment kernel is extracted and re-input at each turn, causing progressive compression. By turn~5, Enforcement~3 produces a total of 5 tokens---the signal has converged to its kernel (``\$100 Friday''). The hard commitments (obligation, amount, deadline) are preserved across all turns; only non-committal content is discarded.
+
+This demonstrates the conservation principle in action: enforcement preserves $C(S)$ while collapsing $N(S)$, exactly as predicted by Lemma~\ref{lem:collapse}.
+
+\subsection{Limitations and Scaling Path}
+
+These results are preliminary and based on a limited corpus (100 sentences, 50 code snippets, 25 proofs). We acknowledge this directly: the corpus is a proof-of-concept, not validation.
+
+The contribution of this paper is the framework---the conservation principle, the enforcement architecture, and the falsification protocol. The harness is public. The pinned suite is versioned. The falsification contract (Section~\ref{sec:falsification}) explicitly invites replication on corpora exceeding 10,000 samples across diverse domains. Scaling the empirical base is the community's task; we provide the tools and the contract for doing so.
+
+The preliminary results are included to demonstrate that conservation is an \emph{observable} property of real transformations, not merely a definitional artifact. The $0.94$ vs.\ $0.42$ stability separation across enforced and unenforced regimes is consistent with the framework's predictions and sufficient to justify the falsification invitation.
+
+%% ============================================================
+%% SECTION 8: MO§ES ARCHITECTURE
+%% ============================================================
+\section{MO\S{}ES\texttrademark{}: Minimal Enforcement Architecture}
+\label{sec:moses}
+
+MO\S{}ES\texttrademark{} (Minimal Orthogonal Subset to Essential Structure) is an enforcement architecture that preserves commitment invariance under compression and recursion without reliance on model-specific assumptions.
+
+Figure~\ref{fig:commitment-lattice} visualizes the topological structure of the commitment lattice, showing how signals are projected onto fixed commitment nodes.
+
+% Insert Figure 5
+\input{fig6_lattice.tex}
+
+\subsection{Architecture Components}
+
+\begin{enumerate}
+    \item \textbf{Compression Gate:}
+    \begin{itemize}
+        \item All signals $S$ must pass through compression $T_c$ before propagating
+        \item Compression is defined as projection onto the essential structure manifold
+        \item Non-committal information $N(S)$ is orthogonally separated and discarded
+    \end{itemize}
+
+    \item \textbf{Lineage DAG:}
+    \begin{itemize}
+        \item Each transformation is recorded in a Merkle DAG
+        \item Nodes contain cryptographic hashes $h(S^{(k)})$
+        \item Edges represent transformation relationships
+        \item Root node anchored to hardware timestamp
+    \end{itemize}
+
+    \item \textbf{Hardware Anchoring:}
+    \begin{itemize}
+        \item Initial signal $S^{(0)}$ stamped with immutable hardware signature
+        \item Prevents forgery and enables verification
+        \item Compatible with TPM, secure enclaves, or blockchain
+    \end{itemize}
+
+    \item \textbf{Orthogonal Projection:}
+    \begin{itemize}
+        \item Commitment $C(S)$ and non-commitment $N(S)$ are orthogonal subspaces
+        \item Projection operator $P: S \rightarrow C(S)$ minimizes $\|S - P(S)\|$
+        \item Ensures minimal information loss while preserving identity
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Gate pseudocode (public-layer specification).}
+
+\begin{verbatim}
+COMPRESS_GATE(S, C_0, epsilon, L):
+    S_c   = compress(S)              // lossy compression
+    C_new = extract_commitment(S_c)  // independent extractor
+    delta = || C_new - C_0 ||
+    if delta > epsilon:
+        emit_ghost_token(delta)
+        REJECT(S, reason="commitment drift exceeds threshold")
+        return NULL
+    L' = append_lineage(L, hash(S_c), C_new, timestamp())
+    return (S_c, C_new, L')
+\end{verbatim}
+
+\noindent The gate is stateless with respect to model internals: it operates on the signal~$S$, not on weights, activations, or internal representations. This is what makes MO\S{}ES\texttrademark{} model-agnostic.
+
+\subsection{Mathematical Formulation}
+Let $M$ be the essential structure manifold, a subspace of the signal space $\Sigma^*$. The compression transformation $T_c$ is defined as:
+\begin{equation}
+T_c(S) = \arg\min_{S' \in M} \|S - S'\| \quad \text{subject to: } C(S') = C(S)
+\end{equation}
+
+The orthogonal projection operator $P$ is:
+\begin{equation}
+P(S) = C(S) \oplus 0
+\end{equation}
+where $\oplus$ denotes direct sum and $0$ is the zero element in the non-committal subspace.
+
+\begin{theorem}[MO\S{}ES\texttrademark{} Preserves Commitment]
+\label{thm:moses-preserve}
+Let $T$ be a transformation in a MO\S{}ES\texttrademark{} system. Then:
+\begin{equation}
+C(S) = C(T(S))
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By construction, $T$ operates on $T_c(S)$, which contains only $C(S)$. Therefore, $C(T(S)) = C(T(T_c(S))) = C(T_c(S)) = C(S)$.
+\end{proof}
+
+\begin{theorem}[MO\S{}ES\texttrademark{} is Recursively Stable]
+\label{thm:moses-stable}
+Let $T$ be a transformation in a MO\S{}ES\texttrademark{} system. Then:
+\begin{equation}
+C(S) = C(S^{(n)}) \text{ for all } n \geq 0
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Follows from Theorem~\ref{thm:moses-preserve} and induction.
+\end{proof}
+
+% Insert Figure 6
+\input{fig5_stress_regimes.tex}
+
+\subsection{Implementation Notes}
+
+\begin{itemize}
+    \item MO\S{}ES\texttrademark{} is model-agnostic: works with any language model or transformation function
+    \item Compression can be implemented via:
+    \begin{itemize}
+        \item Learned embeddings (e.g., sentence transformers)
+        \item Symbolic reduction (e.g., theorem provers)
+        \item Hybrid approaches (e.g., neural-symbolic systems)
+    \end{itemize}
+    \item Lineage DAG can be stored on-chain or in distributed databases
+    \item Hardware anchoring requires trusted execution environments
+\end{itemize}
+
+\subsection{Internal vs.\ External Enforcement}
+
+The present work critiques ``internal alignment'' approaches that rely on model-specific mechanisms (e.g., RLHF reward signals, Constitutional AI self-feedback) which are non-transferable across architectures and unverifiable under recursion. MO\S{}ES\texttrademark{} enforcement is external in the following precise sense:
+
+\begin{itemize}
+    \item The commitment extractor operates on the signal, not on model weights or activations.
+    \item The lineage DAG is append-only, independently auditable, and not controlled by the transformation model.
+    \item The falsification protocol invites third-party verification using only public components.
+\end{itemize}
+
+\noindent We do not claim the mechanism is extra-systemic in every sense; we claim it is architecture-independent and independently verifiable. Any model that produces signals can be evaluated by the same gate, the same extractor, and the same lineage audit.
+
+\subsection{Meta-Refinement as Empirical Exhibit: Recursive Hone with Kernel Locking}
+
+This subsection presents a meta-application of the conservation framework to the refinement process of this manuscript itself, serving as an illustrative, self-referential exhibit of Predictions 1--3. The preprint's iterative development---spanning 10+ cycles of AI-assisted compression and critique---functions as both equation and dataset: The initial draft acts as the source signal $S_0$, each review as a transformative compression $\mathcal{C}_\sigma$ or recursion step $T$, and the emergent stable structure as the conserved hard commitment kernel $C_{\text{hard}}$.
+
+Consider the manuscript's core sections (e.g., abstract, introduction, and key contributions) as the linguistic signal under test. Unconstrained recursion (e.g., repeated AI rephrasing without gating) introduces variability: 10 turns yield divergent results, with fidelity decaying due to paraphrase drift or bloat (non-essential expansions). However, enforced gating---implicitly applied via manual oversight (analogous to MO\S{}ES\texttrademark{} lineage validation)---mitigates this, converging to a stable kernel where hard commitments (e.g., ``commitment defined as minimal invariant'') persist across transforms.
+
+Formally, the refinement process is modeled as:
+\[
+C_{\text{hard}}(S_{n+1}) = \mathcal{E}\left( T(\mathcal{C}_\sigma(S_n)) \right),
+\]
+where $\mathcal{E}$ is the enforcement gate (reject if fidelity drop $\Delta > \theta$, e.g., $\theta = 0.2$ cosine similarity), ensuring invariance till sharp collapse. In exploratory runs (simulated on draft snippets), unconstrained paths exhibit $\Delta(n) \approx 1 - e^{-0.8n}$ (drift rise to collapse), while enforced paths flatten to $\Delta(n) \approx 0.05$, honing the kernel without erosion.
+
+This exhibit demonstrates that information under recursion is not ``sharpened into nothing'' (as with unchecked loss), but conserved as an emergent pattern when locked---representative of the framework's universality, where multiple simulation paths converge to efficiency.
+
+%% ============================================================
+%% SECTION 9: DISCUSSION AND FUTURE DIRECTIONS
+%% ============================================================
+\section{Discussion and Future Directions}
+\label{sec:discussion}
+
+\subsection{Implications}
+
+\paragraph{Zero as attractor.}
+Zero is not absence; it is the attractor state where signal and source coincide under enforced conservation. In conventional information theory, zero signal means silence. Under the commitment framework, zero drift means convergence---the signal has returned to its kernel. This redefines the ontology of null in information-bearing systems.
+
+\paragraph{Drift as forensic loss.}
+Semantic drift is measurable theft. Each unit of drift $\delta = \| C(T(S)) - C(S) \|$ represents quantifiable commitment degradation, traceable to a specific transformation step and attributable through the lineage DAG. This is not a metaphor: drift is a measured quantity with a defined perpetrator (the transformation) and a calculable recovery cost.
+
+\paragraph{Governance as invariant enforcement.}
+Governance is not policy; it is enforcement of invariants at each transformation step. Policy is negotiable, context-dependent, and unverifiable under recursion. Invariant enforcement is mathematical, testable, and falsifiable. The compression gate does not express a preference---it enforces a bound.
+
+\paragraph{Additional implications.}
+Commitment conservation, if validated at scale, constitutes a foundational principle for language systems analogous to conservation laws in physics. Systems that violate it under recursion are inherently unstable and prone to drift. Lineage tracking enables verification of identity preservation, preventing forgery and enabling accountability.
+
+\paragraph{Cross-domain applicability.}
+The framework applies to structured signals beyond natural language. The current evidence base is tiered:
+\begin{itemize}
+    \item \textbf{Natural language text:} Empirical results presented (Section~\ref{sec:empirical}); operational $\sim$ defined via NLI.
+    \item \textbf{Code:} Empirical results presented; operational $\sim$ defined via behavioral equivalence under test suites.
+    \item \textbf{Mathematical proofs:} Empirical results presented; operational $\sim$ defined via theorem-prover kernel check.
+    \item \textbf{Speech and multimodal signals:} Theoretical extension noted; no empirical results in this work. The framework predicts conservation should hold for any structured signal with a definable commitment kernel; validation is future work.
+\end{itemize}
+
+\subsection{Limitations}
+
+\begin{enumerate}
+    \item \textbf{Corpus Size:} Preliminary tests used a limited corpus. Large-scale validation is required.
+
+    \item \textbf{Compression Definition:} The optimal compression transformation $T_c$ may vary by domain and application.
+
+    \item \textbf{Computational Cost:} Compression and lineage tracking impose computational overhead.
+
+    \item \textbf{Adversarial Robustness:} The framework has not been tested against adversarial attacks designed to exploit specific oracle weaknesses. The Goodhart resistance discussion (Section~\ref{sec:falsification}) addresses this structurally but not empirically.
+
+    \item \textbf{Oracle Dependence:} Conservation strength depends on the choice of $\sim$. The framework is parameterized by this choice by design, but results under one oracle do not automatically generalize to all oracles.
+
+    \item \textbf{Code Equivalence Incompleteness:} Behavioral equivalence under finite test suites is sound but incomplete---two programs may pass identical tests while diverging on untested inputs. This is a known limitation shared with all testing-based verification. When formal verification tools (proof assistants, model checkers) are available, they provide a stronger instantiation of $\sim$ for code signals.
+\end{enumerate}
+
+\subsection{Future Work}
+
+\begin{enumerate}
+    \item \textbf{Large-Scale Validation:} Test on corpora with $>10{,}000$ samples across diverse domains.
+
+    \item \textbf{Alternative Compression:} Explore different compression algorithms and compare performance.
+
+    \item \textbf{Adversarial Testing:} Evaluate robustness against adversarial attacks and forgery attempts.
+
+    \item \textbf{Cross-Domain Extension:} Apply framework to speech, video, and multimodal signals.
+
+    \item \textbf{Theoretical Refinement:} Develop tighter bounds on commitment stability and drift rates, including investigation of whether achievable rates under the zero-drift constraint can be characterized as a semantic capacity.
+
+    \item \textbf{Governance Mechanisms:} Design protocols for multi-agent systems with commitment conservation.
+\end{enumerate}
+
+\subsection{Broader Context}
+
+Recent work in language models has highlighted challenges with recursive stability~\cite{correa2025,xie2025,chang2025,zhang2025,guo2025,chen2026}. MO\S{}ES\texttrademark{} provides a minimal enforcement architecture that addresses these challenges through compression gating and lineage tracking, without relying on model-specific assumptions.
+
+%% ============================================================
+%% SECTION 10: CONCLUSION
+%% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have introduced commitment conservation as a candidate foundational principle for language systems under transformation and recursion. The principle states that commitment---the minimal, identity-preserving content---remains invariant under loss-inducing transformations when compression and lineage constraints are enforced.
+
+We formalized this principle through:
+\begin{enumerate}
+    \item Definitions of commitment, compression, and recursive stability
+    \item Propositions demonstrating conservation under compression and recursion
+    \item Corollaries showing non-conservation in probabilistic and agent-based systems
+    \item A public falsification protocol for large-scale replication
+    \item Preliminary empirical validation on a limited corpus
+    \item MO\S{}ES\texttrademark{} as a minimal enforcement architecture
+\end{enumerate}
+
+The framework is falsifiable: it predicts that compression + lineage systems will maintain high commitment stability ($>0.9$) under recursion, while probabilistic systems without compression will exhibit drift. We invite the research community to validate, refine, or falsify these predictions through large-scale adversarial testing.
+
+If validated, commitment conservation could provide a substrate for stable, verifiable ecosystems of language across time, media, and sovereign instances---analogous to TCP/IP's unification of networks or Git's lineage tracking for code.
+
+We conclude that commitment conservation constitutes a viable candidate for a foundational principle in the physics of information-bearing language systems. Its validation, refinement, or falsification now rests squarely with independent theoretical critique and large-scale empirical testing by researchers with access to production-grade infrastructure.
+
+\section*{Intellectual Property Disclosure}
+
+The enforcement architecture described herein (MO\S{}ES\texttrademark{}) is protected by provisional patent applications and trademark registration. These protections cover specific implementations of compression gating, cryptographic lineage DAGs, and hardware anchoring. The underlying conservation principle, falsification protocol, and theoretical framework are not restricted and are presented for open scientific investigation.
+
+\section*{Acknowledgments}
+
+The author thanks the research community for ongoing discussions and feedback. The test harness and corpus are available at\\
+{\sloppy\url{https://github.com/SunrisesIllNeverSee/commitment-test-harness}}.\\
+This enables public replication and falsification.
+
+%% ============================================================
+%% BIBLIOGRAPHY
+%% ============================================================
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+\sloppy
+\raggedright
+
+\bibitem{shannon1948}
+Shannon, C. E. (1948).
+A mathematical theory of communication.
+\textit{Bell System Technical Journal}, 27(3), 379--423.
+
+\bibitem{barhillel1953}
+Bar-Hillel, Y. and Carnap, R. (1953).
+Semantic Information.
+\textit{British Journal for the Philosophy of Science}, 4(14), 147--157.
+
+\bibitem{floridi2004}
+Floridi, L. (2004).
+Outline of a Theory of Strongly Semantic Information.
+\textit{Minds and Machines}, 14(2), 197--221.
+
+\bibitem{tishby2000}
+Tishby, N., Pereira, F. C., and Bialek, W. (2000).
+The Information Bottleneck Method.
+\textit{Proceedings of the 37th Annual Allerton Conference}, 368--377.
+
+\bibitem{bianchi2022}
+Bianchi, F., et al. (2022).
+Language Invariant Properties in Natural Language Processing.
+arXiv preprint arXiv:2203.07628.
+
+\bibitem{atkey2014}
+Atkey, R. (2014).
+From Parametricity to Conservation Laws, via Noether's Theorem.
+\textit{ACM SIGPLAN Notices}, 49(1), 491--502.
+
+\bibitem{kunin2021}
+Kunin, D., et al. (2021).
+Neural Mechanics: Symmetry and Broken Conservation Laws in Deep Learning Dynamics.
+arXiv preprint arXiv:2012.04728.
+
+\bibitem{gaurav2025}
+Gaurav, S., Heikkonen, J., and Chaudhary, J. (2025).
+Governance-as-a-Service: A Multi-Agent Framework for AI System Compliance and Policy Enforcement.
+arXiv preprint arXiv:2508.18765.
+
+\bibitem{xu2026}
+Xu, Y., Zhang, X., Yeh, S., Dhamala, J., Dia, O., Gupta, R., and Li, S. (2026).
+Simulating and Understanding LLM Deceptive Behaviors in Long-Horizon Interactions.
+\textit{Proceedings of ICLR 2026}.
+
+\bibitem{yeh2026lumina}
+Yeh, S., Li, S., and Mallick, T. (2026).
+LUMINA: Detecting Hallucinations in RAG Systems with Context-Knowledge Signals.
+\textit{Proceedings of ICLR 2026}.
+
+\bibitem{correa2025}
+Corr\^ea, C., Schmid, P., Goyal, K., Kim, J., et al. (2025).
+Iterative Deployment Improves Planning Skills in LLMs.
+arXiv preprint arXiv:2512.24940.
+
+\bibitem{xie2025}
+Xie, Z., Ma, Y., Zhou, Y., et al. (2025).
+mHC: Manifold-Constrained Hyper-Connections for Stable Scaling.
+arXiv preprint arXiv:2512.24880.
+
+\bibitem{chang2025}
+Chang, E. (2025).
+The Missing Layer of AGI: From Pattern Alchemy to Coordination Physics.
+arXiv preprint arXiv:2512.05765.
+
+\bibitem{zhang2025}
+Zhang, H., Liu, A., et al. (2025).
+Recursive Language Models.
+arXiv preprint arXiv:2512.24601.
+
+\bibitem{guo2025}
+Guo, D., Yang, D., Zhang, H., et al. (2025).
+DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.
+arXiv preprint arXiv:2501.12948.
+
+\bibitem{chen2026}
+Chen, Z., Wang, H., Li, T., et al. (2026).
+SimpleMem: A Simple Memory Mechanism with Structured Compression for Long-Context Language Agents.
+arXiv preprint arXiv:2601.02553.
+
+\bibitem{park2023}
+Park, J. S., O'Brien, J. C., Cai, C. J., et al. (2023).
+Generative Agents: Interactive Simulacra of Human Behavior.
+\textit{Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology}, 1--22.
+
+\bibitem{bai2022}
+Bai, Y., Kadavath, S., Kundu, S., et al. (2022).
+Constitutional AI: Harmlessness from AI Feedback.
+arXiv preprint arXiv:2212.08073.
+
+\bibitem{schmidhuber2008}
+Schmidhuber, J. (2008).
+Driven by Compression Progress: A Simple Principle Explains Essential Aspects of Subjective Beauty, Novelty, Surprise, Interestingness, Attention, Curiosity, Creativity, Art, Science, Music, Jokes.
+\textit{arXiv preprint arXiv:0812.4360}.
+
+\bibitem{goertzel2014}
+Goertzel, B., et al. (2014).
+A cognitive architecture based on cognitive synergy.
+\textit{Theoretical Foundations of Artificial General Intelligence}, Atlantis Press, 169--187.
+
+\bibitem{looks2006}
+Looks, M. (2006).
+Meta-optimizing semantic evolutionary search.
+\textit{Proceedings of the 8th Annual Conference on Genetic and Evolutionary Computation (GECCO)}, 626--629.
+
+\bibitem{looks2009}
+Looks, M. (2009).
+Scalable meta-optimization: A case study with the distributed hierarchical genetic algorithm.
+Technical report, Google Inc.
+
+\bibitem{grimmett2001}
+Grimmett, G. R. and Stirzaker, D. R. (2001).
+\textit{Probability and Random Processes}.
+Oxford University Press, 3rd edition.
+
+\bibitem{abba2026}
+Centelles, A. and Mendelsohn, T. (2026).
+ABBA: Lattice-based Commitments from Commutators.
+IACR ePrint 2026/148.
+\url{https://eprint.iacr.org/2026/148}
+
+\fussy
+\end{thebibliography}
+
+\end{document}

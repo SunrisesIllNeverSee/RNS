@@ -1,0 +1,24 @@
+---
+word: "is_complete"
+role: user
+rank: "Platoon"
+count: 16
+threads: 3
+classification: "NOISE"
+trajectory: "RISING"
+signal_weight: 0.1591
+noise_weight: 0.8409
+---
+
+# 🏅 is_complete (User)
+
+**Rank:** Platoon  |  **Count:** 16  |  **Threads:** 3
+**Classification:** NOISE  |  **Trajectory:** RISING
+**Signal Weight:** 0.1591  |  **Noise Weight:** 0.8409
+
+*First seen: 2025-08-01T15:26:23.055180+00:00*
+
+## Threads
+- [[threads/Audit request confirmation|Audit request confirmation]]
+- [[threads/Updated K2SO profile|Updated K2SO profile]]
+- [[threads/User asks if assistant is present|User asks if assistant is present]]
