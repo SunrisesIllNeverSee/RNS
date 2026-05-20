@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SigRank — Operator & Signal Statistics</title>
+<style>
+  /* ── Design tokens (from components/sigrank/tokens.ts) ──────────────── */
+  :root {
+    --bg-base: #060b17;
+    --bg-surface: #0b1525;
+    --bg-elevated: #0f1e34;
+    --bg-hover: #132340;
+    --bg-border: #183354;
+    --bg-border-subtle: #0f2240;
+
+    --text-primary: #dde8f5;
+    --text-secondary: #7a9cbf;
+    --text-muted: #3d5a78;
+    --text-accent: #00cfff;
+    --text-gold: #f5a020;
+    --text-dim: #2a4060;
+
+    --cls-transmitter: #f5a020;
+    --cls-archplus: #5ba4f5;
+    --cls-arch: #4a8fd4;
+    --cls-power: #9d7fe8;
+    --cls-base: #6b7f96;
+    --cls-seeker: #2ec4a0;
+    --cls-refiner: #f07030;
+    --cls-bearer: #6876db;
+    --cls-igniter: #3a4f68;
+
+    --rank-1: #f5a020;
+    --rank-2: #00cfff;
+    --rank-3: #5ba4f5;
+
+    --mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Courier New', monospace;
+    --sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg-base); color: var(--text-primary); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  body {
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(0,207,255,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(245,160,32,0.05) 0%, transparent 50%),
+      linear-gradient(180deg, #060b17 0%, #040810 100%);
+    min-height: 100vh;
+  }
+
+  a { color: var(--text-accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Header / Nav ──────────────────────────────────────────────── */
+  .header {
+    background: linear-gradient(180deg, #0d1e38 0%, var(--bg-surface) 100%);
+    border-bottom: 1px solid var(--bg-border);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+  .header-inner {
+    max-width: 1400px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  .logo { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--text-accent); letter-spacing: 0.08em; }
+  .logo .glyph { font-size: 22px; }
+  .nav { display: flex; gap: 4px; flex: 1; }
+  .nav a {
+    padding: 6px 12px; border-radius: 4px; color: var(--text-secondary);
+    font-size: 13px; font-weight: 500; transition: all 0.15s; text-decoration: none;
+  }
+  .nav a:hover { color: var(--text-primary); background: var(--bg-elevated); }
+  .nav a.active { color: var(--text-accent); background: rgba(0,207,255,0.1); }
+  .search {
+    background: var(--bg-elevated); border: 1px solid var(--bg-border);
+    border-radius: 6px; padding: 6px 12px; color: var(--text-secondary);
+    font-family: var(--mono); font-size: 12px; min-width: 260px;
+  }
+  .header-cta {
+    background: rgba(245,160,32,0.12); border: 1px solid rgba(245,160,32,0.4);
+    color: var(--text-gold); padding: 6px 12px; border-radius: 6px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────────── */
+  .hero {
+    max-width: 1400px; margin: 0 auto; padding: 40px 24px 24px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-family: var(--mono); font-size: 32px; margin: 0 0 8px 0;
+    color: var(--text-primary); letter-spacing: 0.05em;
+    text-shadow: 0 0 24px rgba(0,207,255,0.3);
+  }
+  .hero .tagline { color: var(--text-secondary); font-size: 13px; letter-spacing: 0.04em; margin-bottom: 18px; }
+  .platform-selector {
+    display: inline-flex; background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 8px; padding: 4px; gap: 2px;
+  }
+  .platform-selector button {
+    background: transparent; border: none; color: var(--text-secondary);
+    padding: 6px 14px; border-radius: 5px; font-size: 12px; font-weight: 500;
+    cursor: pointer; font-family: var(--sans); transition: all 0.15s;
+  }
+  .platform-selector button.active {
+    background: var(--bg-elevated); color: var(--text-accent);
+    border: 1px solid rgba(0,207,255,0.3);
+  }
+  .platform-selector button:hover:not(.active) { color: var(--text-primary); }
+
+  /* ── Section heading ──────────────────────────────────────────── */
+  .section-title {
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;
+    margin: 0 0 12px 0;
+  }
+  .section-title .accent { color: var(--text-gold); }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 24px 32px; }
+
+  /* ── Featured operators strip ─────────────────────────────────── */
+  .featured-strip {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;
+    margin-bottom: 32px;
+  }
+  .featured-card {
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s;
+  }
+  .featured-card:hover {
+    border-color: rgba(0,207,255,0.4);
+    box-shadow: 0 4px 16px rgba(0,207,255,0.1);
+    transform: translateY(-1px);
+  }
+  .featured-card .badge {
+    display: inline-block; padding: 1px 6px; border-radius: 3px;
+    font-family: var(--mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .featured-card .codename {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--text-primary); margin: 6px 0 2px 0;
+  }
+  .featured-card .meta { font-size: 10px; color: var(--text-muted); font-family: var(--mono); }
+
+  /* ── Two-column layout ────────────────────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .card {
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .card-header {
+    padding: 12px 16px; border-bottom: 1px solid var(--bg-border-subtle);
+    background: linear-gradient(180deg, rgba(0,207,255,0.04) 0%, transparent 100%);
+  }
+  .card-header h3 {
+    margin: 0; font-family: var(--mono); font-size: 12px; font-weight: 700;
+    color: var(--text-primary); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .card-header .sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── Today's Signal Leaders mini-table ────────────────────────── */
+  .mini-table { width: 100%; border-collapse: collapse; }
+  .mini-table th, .mini-table td {
+    padding: 7px 14px; text-align: left; font-size: 11px;
+    border-bottom: 1px solid var(--bg-border-subtle);
+  }
+  .mini-table th {
+    font-family: var(--mono); font-size: 9px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+    background: var(--bg-elevated);
+  }
+  .mini-table td { font-family: var(--mono); color: var(--text-secondary); }
+  .mini-table .codename { color: var(--text-primary); font-weight: 600; }
+  .mini-table .value { color: var(--text-accent); font-weight: 600; text-align: right; }
+  .mini-table tr:hover { background: var(--bg-hover); cursor: pointer; }
+
+  /* ── Class badges ──────────────────────────────────────────────── */
+  .class-badge {
+    display: inline-block; padding: 1px 6px; border-radius: 3px;
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.03em; white-space: nowrap;
+  }
+  .cls-T { color: var(--cls-transmitter); background: rgba(245,160,32,0.12); border: 1px solid rgba(245,160,32,0.3); }
+  .cls-Ap { color: var(--cls-archplus); background: rgba(91,164,245,0.12); border: 1px solid rgba(91,164,245,0.3); }
+  .cls-A  { color: var(--cls-arch); background: rgba(74,143,212,0.12); border: 1px solid rgba(74,143,212,0.3); }
+  .cls-P  { color: var(--cls-power); background: rgba(157,127,232,0.12); border: 1px solid rgba(157,127,232,0.3); }
+  .cls-B  { color: var(--cls-base); background: rgba(107,127,150,0.12); border: 1px solid rgba(107,127,150,0.3); }
+  .cls-S  { color: var(--cls-seeker); background: rgba(46,196,160,0.12); border: 1px solid rgba(46,196,160,0.3); }
+
+  /* ── Signalgeist grid ─────────────────────────────────────────── */
+  .geist-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin-bottom: 32px;
+  }
+  .geist-card {
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 10px; padding: 14px;
+  }
+  .geist-card h4 {
+    margin: 0 0 10px 0; font-family: var(--mono); font-size: 10px; font-weight: 700;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .geist-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 0; border-bottom: 1px solid var(--bg-border-subtle);
+    font-family: var(--mono); font-size: 11px;
+  }
+  .geist-row:last-child { border-bottom: none; }
+  .geist-row .name { color: var(--text-primary); flex: 1; }
+  .geist-row .val { color: var(--text-accent); font-weight: 600; }
+
+  /* ── Live activity ────────────────────────────────────────────── */
+  .live-bar {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 10px; padding: 16px; margin-bottom: 32px;
+  }
+  .live-stat { text-align: center; }
+  .live-stat .lbl {
+    font-family: var(--mono); font-size: 9px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .live-stat .val {
+    font-family: var(--mono); font-size: 22px; font-weight: 700;
+    color: var(--text-accent); margin-top: 2px;
+    text-shadow: 0 0 12px rgba(0,207,255,0.3);
+  }
+  .live-stat .dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: #2ec4a0; box-shadow: 0 0 6px #2ec4a0; margin-right: 4px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── Main leaderboard ─────────────────────────────────────────── */
+  .leaderboard-card {
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .lb-meta {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px; border-bottom: 1px solid var(--bg-border);
+    background: var(--bg-elevated); font-family: var(--mono); font-size: 11px;
+  }
+  .lb-meta .title { font-family: var(--sans); color: var(--text-primary); font-weight: 600; font-size: 13px; }
+  .lb-meta .meta-item { color: var(--text-secondary); }
+  .lb-meta .dot { color: var(--text-dim); margin: 0 6px; }
+  .lb-meta .integrity {
+    margin-left: auto; color: #2ec4a0; font-family: var(--mono); font-size: 11px;
+  }
+  .lb-tabs {
+    display: flex; gap: 4px; padding: 8px 16px; border-bottom: 1px solid var(--bg-border);
+    background: var(--bg-surface);
+  }
+  .lb-tabs button {
+    background: transparent; border: none; color: var(--text-secondary);
+    padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: 500;
+    cursor: pointer; font-family: var(--sans); transition: all 0.15s;
+  }
+  .lb-tabs button.active {
+    background: var(--bg-elevated); color: var(--text-accent);
+    border: 1px solid var(--bg-border);
+    outline: 1px solid rgba(0,207,255,0.3);
+  }
+  .lb-table { width: 100%; border-collapse: collapse; }
+  .lb-table th {
+    padding: 9px 14px; text-align: left; font-family: var(--sans);
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    background: var(--bg-elevated); border-bottom: 1px solid var(--bg-border);
+    white-space: nowrap;
+  }
+  .lb-table td {
+    padding: 10px 14px; border-bottom: 1px solid var(--bg-border-subtle);
+    vertical-align: middle;
+  }
+  .lb-table tr:hover td { background: var(--bg-hover); }
+  .lb-table .rank {
+    font-family: var(--mono); font-size: 13px; font-weight: 500;
+    color: var(--text-muted); text-align: right; min-width: 28px;
+  }
+  .rank-medal {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%; font-family: var(--mono);
+    font-size: 11px; font-weight: 700;
+  }
+  .rank-medal.r1 { background: rgba(245,160,32,0.15); border: 1px solid rgba(245,160,32,0.5); color: var(--rank-1); }
+  .rank-medal.r2 { background: rgba(0,207,255,0.15); border: 1px solid rgba(0,207,255,0.5); color: var(--rank-2); }
+  .rank-medal.r3 { background: rgba(91,164,245,0.15); border: 1px solid rgba(91,164,245,0.5); color: var(--rank-3); }
+  .lb-table .codename-cell { color: var(--text-primary); font-family: var(--mono); font-size: 12px; }
+  .lb-table .location { color: var(--text-muted); font-size: 10px; margin-top: 1px; font-family: var(--sans); }
+  .lb-table .metric { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--text-primary); text-align: right; }
+  .lb-table .metric.accent { color: var(--text-accent); }
+  .lb-table .age { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); text-align: right; }
+  .lb-table .last-seen { font-family: var(--mono); font-size: 10px; color: var(--text-muted); text-align: right; }
+  .lb-table .signa {
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    color: var(--text-gold); text-align: right;
+  }
+  .platform-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%;
+    font-family: var(--mono); font-size: 10px; font-weight: 700;
+    margin-right: 5px;
+  }
+  .pf-claude { background: rgba(217,119,6,0.2); color: #f59e0b; border: 1px solid rgba(217,119,6,0.4); }
+  .pf-chatgpt { background: rgba(16,163,127,0.2); color: #10a37f; border: 1px solid rgba(16,163,127,0.4); }
+  .pf-gemini { background: rgba(66,133,244,0.2); color: #4285f4; border: 1px solid rgba(66,133,244,0.4); }
+  .pf-pi { background: rgba(99,102,241,0.2); color: #6366f1; border: 1px solid rgba(99,102,241,0.4); }
+
+  /* ── Footer ───────────────────────────────────────────────────── */
+  .footer {
+    max-width: 1400px; margin: 32px auto 0;
+    padding: 20px 24px 32px;
+    text-align: center; color: var(--text-dim); font-size: 11px;
+    border-top: 1px solid var(--bg-border-subtle); font-family: var(--mono);
+  }
+  .footer a { color: var(--text-muted); margin: 0 8px; }
+
+  /* ── Section divider ──────────────────────────────────────────── */
+  .page-break {
+    margin: 80px auto 20px; max-width: 1400px; padding: 0 24px;
+    border-top: 2px dashed var(--bg-border);
+    position: relative;
+  }
+  .page-break::before {
+    content: 'OPERATOR PROFILE PAGE → /operators/TransVaultOrigin';
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    background: var(--bg-base); padding: 0 16px;
+    font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Profile page ─────────────────────────────────────────────── */
+  .profile-header {
+    background: linear-gradient(180deg, rgba(245,160,32,0.08) 0%, transparent 100%);
+    border-bottom: 1px solid var(--bg-border);
+  }
+  .profile-header-inner {
+    max-width: 1400px; margin: 0 auto; padding: 24px 24px 16px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .profile-glyph {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(245,160,32,0.15); border: 2px solid rgba(245,160,32,0.5);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-gold); font-family: var(--mono); font-size: 24px;
+    box-shadow: 0 0 24px rgba(245,160,32,0.3);
+  }
+  .profile-meta h2 {
+    margin: 0; font-family: var(--mono); font-size: 24px; color: var(--text-primary);
+    letter-spacing: 0.02em;
+  }
+  .profile-meta .submeta {
+    font-family: var(--mono); font-size: 11px; color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .profile-meta .submeta span { margin-right: 12px; }
+  .profile-actions { margin-left: auto; display: flex; gap: 8px; }
+  .btn-outline {
+    background: transparent; border: 1px solid var(--bg-border);
+    color: var(--text-secondary); padding: 7px 14px; border-radius: 6px;
+    font-size: 12px; cursor: pointer;
+  }
+  .btn-primary {
+    background: rgba(0,207,255,0.15); border: 1px solid rgba(0,207,255,0.4);
+    color: var(--text-accent); padding: 7px 14px; border-radius: 6px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+
+  /* Hero SIGNA RATE */
+  .signa-hero {
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 12px; padding: 32px; margin-bottom: 24px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .signa-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(245,160,32,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .signa-hero .lbl {
+    font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px;
+  }
+  .signa-hero .value {
+    font-family: var(--mono); font-size: 80px; font-weight: 700;
+    color: var(--text-gold); line-height: 1;
+    text-shadow: 0 0 40px rgba(245,160,32,0.5);
+    letter-spacing: -0.02em;
+  }
+  .signa-hero .class-line {
+    font-family: var(--mono); font-size: 16px; color: var(--cls-transmitter);
+    margin-top: 12px; letter-spacing: 0.08em; font-weight: 600;
+  }
+  .signa-hero .rank-line {
+    margin-top: 16px; display: flex; gap: 24px; justify-content: center;
+    font-family: var(--mono); font-size: 11px; color: var(--text-secondary);
+  }
+  .signa-hero .rank-line strong { color: var(--text-primary); font-weight: 700; }
+  .signa-hero .movement {
+    margin-top: 12px; font-family: var(--mono); font-size: 11px; color: #2ec4a0;
+  }
+
+  /* Window selector */
+  .window-selector {
+    display: flex; gap: 4px; justify-content: center; margin-bottom: 20px;
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 8px; padding: 4px; max-width: 480px; margin-left: auto; margin-right: auto;
+  }
+  .window-selector button {
+    flex: 1; background: transparent; border: none; color: var(--text-secondary);
+    padding: 7px 12px; border-radius: 5px; font-size: 12px; font-weight: 500;
+    cursor: pointer; font-family: var(--sans);
+  }
+  .window-selector button.active {
+    background: var(--bg-elevated); color: var(--text-accent);
+    border: 1px solid rgba(0,207,255,0.3);
+  }
+
+  /* Core metrics grid */
+  .core-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    margin-bottom: 24px;
+  }
+  .metric-card {
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 10px; padding: 14px;
+  }
+  .metric-card .lbl {
+    font-family: var(--mono); font-size: 9px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .metric-card .value {
+    font-family: var(--mono); font-size: 28px; font-weight: 700;
+    color: var(--text-primary); margin: 4px 0 8px 0; line-height: 1;
+  }
+  .metric-card .bar {
+    height: 4px; background: var(--bg-elevated); border-radius: 2px; overflow: hidden;
+  }
+  .metric-card .bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--text-accent), var(--text-gold));
+    border-radius: 2px;
+  }
+  .metric-card .rank-info {
+    font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+    margin-top: 6px; display: flex; justify-content: space-between;
+  }
+  .metric-card .rank-info strong { color: var(--text-secondary); }
+
+  /* Analytics row */
+  .analytics-row {
+    display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .analytics-card {
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 10px; padding: 16px;
+  }
+  .analytics-card h4 {
+    margin: 0 0 12px 0; font-family: var(--mono); font-size: 10px;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* Heatmap */
+  .heatmap { display: flex; gap: 2px; }
+  .heatmap-week { display: flex; flex-direction: column; gap: 2px; }
+  .heatmap-day { width: 10px; height: 10px; border-radius: 2px; background: var(--bg-elevated); }
+  .heatmap-day.l1 { background: rgba(0,207,255,0.2); }
+  .heatmap-day.l2 { background: rgba(0,207,255,0.4); }
+  .heatmap-day.l3 { background: rgba(0,207,255,0.65); }
+  .heatmap-day.l4 { background: rgba(0,207,255,0.9); }
+  .heatmap-legend {
+    margin-top: 8px; display: flex; align-items: center; gap: 4px;
+    font-family: var(--sans); font-size: 9px; color: var(--text-muted);
+  }
+  .heatmap-legend .square { width: 9px; height: 9px; border-radius: 2px; }
+
+  /* Drilldown tables */
+  .drilldown { margin-bottom: 24px; }
+  .drilldown-header {
+    padding: 10px 16px; background: var(--bg-elevated);
+    border: 1px solid var(--bg-border); border-bottom: none;
+    border-radius: 10px 10px 0 0; display: flex; align-items: center;
+  }
+  .drilldown-header h3 {
+    margin: 0; font-family: var(--mono); font-size: 11px;
+    color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .drilldown-header .sub {
+    margin-left: auto; font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+  }
+  .drilldown-table {
+    width: 100%; border-collapse: collapse; background: var(--bg-surface);
+    border: 1px solid var(--bg-border); border-radius: 0 0 10px 10px; overflow: hidden;
+  }
+  .drilldown-table th, .drilldown-table td {
+    padding: 8px 14px; text-align: left; font-size: 11px;
+    border-bottom: 1px solid var(--bg-border-subtle);
+  }
+  .drilldown-table th {
+    font-family: var(--mono); font-size: 9px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600;
+    background: var(--bg-elevated);
+  }
+  .drilldown-table td { font-family: var(--mono); color: var(--text-secondary); }
+  .drilldown-table td.first { color: var(--text-primary); font-weight: 500; }
+  .drilldown-table td.accent { color: var(--text-accent); font-weight: 600; }
+  .drilldown-table td.gold { color: var(--text-gold); font-weight: 700; }
+  .drilldown-table tr:last-child td { border-bottom: none; }
+
+  /* Badge case */
+  .badge-case {
+    background: var(--bg-surface); border: 1px solid var(--bg-border);
+    border-radius: 10px; padding: 16px; margin-bottom: 24px;
+  }
+  .badge-case h4 {
+    margin: 0 0 12px 0; font-family: var(--mono); font-size: 10px;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .badge-list { display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--bg-elevated); border: 1px solid var(--bg-border);
+    border-radius: 20px; padding: 6px 12px;
+    font-family: var(--sans); font-size: 11px; color: var(--text-primary);
+  }
+  .badge-pill .ico { font-size: 13px; }
+  .badge-pill.gold { border-color: rgba(245,160,32,0.4); color: var(--text-gold); }
+  .badge-pill.cyan { border-color: rgba(0,207,255,0.4); color: var(--text-accent); }
+
+  /* Caption underneath */
+  .mockup-caption {
+    text-align: center; font-family: var(--mono); font-size: 11px;
+    color: var(--text-muted); padding: 12px 24px;
+    border-top: 1px dashed var(--bg-border-subtle);
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- HOMEPAGE                                                              -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><span class="glyph">◈</span>SIGRANK</div>
+    <nav class="nav">
+      <a href="#" class="active">Leaderboard</a>
+      <a href="#">Operators</a>
+      <a href="#">Circles</a>
+      <a href="#">Metrics</a>
+      <a href="#">Compare</a>
+      <a href="#">Hall of Signal</a>
+      <a href="#">Pro</a>
+      <a href="#">Community</a>
+    </nav>
+    <input class="search" placeholder="◎ known operators · known circles" />
+    <button class="header-cta">★ Submit Snapshot</button>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>◈ SIGRANK</h1>
+  <div class="tagline">Detailed operator &amp; signal statistics for human performance across AI systems · LIVE</div>
+  <div class="platform-selector">
+    <button class="active">Global</button>
+    <button>Claude</button>
+    <button>ChatGPT</button>
+    <button>Gemini</button>
+    <button>Pi</button>
+    <button>Multi</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Featured Operators (Signal Supporters strip) -->
+  <div class="section-title">⭑ FEATURED <span class="accent">SIGNAL SUPPORTERS</span></div>
+  <div class="featured-strip">
+    <div class="featured-card">
+      <span class="badge cls-T">TRANS</span>
+      <div class="codename">TransVaultOrigin</div>
+      <div class="meta">Buffalo · US · Claude</div>
+    </div>
+    <div class="featured-card">
+      <span class="badge cls-Ap">ARCH+</span>
+      <div class="codename">ArchiveSignal</div>
+      <div class="meta">Berlin · DE · Claude</div>
+    </div>
+    <div class="featured-card">
+      <span class="badge cls-Ap">ARCH+</span>
+      <div class="codename">CrossWeaver</div>
+      <div class="meta">Toronto · CA · ChatGPT</div>
+    </div>
+    <div class="featured-card">
+      <span class="badge cls-A">ARCH</span>
+      <div class="codename">DeepChannel</div>
+      <div class="meta">Tokyo · JP · Multi</div>
+    </div>
+    <div class="featured-card">
+      <span class="badge cls-A">ARCH</span>
+      <div class="codename">GhostRelay</div>
+      <div class="meta">Paris · FR · Claude</div>
+    </div>
+    <div class="featured-card">
+      <span class="badge cls-P">POWER</span>
+      <div class="codename">PromplexCore</div>
+      <div class="meta">Seoul · KR · Gemini</div>
+    </div>
+  </div>
+
+  <!-- Two-column: Today's Leaders + Today's Events -->
+  <div class="two-col">
+
+    <!-- Today's Signal Leaders -->
+    <div class="card">
+      <div class="card-header">
+        <h3>★ Today's Signal Leaders</h3>
+        <div class="sub">Last 24 hours · by daily signal gain</div>
+      </div>
+      <table class="mini-table">
+        <thead>
+          <tr><th>Operator</th><th>Circle</th><th style="text-align:right">Today</th><th style="text-align:right">Total</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-badge cls-T">TRANS</span> <span class="codename">TransVaultOrigin</span></td>
+            <td>[III] Foundry</td>
+            <td class="value">+180</td><td>2,700</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge cls-Ap">ARCH+</span> <span class="codename">ArchiveSignal</span></td>
+            <td>[DC] Deep Chnl</td>
+            <td class="value">+154</td><td>2,210</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge cls-Ap">ARCH+</span> <span class="codename">CrossWeaver</span></td>
+            <td>[MEM] Memory</td>
+            <td class="value">+142</td><td>1,988</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge cls-A">ARCH</span> <span class="codename">RiddleSocket</span></td>
+            <td>—</td>
+            <td class="value">+118</td><td>1,654</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge cls-A">ARCH</span> <span class="codename">GhostRelay</span></td>
+            <td>[GR] Return</td>
+            <td class="value">+96</td><td>1,422</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Today's Signal Events -->
+    <div class="card">
+      <div class="card-header">
+        <h3>⚡ Today's Signal Events</h3>
+        <div class="sub">Top performances by class · Last 24h</div>
+      </div>
+      <table class="mini-table">
+        <thead>
+          <tr><th>Class / Operator</th><th>Comp</th><th>SR</th><th style="text-align:right">When</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-badge cls-T">TRANS</span> <span class="codename">TransVaultOrigin</span></td>
+            <td>0.87</td><td class="value">96.4</td><td>16h ago</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge cls-T">TRANS</span> <span class="codename">QuietGiant</span></td>
+            <td>0.89</td><td class="value">90.1</td><td>12h ago</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge cls-Ap">ARCH+</span> <span class="codename">CrossWeaver</span></td>
+            <td>0.82</td><td class="value">89.7</td><td>2h ago</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge cls-A">ARCH</span> <span class="codename">GhostRelay</span></td>
+            <td>0.73</td><td class="value">78.4</td><td>43m ago</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge cls-P">POWER</span> <span class="codename">PromplexCore</span></td>
+            <td>0.64</td><td class="value">68.2</td><td>1h ago</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Signalgeist 90-day -->
+  <div class="section-title">📊 SIGNALGEIST · <span class="accent">90-day stats</span></div>
+  <div class="geist-grid">
+    <div class="geist-card">
+      <h4>HIGHEST COMPRESSION</h4>
+      <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">0.94</span></div>
+      <div class="geist-row"><span class="name">QuietGiant</span><span class="val">0.92</span></div>
+      <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">0.88</span></div>
+      <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">0.86</span></div>
+    </div>
+    <div class="geist-card">
+      <h4>MOST IMPROVED SNR</h4>
+      <div class="geist-row"><span class="name">GhostRelay</span><span class="val">+0.08</span></div>
+      <div class="geist-row"><span class="name">DeepChannel</span><span class="val">+0.06</span></div>
+      <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">+0.05</span></div>
+      <div class="geist-row"><span class="name">PromplexCore</span><span class="val">+0.04</span></div>
+    </div>
+    <div class="geist-card">
+      <h4>MOST ACTIVE (VOLUME)</h4>
+      <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">18,450</span></div>
+      <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">14,320</span></div>
+      <div class="geist-row"><span class="name">GhostRelay</span><span class="val">10,880</span></div>
+      <div class="geist-row"><span class="name">PromplexCore</span><span class="val">9,712</span></div>
+    </div>
+    <div class="geist-card">
+      <h4>DEEPEST CHANNELS</h4>
+      <div class="geist-row"><span class="name">DeepChannel</span><span class="val">31.0</span></div>
+      <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">26.1</span></div>
+      <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">24.4</span></div>
+      <div class="geist-row"><span class="name">RiddleSocket</span><span class="val">22.8</span></div>
+    </div>
+    <div class="geist-card">
+      <h4>MOST COMPLEX (PC)</h4>
+      <div class="geist-row"><span class="name">PromplexCore</span><span class="val">94</span></div>
+      <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">92</span></div>
+      <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">88</span></div>
+      <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">84</span></div>
+    </div>
+    <div class="geist-card">
+      <h4>MOST CROSS-THREADED</h4>
+      <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">41</span></div>
+      <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">37</span></div>
+      <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">31</span></div>
+      <div class="geist-row"><span class="name">DeepChannel</span><span class="val">28</span></div>
+    </div>
+  </div>
+
+  <!-- Live Activity -->
+  <div class="section-title">⚡ <span style="color:#2ec4a0">●</span> OPERATORS ACTIVE — LIVE</div>
+  <div class="live-bar">
+    <div class="live-stat"><div class="lbl">Global</div><div class="val"><span class="dot"></span>1,847</div></div>
+    <div class="live-stat"><div class="lbl">Claude</div><div class="val">612</div></div>
+    <div class="live-stat"><div class="lbl">ChatGPT</div><div class="val">798</div></div>
+    <div class="live-stat"><div class="lbl">Gemini</div><div class="val">287</div></div>
+    <div class="live-stat"><div class="lbl">Pi</div><div class="val">88</div></div>
+    <div class="live-stat"><div class="lbl">Multi</div><div class="val">62</div></div>
+  </div>
+
+  <!-- Main Leaderboard -->
+  <div class="section-title">🏆 GLOBAL <span class="accent">LEADERBOARD</span></div>
+  <div class="leaderboard-card">
+    <div class="lb-meta">
+      <span class="title">Top 25 by SIGNA RATE · 30-day window</span>
+      <span class="meta-item">Last Update: 14:23 UTC</span>
+      <span class="dot">·</span>
+      <span class="meta-item">▲ Latent: <span style="color:var(--text-accent)">38,041</span></span>
+      <span class="integrity">🔒 Compression Integrity: MAINTAINED</span>
+    </div>
+
+    <div class="lb-tabs">
+      <button class="active">SIGNA RATE</button>
+      <button>Compression</button>
+      <button>Session Depth</button>
+      <button>Token Throughput</button>
+      <button>Prompt Complexity</button>
+      <button>Cross-Thread</button>
+      <button>Signal Force</button>
+    </div>
+
+    <table class="lb-table">
+      <thead>
+        <tr>
+          <th style="width:42px">#</th>
+          <th style="width:80px">Class</th>
+          <th>Operator (Location)</th>
+          <th style="width:80px">Platform</th>
+          <th style="text-align:right">SIGNA</th>
+          <th style="text-align:right">Comp</th>
+          <th style="text-align:right">SD</th>
+          <th style="text-align:right">TT</th>
+          <th style="text-align:right">PC</th>
+          <th style="text-align:right">CT</th>
+          <th style="text-align:right">SF</th>
+          <th style="text-align:right">Age</th>
+          <th style="text-align:right">Last Seen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rank-medal r1">1</span></td>
+          <td><span class="class-badge cls-T">TRANS</span></td>
+          <td><div class="codename-cell">TransVaultOrigin</div><div class="location">Buffalo, US</div></td>
+          <td><span class="platform-icon pf-claude">C</span></td>
+          <td class="signa">96.4</td>
+          <td class="metric accent">0.87</td>
+          <td class="metric">26.1</td>
+          <td class="metric">18,450</td>
+          <td class="metric">92</td>
+          <td class="metric">37</td>
+          <td class="metric">12.8</td>
+          <td class="age">14d</td>
+          <td class="last-seen">16h ago</td>
+        </tr>
+        <tr>
+          <td><span class="rank-medal r2">2</span></td>
+          <td><span class="class-badge cls-Ap">ARCH+</span></td>
+          <td><div class="codename-cell">ArchiveSignal</div><div class="location">Berlin, DE</div></td>
+          <td><span class="platform-icon pf-claude">C</span></td>
+          <td class="signa">89.7</td>
+          <td class="metric accent">0.82</td>
+          <td class="metric">22.1</td>
+          <td class="metric">14,320</td>
+          <td class="metric">84</td>
+          <td class="metric">31</td>
+          <td class="metric">9.4</td>
+          <td class="age">7mo</td>
+          <td class="last-seen">2h ago</td>
+        </tr>
+        <tr>
+          <td><span class="rank-medal r3">3</span></td>
+          <td><span class="class-badge cls-Ap">ARCH+</span></td>
+          <td><div class="codename-cell">CrossWeaver</div><div class="location">Toronto, CA</div></td>
+          <td><span class="platform-icon pf-chatgpt">⊕</span></td>
+          <td class="signa">87.3</td>
+          <td class="metric accent">0.81</td>
+          <td class="metric">24.4</td>
+          <td class="metric">12,107</td>
+          <td class="metric">88</td>
+          <td class="metric">41</td>
+          <td class="metric">7.1</td>
+          <td class="age">21d</td>
+          <td class="last-seen">18h ago</td>
+        </tr>
+        <tr>
+          <td class="rank">4</td>
+          <td><span class="class-badge cls-Ap">ARCH+</span></td>
+          <td><div class="codename-cell">DeepChannel</div><div class="location">Tokyo, JP</div></td>
+          <td><span class="platform-icon pf-gemini">G</span></td>
+          <td class="signa">84.2</td>
+          <td class="metric">0.79</td>
+          <td class="metric">31.0</td>
+          <td class="metric">11,884</td>
+          <td class="metric">76</td>
+          <td class="metric">28</td>
+          <td class="metric">6.4</td>
+          <td class="age">9mo</td>
+          <td class="last-seen">3h ago</td>
+        </tr>
+        <tr>
+          <td class="rank">5</td>
+          <td><span class="class-badge cls-A">ARCH</span></td>
+          <td><div class="codename-cell">RiddleSocket</div><div class="location">Toronto, CA</div></td>
+          <td><span class="platform-icon pf-claude">C</span></td>
+          <td class="signa">79.6</td>
+          <td class="metric">0.74</td>
+          <td class="metric">22.8</td>
+          <td class="metric">10,442</td>
+          <td class="metric">71</td>
+          <td class="metric">22</td>
+          <td class="metric">5.8</td>
+          <td class="age">2mo</td>
+          <td class="last-seen">7h ago</td>
+        </tr>
+        <tr>
+          <td class="rank">6</td>
+          <td><span class="class-badge cls-A">ARCH</span></td>
+          <td><div class="codename-cell">GhostRelay</div><div class="location">Paris, FR</div></td>
+          <td><span class="platform-icon pf-claude">C</span></td>
+          <td class="signa">78.4</td>
+          <td class="metric">0.73</td>
+          <td class="metric">19.6</td>
+          <td class="metric">10,880</td>
+          <td class="metric">79</td>
+          <td class="metric">24</td>
+          <td class="metric">5.1</td>
+          <td class="age">6mo</td>
+          <td class="last-seen">43m ago</td>
+        </tr>
+        <tr>
+          <td class="rank">7</td>
+          <td><span class="class-badge cls-A">ARCH</span></td>
+          <td><div class="codename-cell">Arch+:24-78344</div><div class="location">Faris, FR</div></td>
+          <td><span class="platform-icon pf-chatgpt">⊕</span></td>
+          <td class="signa">76.8</td>
+          <td class="metric">0.71</td>
+          <td class="metric">18.2</td>
+          <td class="metric">9,520</td>
+          <td class="metric">74</td>
+          <td class="metric">19</td>
+          <td class="metric">4.9</td>
+          <td class="age">7mo</td>
+          <td class="last-seen">5h ago</td>
+        </tr>
+        <tr>
+          <td class="rank">8</td>
+          <td><span class="class-badge cls-P">POWER</span></td>
+          <td><div class="codename-cell">PromplexCore</div><div class="location">Seoul, KR</div></td>
+          <td><span class="platform-icon pf-gemini">G</span></td>
+          <td class="signa">68.2</td>
+          <td class="metric">0.64</td>
+          <td class="metric">14.8</td>
+          <td class="metric">9,712</td>
+          <td class="metric">94</td>
+          <td class="metric">16</td>
+          <td class="metric">3.7</td>
+          <td class="age">3mo</td>
+          <td class="last-seen">1h ago</td>
+        </tr>
+        <tr>
+          <td class="rank">9</td>
+          <td><span class="class-badge cls-P">POWER</span></td>
+          <td><div class="codename-cell">QuietGiant</div><div class="location">Stockholm, SE</div></td>
+          <td><span class="platform-icon pf-claude">C</span></td>
+          <td class="signa">66.4</td>
+          <td class="metric accent">0.89</td>
+          <td class="metric">11.2</td>
+          <td class="metric">3,210</td>
+          <td class="metric">62</td>
+          <td class="metric">14</td>
+          <td class="metric">3.2</td>
+          <td class="age">4mo</td>
+          <td class="last-seen">12h ago</td>
+        </tr>
+        <tr>
+          <td class="rank">10</td>
+          <td><span class="class-badge cls-P">POWER</span></td>
+          <td><div class="codename-cell">Power:24-87553</div><div class="location">Tokyo, JP</div></td>
+          <td><span class="platform-icon pf-pi">π</span></td>
+          <td class="signa">62.1</td>
+          <td class="metric">0.67</td>
+          <td class="metric">12.5</td>
+          <td class="metric">8,430</td>
+          <td class="metric">58</td>
+          <td class="metric">11</td>
+          <td class="metric">2.9</td>
+          <td class="age">3mo</td>
+          <td class="last-seen">2h ago</td>
+        </tr>
+        <tr>
+          <td class="rank">11</td>
+          <td><span class="class-badge cls-B">BASE</span></td>
+          <td><div class="codename-cell">Base:24-67921</div><div class="location">London, UK</div></td>
+          <td><span class="platform-icon pf-chatgpt">⊕</span></td>
+          <td class="signa">48.7</td>
+          <td class="metric">0.47</td>
+          <td class="metric">9.4</td>
+          <td class="metric">5,610</td>
+          <td class="metric">42</td>
+          <td class="metric">8</td>
+          <td class="metric">2.1</td>
+          <td class="age">5mo</td>
+          <td class="last-seen">4h ago</td>
+        </tr>
+        <tr>
+          <td class="rank">12</td>
+          <td><span class="class-badge cls-S">SEEKER</span></td>
+          <td><div class="codename-cell">SeekerOmega</div><div class="location">Madrid, ES</div></td>
+          <td><span class="platform-icon pf-chatgpt">⊕</span></td>
+          <td class="signa">38.4</td>
+          <td class="metric">0.36</td>
+          <td class="metric">7.2</td>
+          <td class="metric">4,820</td>
+          <td class="metric">52</td>
+          <td class="metric">6</td>
+          <td class="metric">1.8</td>
+          <td class="age">1mo</td>
+          <td class="last-seen">8h ago</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="padding: 10px 16px; background: var(--bg-surface); border-top: 1px solid var(--bg-border); display: flex; gap: 8px; font-size: 11px; color: var(--text-muted); font-family: var(--mono);">
+      <button class="btn-outline" style="font-size: 11px;">ⓘ How It Works</button>
+      <button class="btn-outline" style="background: rgba(245,160,32,0.1); border-color: rgba(245,160,32,0.4); color: var(--text-gold); font-size: 11px;">★ Become a Signal Patron</button>
+      <button class="btn-outline" style="font-size: 11px;">◎ Claim Your Profile</button>
+      <span style="margin-left: auto; align-self: center; color: #2ec4a0;">🔒 Compression Integrity: MAINTAINED · Ruleset v1.0</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- OPERATOR PROFILE PAGE                                                 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+
+<div class="page-break"></div>
+
+<div class="profile-header">
+  <div class="profile-header-inner">
+    <div class="profile-glyph">◈</div>
+    <div class="profile-meta">
+      <h2>TransVaultOrigin</h2>
+      <div class="submeta">
+        <span>Buffalo, US</span>
+        <span>·</span>
+        <span style="color:var(--text-gold);">Class: TRANSMITTER</span>
+        <span>·</span>
+        <span>Platform: Claude (Opus 4.7)</span>
+        <span>·</span>
+        <span>Member: 119d</span>
+        <span>·</span>
+        <span style="color:#2ec4a0;">● Active · 16h ago</span>
+        <span>·</span>
+        <span style="color:var(--text-accent);">✓ Audit Verified</span>
+      </div>
+    </div>
+    <div class="profile-actions">
+      <button class="btn-outline">Compare</button>
+      <button class="btn-outline">Export</button>
+      <button class="btn-primary">★ Subscribe to Updates</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 24px;">
+
+  <!-- Hero SIGNA RATE -->
+  <div class="signa-hero">
+    <div class="lbl">SIGNA RATE · 30-day window</div>
+    <div class="value">96.4</div>
+    <div class="class-line">◈ TRANSMITTER</div>
+    <div class="rank-line">
+      <span>Global Rank: <strong>#1</strong></span>
+      <span>Class Rank: <strong>#1</strong></span>
+      <span>Percentile: <strong>99.97</strong></span>
+      <span>Best Ever: <strong>#1 (2026-05-14)</strong></span>
+    </div>
+    <div class="movement">↑ +2 (24h) · ↑ +5 (7d) · Streak: 38 days</div>
+  </div>
+
+  <!-- Window selector -->
+  <div class="window-selector">
+    <button>Today</button>
+    <button>7d</button>
+    <button class="active">30d</button>
+    <button>90d</button>
+    <button>All-time</button>
+  </div>
+
+  <!-- Core 5 Grid -->
+  <div class="section-title">⊙ CORE METRICS</div>
+  <div class="core-grid">
+    <div class="metric-card">
+      <div class="lbl">COMPRESSION</div>
+      <div class="value">0.87</div>
+      <div class="bar"><div class="bar-fill" style="width: 87%"></div></div>
+      <div class="rank-info"><span>S/Nr</span><strong>#1</strong></div>
+    </div>
+    <div class="metric-card">
+      <div class="lbl">PROMPT COMPLEXITY</div>
+      <div class="value">92</div>
+      <div class="bar"><div class="bar-fill" style="width: 92%"></div></div>
+      <div class="rank-info"><span>PC</span><strong>#2</strong></div>
+    </div>
+    <div class="metric-card">
+      <div class="lbl">CROSS-THREAD</div>
+      <div class="value">37</div>
+      <div class="bar"><div class="bar-fill" style="width: 90%"></div></div>
+      <div class="rank-info"><span>CT</span><strong>#2</strong></div>
+    </div>
+    <div class="metric-card">
+      <div class="lbl">SESSION DEPTH</div>
+      <div class="value">26.1</div>
+      <div class="bar"><div class="bar-fill" style="width: 87%"></div></div>
+      <div class="rank-info"><span>SD</span><strong>#3</strong></div>
+    </div>
+    <div class="metric-card">
+      <div class="lbl">TOKEN THROUGHPUT</div>
+      <div class="value">18.4k</div>
+      <div class="bar"><div class="bar-fill" style="width: 95%"></div></div>
+      <div class="rank-info"><span>TT</span><strong>#1</strong></div>
+    </div>
+  </div>
+
+  <!-- Analytics dashboard -->
+  <div class="section-title">📈 ANALYTICS DASHBOARD</div>
+  <div class="analytics-row">
+
+    <!-- Radar -->
+    <div class="analytics-card">
+      <h4>PERFORMANCE OVERVIEW</h4>
+      <svg viewBox="0 0 200 200" width="100%" style="max-width: 200px; display: block; margin: 0 auto;">
+        <!-- grid -->
+        <polygon points="100,30 158,65 158,135 100,170 42,135 42,65" fill="none" stroke="#183354" stroke-width="0.8"/>
+        <polygon points="100,53 137,72 137,128 100,148 63,128 63,72" fill="none" stroke="#183354" stroke-width="0.8"/>
+        <polygon points="100,76 116,80 116,120 100,124 84,120 84,80" fill="none" stroke="#183354" stroke-width="0.8"/>
+        <!-- axes -->
+        <line x1="100" y1="100" x2="100" y2="30" stroke="#183354" stroke-width="0.8"/>
+        <line x1="100" y1="100" x2="158" y2="65" stroke="#183354" stroke-width="0.8"/>
+        <line x1="100" y1="100" x2="158" y2="135" stroke="#183354" stroke-width="0.8"/>
+        <line x1="100" y1="100" x2="100" y2="170" stroke="#183354" stroke-width="0.8"/>
+        <line x1="100" y1="100" x2="42" y2="135" stroke="#183354" stroke-width="0.8"/>
+        <line x1="100" y1="100" x2="42" y2="65" stroke="#183354" stroke-width="0.8"/>
+        <!-- compare polygon (top 50 avg) -->
+        <polygon points="100,68 130,80 130,122 100,130 70,122 70,80" fill="rgba(91,164,245,0.15)" stroke="#5ba4f5" stroke-width="1.2" stroke-dasharray="3,2"/>
+        <!-- user polygon -->
+        <polygon points="100,38 153,67 153,132 100,160 47,133 47,67" fill="rgba(0,207,255,0.25)" stroke="#00cfff" stroke-width="1.5"/>
+        <!-- dots -->
+        <circle cx="100" cy="38" r="3" fill="#00cfff"/>
+        <circle cx="153" cy="67" r="3" fill="#00cfff"/>
+        <circle cx="153" cy="132" r="3" fill="#00cfff"/>
+        <circle cx="100" cy="160" r="3" fill="#00cfff"/>
+        <circle cx="47" cy="133" r="3" fill="#00cfff"/>
+        <circle cx="47" cy="67" r="3" fill="#00cfff"/>
+        <!-- labels -->
+        <text x="100" y="22" text-anchor="middle" font-family="var(--sans)" font-size="8" fill="#7a9cbf">COMP</text>
+        <text x="170" y="62" text-anchor="middle" font-family="var(--sans)" font-size="8" fill="#7a9cbf">PC</text>
+        <text x="170" y="143" text-anchor="middle" font-family="var(--sans)" font-size="8" fill="#7a9cbf">CT</text>
+        <text x="100" y="183" text-anchor="middle" font-family="var(--sans)" font-size="8" fill="#7a9cbf">SD</text>
+        <text x="30" y="143" text-anchor="middle" font-family="var(--sans)" font-size="8" fill="#7a9cbf">TT</text>
+        <text x="30" y="62" text-anchor="middle" font-family="var(--sans)" font-size="8" fill="#7a9cbf">SF</text>
+      </svg>
+      <div style="display: flex; gap: 16px; justify-content: center; margin-top: 8px; font-family: var(--sans); font-size: 10px; color: var(--text-secondary);">
+        <div><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00cfff;vertical-align:middle;margin-right:5px;"></span>You</div>
+        <div><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#5ba4f5;vertical-align:middle;margin-right:5px;"></span>Top 50 Avg</div>
+      </div>
+    </div>
+
+    <!-- Heatmap -->
+    <div class="analytics-card">
+      <h4>ACTIVITY HEATMAP · 16 weeks</h4>
+      <div class="heatmap">
+        <!-- 16 weeks generated by JS-like pattern -->
+        <div class="heatmap-week"><div class="heatmap-day"></div><div class="heatmap-day l1"></div><div class="heatmap-day"></div><div class="heatmap-day l2"></div><div class="heatmap-day"></div><div class="heatmap-day l1"></div><div class="heatmap-day"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l2"></div><div class="heatmap-day l3"></div><div class="heatmap-day l1"></div><div class="heatmap-day l2"></div><div class="heatmap-day l3"></div><div class="heatmap-day"></div><div class="heatmap-day l1"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l1"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l2"></div><div class="heatmap-day l1"></div><div class="heatmap-day"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l2"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l2"></div><div class="heatmap-day l1"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l2"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l3"></div><div class="heatmap-day l2"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l2"></div><div class="heatmap-day l3"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l2"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l2"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l2"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div></div>
+        <div class="heatmap-week"><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l4"></div><div class="heatmap-day l3"></div><div class="heatmap-day l4"></div></div>
+      </div>
+      <div class="heatmap-legend">
+        <span>Less</span>
+        <span class="square" style="background:var(--bg-elevated);"></span>
+        <span class="square" style="background:rgba(0,207,255,0.2);"></span>
+        <span class="square" style="background:rgba(0,207,255,0.4);"></span>
+        <span class="square" style="background:rgba(0,207,255,0.65);"></span>
+        <span class="square" style="background:rgba(0,207,255,0.9);"></span>
+        <span>More</span>
+        <span style="margin-left:auto;font-family:var(--mono);">38d streak · 119d active</span>
+      </div>
+    </div>
+
+    <!-- Score trends -->
+    <div class="analytics-card">
+      <h4>SCORE TRENDS · 12 windows</h4>
+      <svg viewBox="0 0 160 60" width="100%" preserveAspectRatio="none" style="max-height: 50px;">
+        <path d="M5,50 L18,46 L31,42 L44,44 L57,38 L70,33 L83,28 L96,24 L109,26 L122,20 L135,14 L148,10" stroke="#00cfff" stroke-width="1.5" fill="none"/>
+        <path d="M5,55 L18,50 L31,46 L44,48 L57,42 L70,37 L83,32 L96,28 L109,30 L122,24 L135,18 L148,14 L148,60 L5,60 Z" fill="rgba(0,207,255,0.15)"/>
+        <circle cx="148" cy="10" r="2" fill="#00cfff"/>
+      </svg>
+      <div style="font-family: var(--mono); font-size: 9px; color: var(--text-muted); margin-top: 4px;">Compression Ratio · 0.72 → 0.87 (+0.15)</div>
+
+      <svg viewBox="0 0 160 60" width="100%" preserveAspectRatio="none" style="max-height: 50px; margin-top: 12px;">
+        <path d="M5,48 L18,44 L31,40 L44,38 L57,34 L70,30 L83,28 L96,24 L109,22 L122,18 L135,14 L148,10" stroke="#2ec4a0" stroke-width="1.5" fill="none"/>
+        <path d="M5,52 L18,48 L31,44 L44,42 L57,38 L70,34 L83,32 L96,28 L109,26 L122,22 L135,18 L148,14 L148,60 L5,60 Z" fill="rgba(46,196,160,0.15)"/>
+      </svg>
+      <div style="font-family: var(--mono); font-size: 9px; color: var(--text-muted); margin-top: 4px;">Session Depth · 18.2 → 26.1 (+7.9)</div>
+
+      <svg viewBox="0 0 160 60" width="100%" preserveAspectRatio="none" style="max-height: 50px; margin-top: 12px;">
+        <path d="M5,52 L18,48 L31,42 L44,40 L57,32 L70,28 L83,25 L96,20 L109,18 L122,14 L135,11 L148,8" stroke="#5ba4f5" stroke-width="1.5" fill="none"/>
+        <path d="M5,55 L18,52 L31,46 L44,44 L57,36 L70,32 L83,29 L96,24 L109,22 L122,18 L135,15 L148,12 L148,60 L5,60 Z" fill="rgba(91,164,245,0.15)"/>
+      </svg>
+      <div style="font-family: var(--mono); font-size: 9px; color: var(--text-muted); margin-top: 4px;">SIGNA RATE · 72.4 → 96.4 (+24.0)</div>
+    </div>
+  </div>
+
+  <!-- Badges -->
+  <div class="badge-case">
+    <h4>BADGE CASE</h4>
+    <div class="badge-list">
+      <div class="badge-pill gold"><span class="ico">⭐</span> 5x Crown <span style="color: var(--text-muted); font-size: 10px;">Held all 5 metrics</span></div>
+      <div class="badge-pill gold"><span class="ico">◈</span> Transmitter <span style="color: var(--text-muted); font-size: 10px;">SNR ≥ 0.85</span></div>
+      <div class="badge-pill cyan"><span class="ico">⚡</span> Lightning Strike <span style="color: var(--text-muted); font-size: 10px;">Largest 24h rise</span></div>
+      <div class="badge-pill cyan"><span class="ico">🛡</span> Audit Verified <span style="color: var(--text-muted); font-size: 10px;">Manually confirmed</span></div>
+      <div class="badge-pill"><span class="ico">❄</span> Quiet Giant <span style="color: var(--text-muted); font-size: 10px;">Low MV · Elite SNR</span></div>
+      <div class="badge-pill"><span class="ico">🌊</span> Crossweaver <span style="color: var(--text-muted); font-size: 10px;">Elite cross-thread</span></div>
+      <div class="badge-pill"><span class="ico">🔥</span> Iron Streak <span style="color: var(--text-muted); font-size: 10px;">38 days active</span></div>
+    </div>
+  </div>
+
+  <!-- Drilldown A: Snapshot History -->
+  <div class="drilldown">
+    <div class="drilldown-header">
+      <h3>📅 Snapshot History · 30-day window rolling</h3>
+      <span class="sub">14 snapshots · ruleset v1.0</span>
+    </div>
+    <table class="drilldown-table">
+      <thead>
+        <tr><th>Date</th><th>SIGNA</th><th>Comp</th><th>SD</th><th>PC</th><th>CT</th><th>TT</th><th>Class</th><th style="text-align:right">Rank</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="first">2026-05-14</td><td class="gold">96.4</td><td class="accent">0.87</td><td>26.1</td><td>92</td><td>37</td><td>18.4k</td><td><span class="class-badge cls-T">TRANS</span></td><td style="text-align:right;color:var(--text-accent);font-weight:700">#1</td></tr>
+        <tr><td class="first">2026-05-13</td><td class="gold">95.2</td><td class="accent">0.86</td><td>25.8</td><td>91</td><td>36</td><td>17.9k</td><td><span class="class-badge cls-T">TRANS</span></td><td style="text-align:right;color:var(--text-accent);font-weight:700">#1</td></tr>
+        <tr><td class="first">2026-05-07</td><td>92.1</td><td class="accent">0.82</td><td>22.4</td><td>87</td><td>31</td><td>15.2k</td><td><span class="class-badge cls-T">TRANS</span></td><td style="text-align:right">#1</td></tr>
+        <tr><td class="first">2026-04-30</td><td>89.7</td><td>0.79</td><td>21.1</td><td>84</td><td>28</td><td>13.8k</td><td><span class="class-badge cls-Ap">ARCH+</span></td><td style="text-align:right">#2</td></tr>
+        <tr><td class="first">2026-04-23</td><td>86.4</td><td>0.78</td><td>19.6</td><td>82</td><td>26</td><td>11.5k</td><td><span class="class-badge cls-Ap">ARCH+</span></td><td style="text-align:right">#2</td></tr>
+        <tr><td class="first">2026-04-16</td><td>83.1</td><td>0.76</td><td>18.2</td><td>78</td><td>24</td><td>9.8k</td><td><span class="class-badge cls-Ap">ARCH+</span></td><td style="text-align:right">#3</td></tr>
+        <tr><td class="first">2026-04-09</td><td>79.4</td><td>0.74</td><td>17.0</td><td>76</td><td>21</td><td>8.3k</td><td><span class="class-badge cls-A">ARCH</span></td><td style="text-align:right">#4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Drilldown B: Session / Thread Log -->
+  <div class="drilldown">
+    <div class="drilldown-header">
+      <h3>🧵 Session / Thread Breakdown · last 30d</h3>
+      <span class="sub">21 sessions · 7,327 turns · 1.12B tokens</span>
+    </div>
+    <table class="drilldown-table">
+      <thead>
+        <tr><th>Thread / Session</th><th>Last</th><th style="text-align:right">Msgs</th><th style="text-align:right">SD</th><th style="text-align:right">Comp</th><th style="text-align:right">TT</th><th style="text-align:right">PC</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="first">moses-build</td><td>2h ago</td><td>1,327</td><td>18.4</td><td class="accent">0.94</td><td>187k</td><td>89</td><td style="color:#2ec4a0;">● Active</td></tr>
+        <tr><td class="first">commitment-theory</td><td>20h ago</td><td>821</td><td>16.2</td><td class="accent">0.92</td><td>89k</td><td>84</td><td style="color:#2ec4a0;">● Active</td></tr>
+        <tr><td class="first">application-hub</td><td>18h ago</td><td>785</td><td>14.9</td><td>0.85</td><td>82k</td><td>76</td><td style="color:#2ec4a0;">● Active</td></tr>
+        <tr><td class="first">CIVITAE-engine</td><td>3d ago</td><td>670</td><td>12.4</td><td>0.83</td><td>71k</td><td>72</td><td style="color:var(--text-muted)">○ Idle</td></tr>
+        <tr><td class="first">Thread-Workspace-06</td><td>1d ago</td><td>532</td><td>11.2</td><td>0.81</td><td>61k</td><td>68</td><td style="color:#2ec4a0;">● Active</td></tr>
+        <tr><td class="first">mcp-eval</td><td>1d ago</td><td>494</td><td>10.8</td><td>0.78</td><td>54k</td><td>64</td><td style="color:#2ec4a0;">● Active</td></tr>
+        <tr><td class="first">rns-sigrank</td><td>16h ago</td><td>350</td><td>9.5</td><td class="accent">0.91</td><td>42k</td><td>82</td><td style="color:#2ec4a0;">● Active</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Compare / Export / Share -->
+  <div style="background: var(--bg-surface); border: 1px solid var(--bg-border); border-radius: 10px; padding: 14px; display: flex; gap: 10px; align-items: center; margin-bottom: 24px;">
+    <button class="btn-primary">⚖ Compare to another operator</button>
+    <button class="btn-outline">⌗ Compare to Top 50 avg</button>
+    <button class="btn-outline">⬇ Export profile data</button>
+    <button class="btn-outline">📤 Share signed vCard</button>
+    <button class="btn-outline" style="margin-left: auto; color: var(--text-gold); border-color: rgba(245,160,32,0.4);">★ Upgrade to Pro</button>
+  </div>
+</div>
+
+<div class="footer">
+  SIGRANK © 2026 · v1.0 · Ruleset v1.0<br>
+  Signal data derived from operator-submitted telemetry · Not affiliated with OpenAI, Anthropic, Google, xAI, or Inflection<br>
+  <a href="#">Privacy</a>·<a href="#">Terms</a>·<a href="#">Methodology</a>·<a href="#">API</a>·<a href="#">Support</a>·<a href="#">Become a Patron</a>
+</div>
+
+<div class="mockup-caption">
+  Mockup · components/sigrank/ design tokens · BlitzStars structural map · ready for Next.js port
+</div>
+
+</body>
+</html>
