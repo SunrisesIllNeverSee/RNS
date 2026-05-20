@@ -461,9 +461,38 @@
   }
   footer a { color: var(--text-3); margin: 0 8px; }
   footer a:hover { color: var(--text-1); }
+
+  /* ── Placeholder marker + ID badge ──────────────────────────── */
+  .ph {
+    color: var(--gold); font-size: 0.7em; vertical-align: super;
+    margin-left: 1px; font-weight: 500; cursor: help;
+  }
+  .canon-id {
+    display: inline-block; font-family: var(--mono);
+    font-size: 0.7em; font-weight: 500; color: var(--text-4);
+    margin-left: 4px; vertical-align: super; letter-spacing: 0.02em;
+  }
+  .canon-id.real { color: var(--green); }
+
+  .source-banner {
+    background: rgba(245,160,32,0.06);
+    border-bottom: 1px solid var(--gold-border);
+    padding: 8px 24px; text-align: center;
+    font-family: var(--mono); font-size: 12px; color: var(--text-2);
+    position: sticky; top: 0; z-index: 51;
+  }
+  .source-banner strong { color: var(--gold); font-weight: 600; }
+  .source-banner a { color: var(--text-0); text-decoration: underline; }
+  nav.top { top: 33px; }
 </style>
 </head>
 <body>
+
+<div class="source-banner">
+  <strong>⚠ MOCKUP · DEMO DATA</strong> · Numbers with <span class="ph">*</span> are placeholders.
+  Every value is rooted in <a href="../../scoring/CANON.md">CANON.md</a> (canonical IDs) and
+  <a href="DATA_LEDGER.md">DATA_LEDGER.md</a> (placeholder audit).
+</div>
 
 <nav class="top">
   <div class="nav-inner">
@@ -503,20 +532,20 @@
     <div class="page-header-row">
       <div class="quick-stats">
         <div class="quick-stat">
-          <div class="num">38,041</div>
+          <div class="num">38,041<span class="ph" title="Placeholder · no real operator count yet">*</span></div>
           <div class="lbl">Total operators</div>
         </div>
         <div class="quick-stat">
-          <div class="num green">1,847</div>
+          <div class="num green">1,847<span class="ph" title="Placeholder · no real active counter yet">*</span></div>
           <div class="lbl">Active now</div>
         </div>
         <div class="quick-stat">
-          <div class="num gold">312</div>
-          <div class="lbl">Transmitter-class</div>
+          <div class="num gold">312<span class="ph" title="Placeholder · K.01 count not computed yet">*</span></div>
+          <div class="lbl">Transmitter-class<span class="canon-id real">K.01</span></div>
         </div>
         <div class="quick-stat">
-          <div class="num">96.4</div>
-          <div class="lbl">Top SIGNA RATE</div>
+          <div class="num">96.4<span class="ph" title="Provisional · derived from MO§ES R.09 inputs, not yet through real scoring engine">*</span></div>
+          <div class="lbl">Top SIGNA RATE<span class="canon-id real">C.01</span></div>
         </div>
       </div>
     </div>
@@ -748,16 +777,16 @@
           <tr>
             <th style="width: 50px;" class="right">#</th>
             <th>Operator</th>
-            <th style="width: 80px;">Class</th>
-            <th class="right" style="width: 90px;">SIGNA</th>
-            <th class="right">Comp</th>
-            <th class="right">SD</th>
-            <th class="right">TT</th>
-            <th class="right">PC</th>
-            <th class="right">CT</th>
-            <th class="right">SF</th>
+            <th style="width: 80px;">Class<span class="canon-id real">K.xx</span></th>
+            <th class="right" style="width: 90px;">SIGNA<span class="canon-id real">C.01</span></th>
+            <th class="right">Comp<span class="canon-id real">M.01</span></th>
+            <th class="right">SD<span class="canon-id real">M.04</span></th>
+            <th class="right">TT<span class="canon-id real">M.05</span></th>
+            <th class="right">PC<span class="canon-id real">M.02</span></th>
+            <th class="right">CT<span class="canon-id real">M.03</span></th>
+            <th class="right">SF<span class="canon-id real">C.02</span></th>
             <th class="right" style="width: 80px;">Trend</th>
-            <th class="right">Age</th>
+            <th class="right">Age<span class="canon-id real">B.02</span></th>
             <th class="right">Last</th>
           </tr>
         </thead>

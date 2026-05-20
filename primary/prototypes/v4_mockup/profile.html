@@ -751,9 +751,38 @@
     font-family: var(--mono);
   }
   footer a { color: var(--text-3); margin: 0 8px; }
+
+  /* ── Placeholder marker + ID badge ──────────────────────────── */
+  .ph {
+    color: var(--gold); font-size: 0.7em; vertical-align: super;
+    margin-left: 1px; font-weight: 500; cursor: help;
+  }
+  .canon-id {
+    display: inline-block; font-family: var(--mono);
+    font-size: 0.7em; font-weight: 500; color: var(--text-4);
+    margin-left: 4px; vertical-align: super; letter-spacing: 0.02em;
+  }
+  .canon-id.real { color: var(--green); }
+
+  .source-banner {
+    background: rgba(245,160,32,0.06);
+    border-bottom: 1px solid var(--gold-border);
+    padding: 8px 24px; text-align: center;
+    font-family: var(--mono); font-size: 12px; color: var(--text-2);
+    position: sticky; top: 0; z-index: 51;
+  }
+  .source-banner strong { color: var(--gold); font-weight: 600; }
+  .source-banner a { color: var(--text-0); text-decoration: underline; }
+  nav.top { top: 33px; }
 </style>
 </head>
 <body>
+
+<div class="source-banner">
+  <strong>⚠ MOCKUP · DEMO DATA</strong> · Numbers with <span class="ph">*</span> are placeholders.
+  Every value is rooted in <a href="../../scoring/CANON.md">CANON.md</a> (canonical IDs) and
+  <a href="DATA_LEDGER.md">DATA_LEDGER.md</a> (placeholder audit).
+</div>
 
 <nav class="top">
   <div class="nav-inner">
@@ -832,23 +861,23 @@
           <div class="rank-grid">
             <div class="rank-tile">
               <div class="lbl">Global Rank</div>
-              <div class="val gold">#1</div>
-              <div class="sub">of 38,041 operators</div>
+              <div class="val gold">#1<span class="ph" title="Placeholder · no leaderboard ranking yet">*</span></div>
+              <div class="sub">of 38,041<span class="ph">*</span> operators</div>
             </div>
             <div class="rank-tile">
               <div class="lbl">Class Rank</div>
-              <div class="val gold">#1</div>
-              <div class="sub">of 312 Transmitters</div>
+              <div class="val gold">#1<span class="ph">*</span></div>
+              <div class="sub">of 312<span class="ph">*</span> Transmitters<span class="canon-id real">K.01</span></div>
             </div>
             <div class="rank-tile">
               <div class="lbl">Percentile</div>
-              <div class="val">99.97</div>
-              <div class="sub">Top 0.003%</div>
+              <div class="val">99.97<span class="ph">*</span></div>
+              <div class="sub">Top 0.003%<span class="ph">*</span></div>
             </div>
             <div class="rank-tile">
               <div class="lbl">Best Ever</div>
-              <div class="val">#1</div>
-              <div class="sub">since 2026-05-14</div>
+              <div class="val">#1<span class="ph">*</span></div>
+              <div class="sub">since 2026-05-14<span class="ph">*</span></div>
             </div>
           </div>
         </div>
@@ -879,7 +908,7 @@
     <div class="core-grid">
       <div class="metric-card">
         <div class="head">
-          <span class="ticker">COMP</span>
+          <span class="ticker">COMP<span class="canon-id real" style="color:var(--gold);margin-left:3px;">M.01</span></span>
           <span class="ranking">Rank <strong>#1</strong></span>
         </div>
         <div class="name">Compression Ratio</div>
@@ -889,7 +918,7 @@
       </div>
       <div class="metric-card">
         <div class="head">
-          <span class="ticker">PC</span>
+          <span class="ticker">PC<span class="canon-id real" style="color:var(--gold);margin-left:3px;">M.02</span></span>
           <span class="ranking">Rank <strong>#2</strong></span>
         </div>
         <div class="name">Prompt Complexity</div>
@@ -899,7 +928,7 @@
       </div>
       <div class="metric-card">
         <div class="head">
-          <span class="ticker">CT</span>
+          <span class="ticker">CT<span class="canon-id real" style="color:var(--gold);margin-left:3px;">M.03</span></span>
           <span class="ranking">Rank <strong>#2</strong></span>
         </div>
         <div class="name">Cross-Thread Ref</div>
@@ -909,7 +938,7 @@
       </div>
       <div class="metric-card">
         <div class="head">
-          <span class="ticker">SD</span>
+          <span class="ticker">SD<span class="canon-id real" style="color:var(--gold);margin-left:3px;">M.04</span></span>
           <span class="ranking">Rank <strong>#3</strong></span>
         </div>
         <div class="name">Session Depth</div>
@@ -919,7 +948,7 @@
       </div>
       <div class="metric-card">
         <div class="head">
-          <span class="ticker">TT</span>
+          <span class="ticker">TT<span class="canon-id real" style="color:var(--gold);margin-left:3px;">M.05</span></span>
           <span class="ranking">Rank <strong>#1</strong></span>
         </div>
         <div class="name">Token Throughput</div>

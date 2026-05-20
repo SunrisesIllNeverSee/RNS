@@ -682,6 +682,46 @@
     font-size: 12px; color: var(--text-4); font-family: var(--mono);
   }
 
+  /* ── Placeholder marker + ID badge ──────────────────────────── */
+  .ph {
+    color: var(--gold);
+    font-size: 0.7em;
+    vertical-align: super;
+    margin-left: 1px;
+    font-weight: 500;
+    cursor: help;
+  }
+  .canon-id {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7em;
+    font-weight: 500;
+    color: var(--text-4);
+    margin-left: 4px;
+    vertical-align: super;
+    letter-spacing: 0.02em;
+  }
+  .canon-id.real { color: var(--green); }
+
+  /* ── Source pinned banner (top of body) ─────────────────────── */
+  .source-banner {
+    background: rgba(245,160,32,0.06);
+    border-bottom: 1px solid var(--gold-border);
+    padding: 8px 24px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-2);
+    position: sticky;
+    top: 0;
+    z-index: 51;
+  }
+  .source-banner strong { color: var(--gold); font-weight: 600; }
+  .source-banner a { color: var(--text-0); text-decoration: underline; }
+
+  /* nudge nav.top below the banner */
+  nav.top { top: 33px; }
+
   /* ── Responsive ─────────────────────────────────────────────── */
   @media (max-width: 900px) {
     .hero-stats { grid-template-columns: repeat(2, 1fr); }
@@ -694,6 +734,12 @@
 </style>
 </head>
 <body>
+
+<div class="source-banner">
+  <strong>⚠ MOCKUP · DEMO DATA</strong> · Numbers with <span class="ph">*</span> are placeholders.
+  Every value is rooted in <a href="../../scoring/CANON.md">CANON.md</a> (canonical IDs) and
+  <a href="DATA_LEDGER.md">DATA_LEDGER.md</a> (placeholder audit).
+</div>
 
 <nav class="top">
   <div class="nav-inner">
@@ -736,20 +782,20 @@
 
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="num">38,041</div>
+        <div class="num">38,041<span class="ph" title="Placeholder · no real operator count yet">*</span></div>
         <div class="lbl">Operators ranked across 6 platforms</div>
       </div>
       <div class="hero-stat">
-        <div class="num accent">1,847</div>
+        <div class="num accent">1,847<span class="ph" title="Placeholder · no real active-user telemetry yet">*</span></div>
         <div class="lbl">Active in the last hour</div>
       </div>
       <div class="hero-stat">
-        <div class="num">8,492</div>
+        <div class="num">8,492<span class="ph" title="Placeholder · no real submission counter yet">*</span></div>
         <div class="lbl">Snapshots submitted today</div>
       </div>
       <div class="hero-stat">
-        <div class="num">312</div>
-        <div class="lbl">Operators in TRANSMITTER class</div>
+        <div class="num">312<span class="ph" title="Placeholder · K.01 class count not computed yet">*</span></div>
+        <div class="lbl">Operators in TRANSMITTER class<span class="canon-id real">K.01</span></div>
       </div>
     </div>
   </div>
@@ -1182,7 +1228,7 @@
       <div class="metric-tile">
         <div class="tile-head">
           <span class="ticker">COMP</span>
-          <h3>Compression Ratio</h3>
+          <h3>Compression Ratio<span class="canon-id real">M.01</span></h3>
         </div>
         <p>The signal-purity score. A bounded [0,1] measure of how much of your output is structured, coherent signal vs. noise and redundancy.</p>
         <div class="formula"><span class="var">signal</span> <span class="op">/ (</span><span class="var">signal</span> <span class="op">+</span> <span class="var">noise</span><span class="op">)</span></div>
@@ -1190,7 +1236,7 @@
       <div class="metric-tile">
         <div class="tile-head">
           <span class="ticker">SD</span>
-          <h3>Session Depth</h3>
+          <h3>Session Depth<span class="canon-id real">M.04</span></h3>
         </div>
         <p>Average reply-chain length per session. Sustained reasoning beats shallow chatter. The continuity metric.</p>
         <div class="formula"><span class="op">avg(</span><span class="var">max_chain_length</span> <span class="op">/</span> <span class="var">session</span><span class="op">)</span></div>
@@ -1198,7 +1244,7 @@
       <div class="metric-tile">
         <div class="tile-head">
           <span class="ticker">PC</span>
-          <h3>Prompt Complexity</h3>
+          <h3>Prompt Complexity<span class="canon-id real">M.02</span></h3>
         </div>
         <p>Structural sophistication of your prompts. Multi-layer instructions, recursive logic, symbolic precision, constraint density.</p>
         <div class="formula"><span class="op">weighted(</span><span class="var">layers</span><span class="op">,</span> <span class="var">recursion</span><span class="op">,</span> <span class="var">entities</span><span class="op">)</span></div>
@@ -1206,7 +1252,7 @@
       <div class="metric-tile">
         <div class="tile-head">
           <span class="ticker">CT</span>
-          <h3>Cross-Thread Referencing</h3>
+          <h3>Cross-Thread Referencing<span class="canon-id real">M.03</span></h3>
         </div>
         <p>Long-range continuity. References to prior threads, callbacks to system memory, knowledge weaving across sessions.</p>
         <div class="formula"><span class="op">min(100, 8·</span><span class="var">refs</span> <span class="op">+ 4·</span><span class="var">callbacks</span><span class="op">)</span></div>
@@ -1214,7 +1260,7 @@
       <div class="metric-tile">
         <div class="tile-head">
           <span class="ticker">TT</span>
-          <h3>Token Throughput</h3>
+          <h3>Token Throughput<span class="canon-id real">M.05</span></h3>
         </div>
         <p>Sustained transmission rate per active minute. Log-scaled so volume alone doesn't dominate. Bandwidth, not just chatter.</p>
         <div class="formula"><span class="op">min(100, 20·log₁₀(</span><span class="var">tokens</span> <span class="op">+ 1))</span></div>
@@ -1222,10 +1268,10 @@
       <div class="metric-tile" style="background: linear-gradient(180deg, rgba(245,160,32,0.05), var(--bg-1)); border-color: var(--gold-border);">
         <div class="tile-head">
           <span class="ticker" style="background: var(--gold); color: var(--bg-0); border-color: var(--gold);">SR</span>
-          <h3>SIGNA RATE</h3>
+          <h3>SIGNA RATE<span class="canon-id real">C.01</span></h3>
         </div>
         <p>The flagship. The composite. The number that owns your profile and drives your rank. Computed from the Core 5 with locked weights.</p>
-        <div class="formula"><span class="op">0.30·</span><span class="var">Comp</span> <span class="op">+ 0.20·</span><span class="var">SD</span> <span class="op">+ 0.20·</span><span class="var">PC</span> <span class="op">+ 0.15·</span><span class="var">CT</span> <span class="op">+ 0.15·</span><span class="var">TT</span></div>
+        <div class="formula"><span class="op">w₁·</span><span class="var">Comp</span> <span class="op">+ w₂·</span><span class="var">SD</span> <span class="op">+ w₃·</span><span class="var">PC</span> <span class="op">+ w₄·</span><span class="var">CT</span> <span class="op">+ w₅·</span><span class="var">TT</span> <span class="op">· weights = </span><span class="var">RS.01</span></div>
       </div>
     </div>
   </section>
