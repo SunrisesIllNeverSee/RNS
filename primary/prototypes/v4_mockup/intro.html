@@ -330,6 +330,113 @@
     font-family: var(--mono); font-size: 10px; color: var(--text-4);
   }
 
+  /* ── IP boundary (open vs keep) ─────────────────────────────── */
+  .ip-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .ip-col {
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    border-radius: 14px; padding: 28px;
+  }
+  .ip-col.private {
+    background: linear-gradient(180deg, rgba(245,160,32,0.04), var(--bg-1));
+    border-color: var(--gold-border);
+  }
+  .ip-col .ip-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  }
+  .ip-col .ip-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--bg-2); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .ip-col.private .ip-icon {
+    background: var(--gold-bg); border-color: var(--gold-border); color: var(--gold);
+  }
+  .ip-col .ip-label {
+    font-family: var(--mono); font-size: 11px; color: var(--text-4);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .ip-col.private .ip-label { color: var(--gold); }
+  .ip-col h3 {
+    font-size: 22px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.02em; margin-top: 2px;
+  }
+  .ip-col .ip-tagline {
+    font-size: 14px; color: var(--text-2); margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .ip-col ul { list-style: none; padding: 0; }
+  .ip-col li {
+    padding: 12px 0; font-size: 14px; color: var(--text-1);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex; gap: 12px; align-items: flex-start; line-height: 1.45;
+  }
+  .ip-col li:last-child { border-bottom: none; }
+  .ip-col li .ico {
+    flex-shrink: 0; font-family: var(--mono); font-weight: 600;
+    width: 16px; text-align: center; line-height: 1.45;
+  }
+  .ip-col li .ico.open { color: var(--green); }
+  .ip-col li .ico.lock { color: var(--gold); }
+  .ip-col li strong { color: var(--text-0); font-weight: 600; }
+  .ip-col li small {
+    display: block; font-size: 12px; color: var(--text-3); margin-top: 2px;
+    font-family: var(--mono);
+  }
+
+  /* ── Daily Top-10 grid (5 metric mini-boards) ────────────────── */
+  .daily5-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  }
+  .daily5-card {
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    border-radius: 12px; overflow: hidden;
+  }
+  .daily5-head {
+    padding: 14px 16px; border-bottom: 1px solid var(--border-subtle);
+  }
+  .daily5-head .metric-tag {
+    display: inline-block; font-family: var(--mono);
+    font-size: 10px; font-weight: 600; color: var(--gold);
+    background: var(--gold-bg); border: 1px solid var(--gold-border);
+    padding: 2px 7px; border-radius: 4px; letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .daily5-head h4 {
+    font-size: 14px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.01em;
+  }
+  .daily5-head .sub {
+    font-size: 11px; color: var(--text-4); margin-top: 2px;
+    font-family: var(--mono);
+  }
+  .daily5-row {
+    display: grid; grid-template-columns: 18px 1fr 50px; gap: 8px;
+    padding: 7px 16px; align-items: center;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.1s;
+  }
+  .daily5-row:last-child { border-bottom: none; }
+  .daily5-row:hover { background: var(--bg-2); cursor: pointer; }
+  .daily5-row .rank-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-4); text-align: right;
+  }
+  .daily5-row.t1 .rank-num,
+  .daily5-row.t2 .rank-num,
+  .daily5-row.t3 .rank-num { color: var(--gold); font-weight: 600; }
+  .daily5-row .op-name {
+    font-size: 12px; color: var(--text-1); font-weight: 500;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .daily5-row .op-val {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    color: var(--text-0); text-align: right;
+  }
+  .daily5-row.t1 .op-val { color: var(--gold); }
+
   /* ── Metrics breakdown ───────────────────────────────────────── */
   .metric-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
@@ -629,20 +736,20 @@
 
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="num">5</div>
-        <div class="lbl">Core metrics measured</div>
+        <div class="num">38,041</div>
+        <div class="lbl">Operators ranked across 6 platforms</div>
       </div>
       <div class="hero-stat">
-        <div class="num">9</div>
-        <div class="lbl">Class tiers, Transmitter → Igniter</div>
+        <div class="num accent">1,847</div>
+        <div class="lbl">Active in the last hour</div>
       </div>
       <div class="hero-stat">
-        <div class="num accent">31.7×</div>
-        <div class="lbl">Top operator output : input ratio</div>
+        <div class="num">8,492</div>
+        <div class="lbl">Snapshots submitted today</div>
       </div>
       <div class="hero-stat">
-        <div class="num">0.97</div>
-        <div class="lbl">Cache hit rate · top operator</div>
+        <div class="num">312</div>
+        <div class="lbl">Operators in TRANSMITTER class</div>
       </div>
     </div>
   </div>
@@ -710,14 +817,14 @@
       <div class="conv-row">
         <div class="conv-input">
           <div class="head">INPUT · TELEMETRY</div>
-          <div class="formula"><span class="var">output_tokens</span> <span class="op">/ (</span><span class="var">output_tokens</span> <span class="op">+</span> <span class="var">fresh_input_tokens</span><span class="op">)</span></div>
-          <div class="ex">e.g. 3,902,803 / (3,902,803 + 123,246) = <strong style="color:var(--text-1);">0.9694</strong></div>
+          <div class="formula">Output tokens<br>relative to fresh input</div>
+          <div class="ex">Higher ratio = more signal per token spent</div>
         </div>
         <div class="conv-arrow">→</div>
         <div class="conv-output">
           <div class="head">CORE 5 · COMP</div>
           <h4>Compression Ratio</h4>
-          <p>Bounded signal-purity score [0,1]. The closer to 1.0, the more output you produce per fresh input token.</p>
+          <p>Bounded signal-purity score [0,1]. Measures how much output you produce per fresh input token.</p>
         </div>
         <div class="conv-quality">
           <span class="pill clean">● Clean proxy</span>
@@ -728,14 +835,14 @@
       <div class="conv-row">
         <div class="conv-input">
           <div class="head">INPUT · TELEMETRY</div>
-          <div class="formula"><span class="var">cache_read</span> <span class="op">/ (</span><span class="var">cache_read</span> <span class="op">+</span> <span class="var">cache_creation</span> <span class="op">+</span> <span class="var">fresh_input</span><span class="op">)</span></div>
-          <div class="ex">e.g. 1.084B / (1.084B + 34.8M + 123K) = <strong style="color:var(--text-1);">0.9688</strong></div>
+          <div class="formula">Cache reuse rate<br>across submissions</div>
+          <div class="ex">Higher reuse = context preservation</div>
         </div>
         <div class="conv-arrow">→</div>
         <div class="conv-output">
           <div class="head">CORE 5 · CT</div>
           <h4>Cross-Thread Referencing</h4>
-          <p>Long-range continuity. High cache reuse = context preservation across sessions. Mapped to [0,100].</p>
+          <p>Long-range continuity. High cache reuse indicates context preservation across sessions.</p>
         </div>
         <div class="conv-quality">
           <span class="pill clean">● Clean proxy</span>
@@ -746,14 +853,14 @@
       <div class="conv-row">
         <div class="conv-input">
           <div class="head">INPUT · TELEMETRY</div>
-          <div class="formula"><span class="var">total_turns</span> <span class="op">/</span> <span class="var">sessions_count</span></div>
-          <div class="ex">e.g. 7,327 turns / 21 sessions = <strong style="color:var(--text-1);">348.9</strong> avg</div>
+          <div class="formula">Turn density<br>per session</div>
+          <div class="ex">Deeper sessions → higher tier band</div>
         </div>
         <div class="conv-arrow">→</div>
         <div class="conv-output">
           <div class="head">CORE 5 · SD</div>
           <h4>Session Depth</h4>
-          <p>Sustained reasoning depth. Bucketed to [0,100] via tiered scoring (30+ → 100, 25-29 → 92, etc.)</p>
+          <p>Sustained reasoning depth. Bucketed to [0,100] via proprietary tiered scoring curves.</p>
         </div>
         <div class="conv-quality">
           <span class="pill strong">● Strong proxy</span>
@@ -764,14 +871,14 @@
       <div class="conv-row">
         <div class="conv-input">
           <div class="head">INPUT · TELEMETRY</div>
-          <div class="formula"><span class="op">min(100, 20·log₁₀(</span><span class="var">output_tokens</span> <span class="op">+ 1))</span></div>
-          <div class="ex">e.g. log₁₀(3,902,803) × 20 = <strong style="color:var(--text-1);">100</strong> (capped)</div>
+          <div class="formula">Log-scaled<br>output bandwidth</div>
+          <div class="ex">Curve prevents volume gaming</div>
         </div>
         <div class="conv-arrow">→</div>
         <div class="conv-output">
           <div class="head">CORE 5 · TT</div>
           <h4>Token Throughput</h4>
-          <p>Log-scaled bandwidth metric. Prevents volume gaming while still rewarding sustained throughput.</p>
+          <p>Log-scaled bandwidth. Prevents volume gaming while rewarding sustained throughput.</p>
         </div>
         <div class="conv-quality">
           <span class="pill clean">● Direct map</span>
@@ -781,15 +888,15 @@
 
       <div class="conv-row pro-only">
         <div class="conv-input">
-          <div class="head">INPUT · CONVERSATION TEXT</div>
-          <div class="formula"><span class="op">weighted(</span><span class="var">layers</span> <span class="op">,</span> <span class="var">recursion</span> <span class="op">,</span> <span class="var">entities</span> <span class="op">,</span> <span class="var">constraints</span><span class="op">)</span></div>
+          <div class="head">INPUT · CONVERSATION ANALYSIS</div>
+          <div class="formula">Prompt structure<br>composite sub-scores</div>
           <div class="ex" style="color: var(--gold);">Raw input volume is NOT a complexity proxy — requires actual prompt analysis</div>
         </div>
         <div class="conv-arrow">→</div>
         <div class="conv-output">
           <div class="head">CORE 5 · PC</div>
           <h4>Prompt Complexity</h4>
-          <p>Structural sophistication of your prompts. Sub-score composite (instruction layers, recursion, system entities, constraint density, symbolic precision).</p>
+          <p>Structural sophistication. Composite of instruction layers, recursion, system entities, and constraint density.</p>
         </div>
         <div class="conv-quality">
           <span class="pill weak">★ Pro tier only</span>
@@ -800,8 +907,267 @@
     </div>
 
     <p style="margin-top: 32px; padding: 20px 24px; background: var(--bg-1); border: 1px solid var(--border-subtle); border-radius: 12px; font-size: 13px; color: var(--text-2); line-height: 1.6;">
-      <strong style="color: var(--text-0);">Why this works:</strong> Four of the Core 5 have clean behavioral proxies in standard token telemetry. The fifth — Prompt Complexity — requires actual prompt analysis, which is the precision tier's job. The free tier ranks you accurately on four metrics with an estimated fifth. The Pro tier replaces the estimate with exact sig_army computation and adds Drift Ratio detection.
+      <strong style="color: var(--text-0);">What you see vs. what we compute:</strong> The general shape of the conversion is public — the exact weights, bucketization curves, class thresholds, and composite aggregation are proprietary. We open the inputs so you can trust the system; we keep the engine so the leaderboard can't be gamed. Ruleset versioning ensures changes are audited and historical scores remain replayable.
     </p>
+  </section>
+
+  <!-- WHAT WE OPEN / WHAT WE KEEP -->
+  <section>
+    <div class="section-eyebrow">⊙ The IP boundary</div>
+    <h2 class="section-h2">What we open. What we keep.</h2>
+    <p class="section-lede">
+      Trust requires transparency. A leaderboard requires a moat. We open everything that proves the system is honest — and keep everything that prevents it from being gamed or cloned.
+    </p>
+
+    <div class="ip-grid">
+
+      <div class="ip-col">
+        <div class="ip-header">
+          <div class="ip-icon">⊕</div>
+          <div>
+            <div class="ip-label">Open source</div>
+            <h3>What we publish</h3>
+          </div>
+        </div>
+        <p class="ip-tagline">Everything that makes the privacy claim verifiable. Read the code. Inspect the schema. Trust by audit, not promise.</p>
+        <ul>
+          <li>
+            <span class="ico open">✓</span>
+            <div>
+              <strong>Local agent source code</strong>
+              <small>Every line auditable · See exactly what gets sent</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico open">✓</span>
+            <div>
+              <strong>Snapshot payload schema</strong>
+              <small>The exact JSON that crosses the network</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico open">✓</span>
+            <div>
+              <strong>Metric concepts and proxy mappings</strong>
+              <small>Which telemetry feeds which Core 5 metric</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico open">✓</span>
+            <div>
+              <strong>Class taxonomy and tier names</strong>
+              <small>9 classes from Transmitter to Igniter</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico open">✓</span>
+            <div>
+              <strong>Privacy guarantees</strong>
+              <small>No raw transcripts · Ed25519 signing · Verifiable proofs</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico open">✓</span>
+            <div>
+              <strong>Adapter SDK</strong>
+              <small>Community builds new platform integrations</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico open">✓</span>
+            <div>
+              <strong>Public REST API</strong>
+              <small>Read leaderboards, profiles, snapshots programmatically</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico open">✓</span>
+            <div>
+              <strong>Ruleset version history</strong>
+              <small>Every change documented and replayable</small>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ip-col private">
+        <div class="ip-header">
+          <div class="ip-icon">⊘</div>
+          <div>
+            <div class="ip-label">Proprietary</div>
+            <h3>What we keep</h3>
+          </div>
+        </div>
+        <p class="ip-tagline">The moat. The math that prevents gaming and cloning. Without these, anyone could rebuild a clone with our data and undercut the leaderboard.</p>
+        <ul>
+          <li>
+            <span class="ico lock">⊘</span>
+            <div>
+              <strong>SIGNA RATE composite weights</strong>
+              <small>The exact aggregation of Core 5 into the flagship score</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico lock">⊘</span>
+            <div>
+              <strong>Class threshold breakpoints</strong>
+              <small>Why "rare" stays rare. Promotion stickiness rules.</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico lock">⊘</span>
+            <div>
+              <strong>Bucketization curves</strong>
+              <small>How Session Depth maps to [0,100] tiers</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico lock">⊘</span>
+            <div>
+              <strong>Recency modifier curves</strong>
+              <small>How live rankings decay with inactivity</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico lock">⊘</span>
+            <div>
+              <strong>Anti-gaming detection</strong>
+              <small>Pattern matching against spam, redundancy, synthetic inflation</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico lock">⊘</span>
+            <div>
+              <strong>sig_army word_vault classifier</strong>
+              <small>The 4,900-token precision tier engine. The eight-month build.</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico lock">⊘</span>
+            <div>
+              <strong>PC sub-score weights</strong>
+              <small>Instruction layers / recursion / entities / constraint weighting</small>
+            </div>
+          </li>
+          <li>
+            <span class="ico lock">⊘</span>
+            <div>
+              <strong>Drift Ratio computation</strong>
+              <small>Semantic vector deviation detection logic</small>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TOP 10 DAILY ACROSS 5 METRICS -->
+  <section>
+    <div class="section-eyebrow">⊙ The dailies</div>
+    <h2 class="section-h2">Today's leaders, by metric.</h2>
+    <p class="section-lede">
+      Five Core metrics. Five leaderboards. Daily snapshot of who's leading where right now. The full per-metric tables (Daily / 30 / 60 / 90 / All time) live in the leaderboard.
+    </p>
+
+    <div class="daily5-grid">
+
+      <!-- Compression Ratio -->
+      <div class="daily5-card">
+        <div class="daily5-head">
+          <span class="metric-tag">COMP</span>
+          <h4>Compression Ratio</h4>
+          <div class="sub">Top 10 · daily</div>
+        </div>
+        <div class="daily5-row t1"><div class="rank-num">1</div><div class="op-name">TransVaultOrigin</div><div class="op-val">0.97</div></div>
+        <div class="daily5-row t2"><div class="rank-num">2</div><div class="op-name">QuietGiant</div><div class="op-val">0.92</div></div>
+        <div class="daily5-row t3"><div class="rank-num">3</div><div class="op-name">CrossWeaver</div><div class="op-val">0.88</div></div>
+        <div class="daily5-row"><div class="rank-num">4</div><div class="op-name">ArchiveSignal</div><div class="op-val">0.86</div></div>
+        <div class="daily5-row"><div class="rank-num">5</div><div class="op-name">DeepChannel</div><div class="op-val">0.84</div></div>
+        <div class="daily5-row"><div class="rank-num">6</div><div class="op-name">RiddleSocket</div><div class="op-val">0.81</div></div>
+        <div class="daily5-row"><div class="rank-num">7</div><div class="op-name">GhostRelay</div><div class="op-val">0.79</div></div>
+        <div class="daily5-row"><div class="rank-num">8</div><div class="op-name">Arch+:24-78344</div><div class="op-val">0.77</div></div>
+        <div class="daily5-row"><div class="rank-num">9</div><div class="op-name">PromplexCore</div><div class="op-val">0.74</div></div>
+        <div class="daily5-row"><div class="rank-num">10</div><div class="op-name">SignalTrace</div><div class="op-val">0.72</div></div>
+      </div>
+
+      <!-- Session Depth -->
+      <div class="daily5-card">
+        <div class="daily5-head">
+          <span class="metric-tag">SD</span>
+          <h4>Session Depth</h4>
+          <div class="sub">Top 10 · daily</div>
+        </div>
+        <div class="daily5-row t1"><div class="rank-num">1</div><div class="op-name">DeepChannel</div><div class="op-val">31.0</div></div>
+        <div class="daily5-row t2"><div class="rank-num">2</div><div class="op-name">TransVaultOrigin</div><div class="op-val">26.1</div></div>
+        <div class="daily5-row t3"><div class="rank-num">3</div><div class="op-name">CrossWeaver</div><div class="op-val">24.4</div></div>
+        <div class="daily5-row"><div class="rank-num">4</div><div class="op-name">RiddleSocket</div><div class="op-val">22.8</div></div>
+        <div class="daily5-row"><div class="rank-num">5</div><div class="op-name">ArchiveSignal</div><div class="op-val">22.1</div></div>
+        <div class="daily5-row"><div class="rank-num">6</div><div class="op-name">GhostRelay</div><div class="op-val">19.6</div></div>
+        <div class="daily5-row"><div class="rank-num">7</div><div class="op-name">Arch+:24-78344</div><div class="op-val">18.2</div></div>
+        <div class="daily5-row"><div class="rank-num">8</div><div class="op-name">PromplexCore</div><div class="op-val">14.8</div></div>
+        <div class="daily5-row"><div class="rank-num">9</div><div class="op-name">Power:24-87553</div><div class="op-val">12.5</div></div>
+        <div class="daily5-row"><div class="rank-num">10</div><div class="op-name">QuietGiant</div><div class="op-val">11.2</div></div>
+      </div>
+
+      <!-- Prompt Complexity -->
+      <div class="daily5-card">
+        <div class="daily5-head">
+          <span class="metric-tag">PC</span>
+          <h4>Prompt Complexity</h4>
+          <div class="sub">Top 10 · daily</div>
+        </div>
+        <div class="daily5-row t1"><div class="rank-num">1</div><div class="op-name">PromplexCore</div><div class="op-val">94</div></div>
+        <div class="daily5-row t2"><div class="rank-num">2</div><div class="op-name">TransVaultOrigin</div><div class="op-val">92</div></div>
+        <div class="daily5-row t3"><div class="rank-num">3</div><div class="op-name">CrossWeaver</div><div class="op-val">88</div></div>
+        <div class="daily5-row"><div class="rank-num">4</div><div class="op-name">ArchiveSignal</div><div class="op-val">84</div></div>
+        <div class="daily5-row"><div class="rank-num">5</div><div class="op-name">GhostRelay</div><div class="op-val">79</div></div>
+        <div class="daily5-row"><div class="rank-num">6</div><div class="op-name">DeepChannel</div><div class="op-val">76</div></div>
+        <div class="daily5-row"><div class="rank-num">7</div><div class="op-name">Arch+:24-78344</div><div class="op-val">74</div></div>
+        <div class="daily5-row"><div class="rank-num">8</div><div class="op-name">RiddleSocket</div><div class="op-val">71</div></div>
+        <div class="daily5-row"><div class="rank-num">9</div><div class="op-name">QuietGiant</div><div class="op-val">62</div></div>
+        <div class="daily5-row"><div class="rank-num">10</div><div class="op-name">SignalTrace</div><div class="op-val">58</div></div>
+      </div>
+
+      <!-- Cross-Thread -->
+      <div class="daily5-card">
+        <div class="daily5-head">
+          <span class="metric-tag">CT</span>
+          <h4>Cross-Thread Ref</h4>
+          <div class="sub">Top 10 · daily</div>
+        </div>
+        <div class="daily5-row t1"><div class="rank-num">1</div><div class="op-name">CrossWeaver</div><div class="op-val">41</div></div>
+        <div class="daily5-row t2"><div class="rank-num">2</div><div class="op-name">TransVaultOrigin</div><div class="op-val">37</div></div>
+        <div class="daily5-row t3"><div class="rank-num">3</div><div class="op-name">ArchiveSignal</div><div class="op-val">31</div></div>
+        <div class="daily5-row"><div class="rank-num">4</div><div class="op-name">DeepChannel</div><div class="op-val">28</div></div>
+        <div class="daily5-row"><div class="rank-num">5</div><div class="op-name">GhostRelay</div><div class="op-val">24</div></div>
+        <div class="daily5-row"><div class="rank-num">6</div><div class="op-name">RiddleSocket</div><div class="op-val">22</div></div>
+        <div class="daily5-row"><div class="rank-num">7</div><div class="op-name">Arch+:24-78344</div><div class="op-val">19</div></div>
+        <div class="daily5-row"><div class="rank-num">8</div><div class="op-name">PromplexCore</div><div class="op-val">16</div></div>
+        <div class="daily5-row"><div class="rank-num">9</div><div class="op-name">QuietGiant</div><div class="op-val">14</div></div>
+        <div class="daily5-row"><div class="rank-num">10</div><div class="op-name">Power:24-87553</div><div class="op-val">11</div></div>
+      </div>
+
+      <!-- Token Throughput -->
+      <div class="daily5-card">
+        <div class="daily5-head">
+          <span class="metric-tag">TT</span>
+          <h4>Token Throughput</h4>
+          <div class="sub">Top 10 · daily</div>
+        </div>
+        <div class="daily5-row t1"><div class="rank-num">1</div><div class="op-name">TransVaultOrigin</div><div class="op-val">18.4k</div></div>
+        <div class="daily5-row t2"><div class="rank-num">2</div><div class="op-name">ArchiveSignal</div><div class="op-val">14.3k</div></div>
+        <div class="daily5-row t3"><div class="rank-num">3</div><div class="op-name">CrossWeaver</div><div class="op-val">12.1k</div></div>
+        <div class="daily5-row"><div class="rank-num">4</div><div class="op-name">DeepChannel</div><div class="op-val">11.9k</div></div>
+        <div class="daily5-row"><div class="rank-num">5</div><div class="op-name">GhostRelay</div><div class="op-val">10.9k</div></div>
+        <div class="daily5-row"><div class="rank-num">6</div><div class="op-name">RiddleSocket</div><div class="op-val">10.4k</div></div>
+        <div class="daily5-row"><div class="rank-num">7</div><div class="op-name">PromplexCore</div><div class="op-val">9.7k</div></div>
+        <div class="daily5-row"><div class="rank-num">8</div><div class="op-name">Arch+:24-78344</div><div class="op-val">9.5k</div></div>
+        <div class="daily5-row"><div class="rank-num">9</div><div class="op-name">Power:24-87553</div><div class="op-val">8.4k</div></div>
+        <div class="daily5-row"><div class="rank-num">10</div><div class="op-name">Base:24-67921</div><div class="op-val">5.6k</div></div>
+      </div>
+
+    </div>
   </section>
 
   <!-- THE CORE 5 METRICS -->

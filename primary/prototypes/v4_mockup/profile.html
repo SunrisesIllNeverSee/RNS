@@ -445,28 +445,86 @@
     font-family: var(--mono); font-size: 9px; color: var(--text-4);
   }
 
-  /* Final SIGNA computation footer */
-  .br-final {
-    background: linear-gradient(180deg, rgba(245,160,32,0.05), var(--bg-0));
+  /* ── Scoring engine — black-box composite ──────────────────── */
+  .br-engine {
+    background: linear-gradient(180deg, rgba(245,160,32,0.06), var(--bg-0));
     border-top: 1px solid var(--gold-border);
-    padding: 24px 28px;
-    display: flex; align-items: center; gap: 24px;
+    padding: 32px 28px;
+    display: grid;
+    grid-template-columns: 1.2fr 40px 1.4fr 40px 1fr;
+    gap: 20px; align-items: center;
   }
-  .br-final .label {
-    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+  .br-engine-inputs { }
+  .br-engine-label,
+  .br-engine-box-label,
+  .br-engine-output-label {
+    font-family: var(--mono); font-size: 10px; color: var(--text-4);
     text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 12px;
   }
-  .br-final .formula {
-    font-family: var(--mono); font-size: 13px; color: var(--text-2);
-    flex: 1;
+  .br-engine-vals {
+    display: flex; flex-direction: column; gap: 6px;
   }
-  .br-final .formula .var { color: var(--gold); font-weight: 500; }
-  .br-final .equals {
-    font-family: var(--mono); font-size: 13px; color: var(--text-4);
+  .br-engine-vals span {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 6px 12px; background: var(--bg-2);
+    border: 1px solid var(--border-subtle); border-radius: 6px;
+    font-family: var(--mono); font-size: 12px;
   }
-  .br-final .result {
-    font-family: var(--mono); font-size: 28px; font-weight: 700;
-    color: var(--gold); letter-spacing: -0.02em;
+  .br-engine-vals .k { color: var(--text-3); font-weight: 500; }
+  .br-engine-vals .v { color: var(--text-0); font-weight: 600; }
+
+  .br-engine-arrow {
+    text-align: center; color: var(--gold); font-size: 24px;
+    font-family: var(--mono);
+  }
+
+  .br-engine-box {
+    background: linear-gradient(180deg, var(--bg-1), var(--bg-0));
+    border: 1px solid var(--gold-border);
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .br-engine-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(245,160,32,0.025) 8px, rgba(245,160,32,0.025) 9px);
+    pointer-events: none;
+  }
+  .br-engine-box-name {
+    position: relative;
+    font-size: 18px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.01em; margin-bottom: 6px;
+  }
+  .br-engine-box-meta {
+    position: relative;
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    display: flex; gap: 6px; justify-content: center;
+    flex-wrap: wrap;
+  }
+  .br-engine-box-meta .sep { color: var(--text-5); }
+  .br-engine-box-meta .lock { color: var(--gold); font-weight: 600; }
+
+  .br-engine-output { text-align: right; }
+  .br-engine-result {
+    font-family: var(--mono); font-size: 48px; font-weight: 700;
+    color: var(--gold); letter-spacing: -0.025em; line-height: 1;
+    text-shadow: 0 0 24px rgba(245,160,32,0.3);
+  }
+  .br-engine-result-meta {
+    margin-top: 8px;
+  }
+  .br-engine-result-meta .verified {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(52,211,153,0.10);
+    border: 1px solid rgba(52,211,153,0.25);
+    color: var(--green); padding: 4px 10px; border-radius: 100px;
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
   }
 
   /* Pro upsell row inside breakdown */
@@ -803,10 +861,10 @@
   <div class="window-row">
     <span class="lbl">Window</span>
     <div class="window-selector">
-      <button>Today</button>
-      <button>7d</button>
-      <button class="active">30d</button>
-      <button>90d</button>
+      <button>Daily</button>
+      <button class="active">30</button>
+      <button>60</button>
+      <button>90</button>
       <button>All time</button>
     </div>
   </div>
@@ -925,9 +983,9 @@
 
         <div class="br-row">
           <div class="br-input">
-            <div class="head">INPUT · TELEMETRY</div>
-            <div class="formula"><span class="var">output</span> <span class="op">/ (</span><span class="var">output</span> <span class="op">+</span> <span class="var">fresh_input</span><span class="op">)</span></div>
-            <div class="compute">3,902,803 / 4,026,049 = <span class="out">0.9694</span></div>
+            <div class="head">YOUR TELEMETRY</div>
+            <div class="formula">Output : fresh input<br>bounded purity</div>
+            <div class="compute">Inputs: <span class="out">3.90M / 123K</span></div>
           </div>
           <div class="br-arrow">→</div>
           <div class="br-output">
@@ -947,9 +1005,9 @@
 
         <div class="br-row">
           <div class="br-input">
-            <div class="head">INPUT · TELEMETRY</div>
-            <div class="formula"><span class="var">cache_read</span> <span class="op">/ (</span><span class="var">read</span> <span class="op">+</span> <span class="var">create</span> <span class="op">+</span> <span class="var">input</span><span class="op">)</span></div>
-            <div class="compute">1.084B / 1.119B = <span class="out">0.9688</span> → 96.88%</div>
+            <div class="head">YOUR TELEMETRY</div>
+            <div class="formula">Cache reuse rate<br>across submissions</div>
+            <div class="compute">Inputs: <span class="out">1.08B reads / 1.12B total</span></div>
           </div>
           <div class="br-arrow">→</div>
           <div class="br-output">
@@ -969,9 +1027,9 @@
 
         <div class="br-row">
           <div class="br-input">
-            <div class="head">INPUT · TELEMETRY</div>
-            <div class="formula"><span class="var">turns_total</span> <span class="op">/</span> <span class="var">sessions</span></div>
-            <div class="compute">7,327 / 21 = <span class="out">348.9</span> avg</div>
+            <div class="head">YOUR TELEMETRY</div>
+            <div class="formula">Turn density<br>per session</div>
+            <div class="compute">Inputs: <span class="out">7,327 turns / 21 sessions</span></div>
           </div>
           <div class="br-arrow">→</div>
           <div class="br-output">
@@ -991,9 +1049,9 @@
 
         <div class="br-row">
           <div class="br-input">
-            <div class="head">INPUT · TELEMETRY</div>
-            <div class="formula"><span class="op">min(100, 20·log₁₀(</span><span class="var">output</span><span class="op">))</span></div>
-            <div class="compute">log₁₀(3.90M) × 20 = <span class="out">100</span> (capped)</div>
+            <div class="head">YOUR TELEMETRY</div>
+            <div class="formula">Log-scaled<br>output bandwidth</div>
+            <div class="compute">Inputs: <span class="out">3.90M output tokens</span></div>
           </div>
           <div class="br-arrow">→</div>
           <div class="br-output">
@@ -1013,8 +1071,8 @@
 
         <div class="br-row pro-locked">
           <div class="br-input">
-            <div class="head">INPUT · CONVERSATION TEXT</div>
-            <div class="formula"><span class="op">weighted(</span><span class="var">layers</span><span class="op">,</span> <span class="var">recursion</span><span class="op">,</span> <span class="var">entities</span><span class="op">)</span></div>
+            <div class="head">CONVERSATION ANALYSIS</div>
+            <div class="formula">Prompt structure<br>composite sub-scores</div>
             <div class="compute" style="color: var(--gold);">⊘ Requires sig_army prompt analysis</div>
           </div>
           <div class="br-arrow">→</div>
@@ -1035,14 +1093,42 @@
 
       </div>
 
-      <!-- Final SIGNA RATE computation -->
-      <div class="br-final">
-        <div class="label">SIGNA RATE</div>
-        <div class="formula">
-          <span class="op">0.30·(</span><span class="var">96.94</span><span class="op">) + 0.20·(</span><span class="var">100</span><span class="op">) + 0.20·(</span><span class="var">92</span><span class="op">) + 0.15·(</span><span class="var">96</span><span class="op">) + 0.15·(</span><span class="var">100</span><span class="op">)</span>
+      <!-- Final SIGNA RATE — black-box scoring engine -->
+      <div class="br-engine">
+        <div class="br-engine-inputs">
+          <div class="br-engine-label">CORE 5 INPUTS</div>
+          <div class="br-engine-vals">
+            <span><span class="k">Comp</span><span class="v">0.97</span></span>
+            <span><span class="k">SD</span><span class="v">26.1</span></span>
+            <span><span class="k">PC</span><span class="v">~92</span></span>
+            <span><span class="k">CT</span><span class="v">37</span></span>
+            <span><span class="k">TT</span><span class="v">18.4k</span></span>
+          </div>
         </div>
-        <div class="equals">=</div>
-        <div class="result">96.4</div>
+
+        <div class="br-engine-arrow">→</div>
+
+        <div class="br-engine-box">
+          <div class="br-engine-box-label">SCORING ENGINE</div>
+          <div class="br-engine-box-name">SIGNA RATE Composite</div>
+          <div class="br-engine-box-meta">
+            <span>Ruleset v1.0</span>
+            <span class="sep">·</span>
+            <span>Proprietary weights</span>
+            <span class="sep">·</span>
+            <span class="lock">⊘ Locked</span>
+          </div>
+        </div>
+
+        <div class="br-engine-arrow">→</div>
+
+        <div class="br-engine-output">
+          <div class="br-engine-output-label">YOUR SCORE</div>
+          <div class="br-engine-result">96.4</div>
+          <div class="br-engine-result-meta">
+            <span class="verified">✓ Audit Verified</span>
+          </div>
+        </div>
       </div>
 
       <!-- Pro upsell -->
