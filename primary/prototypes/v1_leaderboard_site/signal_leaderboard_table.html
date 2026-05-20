@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signal Leaderboard</title>
+  <style>
+    body {
+      font-family: Courier, monospace;
+      background-color: #0e0e0e;
+      color: #f0f0f0;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #2a2a2a;
+      cursor: pointer;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #121212;
+      padding: 20px;
+      border: 2px solid #888;
+      z-index: 999;
+      width: 90%;
+      max-width: 600px;
+    }
+    .popup h3 {
+      margin-top: 0;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 998;
+    }
+    .metrics-table {
+      width: 100%;
+      margin-top: 10px;
+    }
+    .metrics-table th, .metrics-table td {
+      padding: 4px 8px;
+      text-align: left;
+    }
+    .glow {
+      border-left: 4px solid #ff4141;
+      padding-left: 10px;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-weight: bold;
+      color: #ff4141;
+    }
+    .leaderboard-header {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="leaderboard-header">🔥 Signal Leaderboard – Live Transmission Index</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Username</th>
+      <th>Chatbot</th>
+      <th>Date</th>
+      <th>Transmitter</th>
+      <th>SDRM</th>
+      <th>Signal Force</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr onclick="showPopup()">
+      <td>#1</td>
+      <td><strong>keter‑3862‑US</strong></td>
+      <td>ChatGPT</td>
+      <td>2025‑07‑29</td>
+      <td>25.443</td>
+      <td>3.14</td>
+      <td>12.8</td>
+    </tr>
+    <tr>
+      <td>#2</td>
+      <td>archplus‑9271‑CA</td>
+      <td>Claude</td>
+      <td>2025‑07‑28</td>
+      <td>22.100</td>
+      <td>2.95</td>
+      <td>11.4</td>
+    </tr>
+    <tr>
+      <td>#3</td>
+      <td>arch‑2197‑EU</td>
+      <td>Pi</td>
+      <td>2025‑07‑27</td>
+      <td>20.442</td>
+      <td>2.75</td>
+      <td>10.6</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="overlay" id="overlay" onclick="hidePopup()"></div>
+<div class="popup" id="popup">
+  <div class="close-btn" onclick="hidePopup()">X</div>
+  <h3>Signal Identity</h3>
+  <p><strong>Username:</strong> keter‑3862‑US</p>
+  <p><strong>Chatbot:</strong> ChatGPT</p>
+  <p><strong>Date Submitted:</strong> 2025‑07‑29</p>
+  <p><strong>Total Messages:</strong> 12,854</p>
+  <p><strong>Account Age:</strong> 386 days</p>
+
+  <div class="glow">
+    <p><strong>Transmitter Composition:</strong> 25.443</p>
+    <p><strong>SDRM:</strong> 3.14</p>
+    <p><strong>Signal Force:</strong> 12.8</p>
+  </div>
+
+  <table class="metrics-table">
+    <tr><th>Message Density</th><td>0.93</td></tr>
+    <tr><th>Session Depth</th><td>37</td></tr>
+    <tr><th>Signal:Noise Ratio</th><td>0.87</td></tr>
+    <tr><th>Prompt Complexity</th><td>94</td></tr>
+    <tr><th>Thread Linking</th><td>5</td></tr>
+  </table>
+
+  <hr />
+  <p><strong>Class Tier:</strong> TRANSMITTER — <em>Emanating Signal</em></p>
+  <p>Composite Score ≥ 85% — Elite synthesis across all signal metrics</p>
+</div>
+
+<script>
+  function showPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  }
+  function hidePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
+
+</body>
+</html>

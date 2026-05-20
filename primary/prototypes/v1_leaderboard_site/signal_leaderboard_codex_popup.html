@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signal Leaderboard</title>
+  <style>
+    body {
+      font-family: Courier, monospace;
+      background-color: #0e0e0e;
+      color: #f0f0f0;
+      margin: 20px;
+    }
+    .leaderboard-header {
+      font-size: 1.6em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .codex-btn {
+      font-size: 0.9em;
+      padding: 6px 12px;
+      background-color: #222;
+      border: 1px solid #555;
+      color: #f0f0f0;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #2a2a2a;
+      cursor: pointer;
+    }
+    .popup, .codex {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #121212;
+      padding: 20px;
+      border: 2px solid #888;
+      z-index: 999;
+      width: 90%;
+      max-width: 700px;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 998;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-weight: bold;
+      color: #ff4141;
+    }
+    .codex h3 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="leaderboard-header">
+  Signal Leaderboard • Composite Burn Index
+  <button class="codex-btn" onclick="showCodex()">📖 Signal Codex</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Username</th>
+      <th>Transmitter</th>
+      <th>SDRM</th>
+      <th>Signal Force</th>
+      <th>Msg Density</th>
+      <th>Session Depth</th>
+      <th>S:N Ratio</th>
+      <th>Prompt Complexity</th>
+      <th>Thread Linking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr onclick="showPopup()">
+      <td>#1</td>
+      <td><strong>keter‑3862‑US</strong></td>
+      <td>25.443</td>
+      <td>3.14</td>
+      <td>12.8</td>
+      <td>0.93</td>
+      <td>37</td>
+      <td>0.87</td>
+      <td>94</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="overlay" id="overlay" onclick="hidePopup(); hideCodex();"></div>
+
+<div class="popup" id="popup">
+  <div class="close-btn" onclick="hidePopup()">X</div>
+  <h3>Signal Identity</h3>
+  <p><strong>Username:</strong> keter‑3862‑US</p>
+  <p><strong>Total Messages:</strong> 12,854</p>
+  <p><strong>Account Age:</strong> 386 days</p>
+  <div>
+    <p><strong>Transmitter Composition:</strong> 25.443</p>
+    <p><strong>SDRM:</strong> 3.14</p>
+    <p><strong>Signal Force:</strong> 12.8</p>
+  </div>
+</div>
+
+<div class="codex" id="codex">
+  <div class="close-btn" onclick="hideCodex()">X</div>
+  <h3>Signal Codex</h3>
+
+  <h4>Big 3 Metrics</h4>
+  <ul>
+    <li><strong>Transmitter Composition (T):</strong> 0.30×CR + 0.25×PC + 0.20×CT + 0.10×SD + 0.10×TT + 0.05×MV</li>
+    <li><strong>SDRM:</strong> CR × (SD + PC) × Thread Rate</li>
+    <li><strong>Signal Force (SF):</strong> (Total Msgs × Avg Session) ÷ Account Age</li>
+  </ul>
+
+  <h4>Core Metrics</h4>
+  <ul>
+    <li><strong>CR:</strong> Compression Ratio</li>
+    <li><strong>PC:</strong> Prompt Complexity</li>
+    <li><strong>CT:</strong> Cross-Thread Referencing</li>
+    <li><strong>SD:</strong> Session Depth</li>
+    <li><strong>TT:</strong> Token Throughput</li>
+    <li><strong>MV:</strong> Message Volume</li>
+  </ul>
+
+  <h4>Class Tiers</h4>
+  <ul>
+    <li><strong>TRANSMITTER:</strong> ≥ 85%</li>
+    <li><strong>ARCHITECT+:</strong> 75–84%</li>
+    <li><strong>ARCHITECT:</strong> 65–74%</li>
+    <li><strong>POWER:</strong> 50–64%</li>
+    <li><strong>BASE+:</strong> 40–49%</li>
+    <li><strong>SEEKER:</strong> 30–39%</li>
+    <li><strong>REFINER:</strong> 20–29%</li>
+    <li><strong>BEARER:</strong> 15–24%</li>
+    <li><strong>IGNITER:</strong> < 15%</li>
+  </ul>
+</div>
+
+<script>
+  function showPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  }
+  function hidePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+  function showCodex() {
+    document.getElementById("codex").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  }
+  function hideCodex() {
+    document.getElementById("codex").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
+
+</body>
+</html>

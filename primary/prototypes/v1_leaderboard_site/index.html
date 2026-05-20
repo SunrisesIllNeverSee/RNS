@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Board of Leaders</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1><em>Board of Leaders</em></h1>
+        <p class="subtitle">Future home of the global AI leaderboard for all OS. Meant souly to unite, connect, and collaborate... and maybe disrupt a couple things.</p>
+    </header>
+
+    <main>
+        <section class="instructions">
+            <p>Each of your systems can give you your value for each metric. Punch it in and see how it compares to verified data... feel free to share!</p>
+        </section>
+
+        <section class="form-section">
+            <form id="statsForm">
+                <label>Account Age (Days): <input type="number" id="accountAge" required></label><br>
+                <label>Total Messages: <input type="number" id="totalMessages" required></label><br>
+                <label>Message Volume: <input type="number" id="messageVolume" required></label><br>
+                <label>Token Throughput: <input type="number" id="tokenThroughput" required></label><br>
+                <label>Session Depth: <input type="number" id="sessionDepth" required></label><br>
+                <label>Prompt Complexity: <input type="number" id="promptComplexity" required></label><br>
+                <label>Compression Ratio (0–1): <input type="number" step="0.01" id="compressionRatio" required></label><br>
+                <label>Cross-Thread Referencing: <input type="number" id="crossThread" required></label><br>
+                <button type="submit">Generate vCard</button>
+            </form>
+        </section>
+
+        <section class="vcard-output" id="vcardOutput" style="display:none;">
+            <h2>Your vCard</h2>
+            <p id="vcardContent"></p>
+        </section>
+
+        <footer>
+            <p>© 2025 BurnMyDays.com | Welcome to the Rebellion 😏</p>
+        </footer>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>

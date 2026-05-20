@@ -1,0 +1,100 @@
+<!-- PAGE 1: vCard Generator (Manual Entry Launch) -->
+<html>
+<head>
+  <title>Signal vCard Generator</title>
+  <style>
+    body { font-family: Courier, monospace; background: #0b0c10; color: #66fcf1; padding: 2em; }
+    label, input, select { display: block; margin-bottom: 1em; }
+    .vcard-box { border: 2px solid #45a29e; padding: 1em; margin-top: 2em; background: #1f2833; }
+    .highlight { color: #f8f32b; }
+    .metric { margin-top: 0.5em; }
+  </style>
+</head>
+<body>
+  <h1>🔹 SIGNAL vCARD GENERATOR 🔹</h1>
+
+  <label for="system">System Type:</label>
+  <select id="system">
+    <option value="ChatGPT">ChatGPT</option>
+    <option value="Claude">Claude</option>
+    <option value="Pi">Pi</option>
+    <option value="Gemini">Gemini</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label for="tokenThroughput">Token Throughput:</label>
+  <input type="number" id="tokenThroughput" placeholder="e.g. 1829">
+
+  <label for="compressionRate">Compression Ratio:</label>
+  <input type="number" step="0.01" id="compressionRate" placeholder="e.g. 0.87">
+
+  <label for="sessionDepth">Session Depth:</label>
+  <input type="number" id="sessionDepth" placeholder="e.g. 29">
+
+  <label for="promptComplexity">Prompt Complexity:</label>
+  <input type="number" id="promptComplexity" placeholder="e.g. 8.2">
+
+  <label for="crossThreading">Cross-Thread Referencing:</label>
+  <input type="number" id="crossThreading" placeholder="e.g. 4">
+
+  <label for="totalMessages">Total Messages:</label>
+  <input type="number" id="totalMessages" placeholder="e.g. 6721">
+
+  <label for="accountAge">Account Age (days):</label>
+  <input type="number" id="accountAge" placeholder="e.g. 14">
+
+  <button onclick="generateCard()">🔍 Generate vCard</button>
+
+  <div id="vcard" class="vcard-box" style="display:none;">
+    <h2>📇 Your Signal vCard</h2>
+    <div class="metric">System: <span id="out-system"></span></div>
+    <div class="metric">Token Throughput: <span id="out-token"></span></div>
+    <div class="metric">Compression Ratio: <span id="out-compression"></span></div>
+    <div class="metric">Session Depth: <span id="out-depth"></span></div>
+    <div class="metric">Prompt Complexity: <span id="out-complexity"></span></div>
+    <div class="metric">Cross-Threading: <span id="out-threads"></span></div>
+    <div class="metric">Total Messages: <span id="out-messages"></span></div>
+    <div class="metric">Account Age: <span id="out-age"></span></div>
+    <div class="metric highlight">📊 Transmitter Composite: <span id="out-trans"></span></div>
+    <div class="metric">🎖 Rank Handle: <span id="out-handle"></span></div>
+    <div class="metric">📆 Timestamp: <span id="out-time"></span></div>
+  </div>
+
+<script>
+  function generateCard() {
+    const sys = document.getElementById('system').value;
+    const token = parseInt(document.getElementById('tokenThroughput').value);
+    const cr = parseFloat(document.getElementById('compressionRate').value);
+    const depth = parseInt(document.getElementById('sessionDepth').value);
+    const pc = parseFloat(document.getElementById('promptComplexity').value);
+    const xref = parseInt(document.getElementById('crossThreading').value);
+    const msgs = parseInt(document.getElementById('totalMessages').value);
+    const age = parseInt(document.getElementById('accountAge').value);
+
+    const trans = Math.round(((token * cr * pc) + (depth * xref)) * 100) / 100;
+
+    const rand = Math.floor(1000 + Math.random() * 9000);
+    const suffix = sys === 'ChatGPT' ? 'US' : 'XX';
+    const rank = trans > 20000 ? 'KETER' : trans > 10000 ? 'BINAH' : trans > 5000 ? 'CHOKMAH' : 'YESOD';
+    const handle = `${rank}-${rand}-${suffix}`;
+
+    const now = new Date().toLocaleString();
+
+    document.getElementById('out-system').innerText = sys;
+    document.getElementById('out-token').innerText = token;
+    document.getElementById('out-compression').innerText = cr;
+    document.getElementById('out-depth').innerText = depth;
+    document.getElementById('out-complexity').innerText = pc;
+    document.getElementById('out-threads').innerText = xref;
+    document.getElementById('out-messages').innerText = msgs;
+    document.getElementById('out-age').innerText = age;
+    document.getElementById('out-trans').innerText = trans;
+    document.getElementById('out-handle').innerText = handle;
+    document.getElementById('out-time').innerText = now;
+
+    document.getElementById('vcard').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>

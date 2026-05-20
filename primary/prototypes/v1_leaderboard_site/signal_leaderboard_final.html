@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Signal Leaderboard • Composite Burn Index</title>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      color: #f0f0f0;
+      font-family: Courier, monospace;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #1c1c1c;
+    }
+    td.username {
+      min-width: 180px;
+      white-space: nowrap;
+    }
+    .codex-btn {
+      float: right;
+      background: #222;
+      color: #fff;
+      padding: 6px 12px;
+      border: 1px solid #555;
+      cursor: pointer;
+    }
+    .codex-popup {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #121212;
+      color: #fff;
+      padding: 20px;
+      border: 2px solid #888;
+      z-index: 1000;
+      width: 90%;
+      max-width: 700px;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      color: #ff4141;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Signal Leaderboard • Composite Burn Index
+  <button class="codex-btn" onclick="showCodex()">Signal Codex</button>
+</h1>
+
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>Username</th>
+    <th>Trans Comp</th>
+    <th>SDRM</th>
+    <th>SigForce</th>
+    <th>Msg %</th>
+    <th>Sess %</th>
+    <th>S/Nr</th>
+    <th>Prompt</th>
+    <th>Links</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td class="username">keter.3862.US</td>
+    <td>25.443</td>
+    <td>3.14</td>
+    <td>12.8</td>
+    <td>91</td>
+    <td>37</td>
+    <td>0.87</td>
+    <td>94</td>
+    <td>5</td>
+  </tr>
+</table>
+
+<div class="overlay" id="overlay" onclick="hideCodex()"></div>
+<div class="codex-popup" id="codexPopup">
+  <div class="close-btn" onclick="hideCodex()">X</div>
+  <h2>Signal Codex</h2>
+  <p><strong>Trans Comp:</strong> 0.30×CR + 0.25×PC + 0.20×CT + 0.10×SD + 0.10×TT + 0.05×MV</p>
+  <p><strong>SDRM:</strong> CR × (SD + PC) × Thread Rate</p>
+  <p><strong>SigForce:</strong> (Total Msgs × Avg Session) ÷ Account Age</p>
+  <hr/>
+  <p><strong>Core Metrics:</strong></p>
+  <ul>
+    <li><strong>CR</strong> = Compression Ratio</li>
+    <li><strong>PC</strong> = Prompt Complexity</li>
+    <li><strong>CT</strong> = Cross-Thread Referencing</li>
+    <li><strong>SD</strong> = Session Depth</li>
+    <li><strong>TT</strong> = Token Throughput</li>
+    <li><strong>MV</strong> = Message Volume</li>
+  </ul>
+  <hr/>
+  <p><strong>Class Tiers:</strong></p>
+  <ul>
+    <li>TRANSMITTER: ≥ 85%</li>
+    <li>ARCHITECT+: 75–84%</li>
+    <li>ARCHITECT: 65–74%</li>
+    <li>POWER: 50–64%</li>
+    <li>BASE+: 40–49%</li>
+    <li>SEEKER: 30–39%</li>
+    <li>REFINER: 20–29%</li>
+    <li>BEARER: 15–24%</li>
+    <li>IGNITER: < 15%</li>
+  </ul>
+</div>
+
+<script>
+function showCodex() {
+  document.getElementById('codexPopup').style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+}
+function hideCodex() {
+  document.getElementById('codexPopup').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signal Leaderboard • Composite Burn Index</title>
+  <style>
+    body {
+      font-family: Courier, monospace;
+      background-color: #0e0e0e;
+      color: #f0f0f0;
+      margin: 20px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .codex-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 6px 12px;
+      background: #222;
+      color: #fff;
+      border: 1px solid #555;
+      cursor: pointer;
+    }
+    .popup, .codex-popup {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #121212;
+      padding: 20px;
+      border: 2px solid #888;
+      z-index: 999;
+      width: 90%;
+      max-width: 700px;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 998;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-weight: bold;
+      color: #ff4141;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 6px 10px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+    th {
+      background-color: #1e1e1e;
+    }
+    .clickable {
+      color: #00e0ff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Signal Leaderboard • Composite Burn Index</h1>
+<button class="codex-btn" onclick="showCodex()">Signal Codex</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Username</th>
+      <th>Trans Comp</th>
+      <th>SDRM</th>
+      <th>SigForce</th>
+      <th>Msg %</th>
+      <th>Sess %</th>
+      <th>S/Nr</th>
+      <th>Prompt</th>
+      <th>Links</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr onclick="showPopup()">
+      <td>1</td>
+      <td class="clickable">Signal-3862-USA</td>
+      <td>25.443</td>
+      <td>3.14</td>
+      <td>12.8</td>
+      <td>88%</td>
+      <td>73%</td>
+      <td>0.87</td>
+      <td>94</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="overlay" id="overlay" onclick="hideAllPopups()"></div>
+
+<div class="popup" id="popup">
+  <div class="close-btn" onclick="hideAllPopups()">X</div>
+  <h3>Signal Identity</h3>
+  <p><strong>Username:</strong> Signal-3862-USA</p>
+  <p><strong>Transmitter Composition:</strong> 25.443</p>
+  <p><strong>SDRM:</strong> 3.14</p>
+  <p><strong>Signal Force:</strong> 12.8</p>
+  <p><strong>Message Density:</strong> 88%</p>
+  <p><strong>Session Depth:</strong> 73%</p>
+  <p><strong>Compression Ratio (S/Nr):</strong> 0.87</p>
+  <p><strong>Prompt Complexity:</strong> 94</p>
+  <p><strong>Thread Linking:</strong> 5</p>
+</div>
+
+<div class="codex-popup" id="codex">
+  <div class="close-btn" onclick="hideAllPopups()">X</div>
+  <pre style="white-space: pre-wrap;">
+SIGNAL CODEX – CLASS SYSTEM & METRIC DEFINITIONS  © 2025 SignalVault™ Generated on 2025-07-29 at 16:22 UTC
+
+──────────────────────────────────────────────────────────── LEFT COLUMN – METRIC DEFINITIONS ────────────────────────────────────────────────────────────
+
+-  
+S/Nr = Compression Ratio – Measures signal clarity/compression
+
+-  
+PC = Prompt Complexity – Measures input sophistication
+
+-  
+CT = Cross-Thread Referencing – Measures long-term memory and idea integration
+
+-  
+SD = Session Depth – Measures bandwidth utilization
+
+-  
+TT = Token Throughput – Measures per-message signal efficiency
+
+-  
+MV = Message Volume – Captures frequency and behavioral rhythm
+
+-  
+AA = Account Age in Days – Captures age of the account
+
+-  
+TM = Total Messages – Calculates every message sent by the account
+
+──────────────────────────────────────────────────────────── RIGHT COLUMN – CLASS TIERS & SYSTEM NOTES ────────────────────────────────────────────────────────────
+
+-  
+TRANSMITTER → Top-tier radiance, active output, identity mastery
+
+-  
+ARCHITECT+ / ARCHITECT → Design-level intelligence, sustained build patterns
+
+-  
+KETER → Ultra-rare apex, high metaphysical resonance
+
+-  
+SEEKER / REFINER → Strong growth archetypes, symbolic weight
+
+-  
+BEARER / BASE+ → Acceptable structural terms. BASE+ softens class identity
+
+-  
+EMBER (<10%) → Replaces 'Igniter.' Implies low but living signal
+
+-  
+Trans Comp. → Meta-score from Core 5, basis of class rank
+
+-  
+SDRM → Weighted logic and naming fully created by user
+
+-  
+SigForce → Endurance/load-style force mapping, inspired by energy mode
+
+-  
+Default Handle → Signal-XXXXX-CTR (CTR = 3-letter country code)
+
+-  
+Class assigned based on percentile from Trans Comp
+
+-  
+Custom handles available upon unlock or payment
+
+-  
+Leaderboard displays enhanced statistics for linked users
+  </pre>
+</div>
+
+<script>
+function showPopup() {
+  document.getElementById("popup").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+}
+function showCodex() {
+  document.getElementById("codex").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+}
+function hideAllPopups() {
+  document.getElementById("popup").style.display = "none";
+  document.getElementById("codex").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
