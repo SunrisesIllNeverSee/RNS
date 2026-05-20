@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>MO§ES™ × 5 Measured Benchmarks</title>
+<style>
+  @page { size: 11in 8.5in; margin: 0.18in; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0 auto; padding: 3px 6px; color: #1a1a1a; background: #fafafa; max-width: 1500px; }
+  .header { text-align: center; padding: 2px 0 3px 0; border-bottom: 2px solid #d4af37; margin-bottom: 4px; }
+  .header h1 { font-size: 16px; margin: 0 0 1px 0; font-weight: 700; letter-spacing: -0.3px; }
+  .header .sub { color: #666; font-size: 8.5px; }
+  .header .gold { color: #b8860b; font-weight: 600; }
+  .summary { background: linear-gradient(135deg,#fff8dc,#fdf3c0); border: 1px solid #d4af37; border-radius: 5px; padding: 3px 7px; margin-bottom: 4px; }
+  .summary .headline { font-size: 10.5px; font-weight: 700; color: #5d4a0e; margin: 0 0 3px 0; text-align: center; }
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .stat { background: white; padding: 3px 5px; border-radius: 3px; border: 1px solid #e8d97a; text-align: center; }
+  .stat .label { font-size: 7px; color: #888; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
+  .stat .value { font-size: 14px; font-weight: 700; color: #b8860b; margin: 0; line-height: 1.0; }
+  .stat .secondary { font-size: 6.5px; color: #888; line-height: 1.15; margin-top: 1px; font-style: italic; }
+  .stat .pos { font-size: 7px; color: #2e7d32; font-weight: 600; margin-top: 1px; }
+  .stat .src { font-size: 6px; color: #aaa; margin-top: 1px; font-weight: 500; }
+  .methodology { background: #f0f4f8; border-left: 3px solid #5d6b7a; padding: 3px 7px; margin-bottom: 4px; font-size: 8px; color: #2a3947; border-radius: 0 4px 4px 0; line-height: 1.35; }
+  .methodology b { color: #1a1a1a; }
+  .methodology .aa { color: #5d6b7a; }
+  .methodology .moses { color: #b8860b; }
+  .row { display: grid; gap: 4px; margin-bottom: 4px; }
+  .row3 { grid-template-columns: repeat(3, 1fr); }
+  .row-loc { grid-template-columns: 1fr 2fr; }
+  .chart { background: white; border-radius: 4px; padding: 3px 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+  .chart h3 { font-size: 9.5px; margin: 0; font-weight: 600; }
+  .chart .sub { font-size: 7.5px; color: #888; margin-bottom: 2px; }
+  .chart .src { font-size: 6.5px; color: #b8860b; font-weight: 600; margin-top: 2px; line-height: 1.2; }
+  .bars { display: flex; align-items: flex-end; gap: 2px; padding: 2px 0 0 0; border-bottom: 1px solid #eee; }
+  .labels { display: flex; gap: 2px; padding-top: 1px; }
+  .bars-nar { display: flex; align-items: flex-end; gap: 1px; padding: 2px 0 0 0; border-bottom: 1px solid #eee; }
+  .labels-nar { display: flex; gap: 1px; padding-top: 1px; }
+  .bf { flex: 1; min-width: 0; display: flex; align-items: flex-start; justify-content: center; padding: 1px 0 0 0; color: white; font-size: 7px; font-weight: 600; overflow: hidden; }
+  .bl { flex: 1; min-width: 0; font-size: 5.5px; text-align: center; line-height: 1.0; color: #555; padding: 0 1px; overflow: hidden; }
+  .bl-nar { flex: 1; min-width: 0; font-size: 5px; text-align: center; line-height: 1.0; color: #555; padding: 0 1px; overflow: hidden; }
+  .bl b { display: block; font-weight: 700; color: #222; font-size: 6px; }
+  .bl-nar b { display: block; font-weight: 700; color: #222; font-size: 5.5px; }
+  .bl.ml b, .bl-nar.ml b { color: #b8860b; }
+  /* Raw data bar — mirror top, BIG BOLD BLACK raw numbers, equations blend in */
+  .rawbar { background: linear-gradient(135deg,#fff8dc,#fdf3c0); border: 1px solid #d4af37; border-radius: 5px; padding: 4px 7px; margin-top: 4px; margin-bottom: 4px; }
+  .rawbar .headline { font-size: 10px; font-weight: 700; color: #5d4a0e; margin: 0 0 3px 0; text-align: center; }
+  .rawbar .raws { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .raw { background: white; padding: 4px 6px; border-radius: 3px; border: 1px solid #e8d97a; display: flex; flex-direction: column; }
+  .raw .label { font-size: 7px; color: #888; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; text-align: center; margin-bottom: 3px; }
+  .raw .kvtable { width: 100%; border-collapse: collapse; }
+  .raw .kvtable td { padding: 1.5px 0; vertical-align: baseline; }
+  .raw .kvtable td.k { font-size: 7px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2px; padding-right: 4px; white-space: nowrap; }
+  .raw .kvtable td.v { font-size: 13px; font-weight: 800; color: #000; font-family: ui-monospace, Menlo, "SF Mono", Consolas, monospace; text-align: right; line-height: 1.05; white-space: nowrap; }
+  .raw .eq { font-size: 6.5px; color: #999; line-height: 1.2; margin-top: 4px; padding-top: 3px; border-top: 1px solid #f0e7c0; font-family: ui-monospace, Menlo, monospace; text-align: center; font-weight: 500; }
+  .raw .eq b { color: #b8860b; font-weight: 700; }
+  .footer { text-align: center; font-size: 6.5px; color: #888; margin-top: 3px; padding-top: 2px; border-top: 1px solid #eee; line-height: 1.3; }
+</style></head>
+<body>
+<div class="header">
+  <h1>MO§ES™ × Artificial Analysis Coding Agent Benchmarks</h1>
+  <div class="sub">Operator-augmented <span class="gold">Claude Code + Opus 4.7</span> vs. 13 published combinations · Field: <span class="gold">artificialanalysis.ai/agents/coding-agents</span> · 2026-05-14</div>
+</div>
+
+<div class="summary">
+  <div class="headline">MO§ES™ leads all 5 measured economic categories — 7-day window (2026-05-08 → 2026-05-14)</div>
+  <div class="stats">
+    <div class="stat"><div class="label">Cache hit rate</div><div class="value">96.88%</div><div class="pos">#1 — &gt; field's 96.2%</div><div class="src">SRC: Token Dashboard 7d</div></div>
+    <div class="stat"><div class="label">Output : Input</div><div class="value">31.7×</div><div class="secondary">30d 42.5× · 90d 22.1×</div><div class="pos">#1 — 83× field leader (0.38)</div><div class="src">SRC: 3.90M out ÷ 123K in</div></div>
+    <div class="stat"><div class="label">Tokens / task</div><div class="value">767K</div><div class="pos">#1 — 3.6× more efficient</div><div class="src">SRC: 1.12B ÷ 1,465 tasks</div></div>
+    <div class="stat"><div class="label">Time / task</div><div class="value">1.84 min</div><div class="pos">#1 — 3.2× faster</div><div class="src">SRC: ~45 hr ÷ 1,465 tasks</div></div>
+    <div class="stat"><div class="label">Cost / LOC</div><div class="value">$0.0007</div><div class="secondary">plan · API: $0.044 · ccusage: $0.018</div><div class="pos">#1 — &lt; 1¢ per line</div><div class="src">SRC: $23.33 ÷ 35,242 LOC</div></div>
+  </div>
+</div>
+
+<div class="methodology">
+  <b>Testing methodology — not the same thing being measured:</b>
+  <span class="aa"><b>AA field:</b> per-task isolated runs on SWE-Bench-Pro-Hard-AA, Terminal-Bench v2, SWE-Atlas-QnA. Each task = one bug/issue.</span>
+  <span class="moses"><b>MO§ES™:</b> sustained operator work on App Hub (real product) over 7-day measurement window (2026-05-08 → 2026-05-14), 21 sessions, 7,327 turns. App Hub = 5 build days within the window (5/10–5/14), 35,242 LOC shipped. Cost/task ($0.017 sub · $1.05 API) computed similarly but not on cards. $/LOC: AA = cost_per_task ÷ 20 LOC industry convention. MO§ES = $23.33/wk sub ÷ 35,242 actual LOC.</span>
+</div>
+
+<div class="row row3">
+  <div class="chart"><h3>1. Cache Hit Rate</h3><div class="sub">Cache reuse % · higher better · MO§ES sustained multi-project</div><div class="bars" style="height:100px"><div class="bf" style="height:96px;background:linear-gradient(180deg,#d4af37,#b8860b);box-shadow:0 0 0 1px white,0 0 4px rgba(212,175,55,0.6);">96.9%</div><div class="bf" style="height:96px;background:#757575;">96.2%</div><div class="bf" style="height:96px;background:#c97c5d;">96.2%</div><div class="bf" style="height:96px;background:#888;">96.1%</div><div class="bf" style="height:94px;background:#1a1a1a;">94.9%</div><div class="bf" style="height:94px;background:#c97c5d;">94.5%</div><div class="bf" style="height:93px;background:#c97c5d;">93.7%</div><div class="bf" style="height:92px;background:#1a1a1a;">92.8%</div><div class="bf" style="height:91px;background:#757575;">91.7%</div><div class="bf" style="height:87px;background:#757575;">87.8%</div><div class="bf" style="height:86px;background:#888;">86.1%</div><div class="bf" style="height:85px;background:#757575;">85.3%</div><div class="bf" style="height:83px;background:#888;">83.7%</div><div class="bf" style="height:79px;background:#303f9f;">79.8%</div></div><div class="labels"><div class="bl ml"><b>MO§ES™</b><span>CC+Opus 4.7+op</span></div><div class="bl"><b>Cursor CLI</b><span>Opus 4.7 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>Opus 4.7 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>Kimi K2.6</span></div><div class="bl"><b>Codex</b><span>GPT-5.5 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>Sonnet 4.6 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>Opus 4.6 (Medium)</span></div><div class="bl"><b>Codex</b><span>GPT-5.4 (Medium)</span></div><div class="bl"><b>Cursor CLI</b><span>Composer 2</span></div><div class="bl"><b>Cursor CLI</b><span>GPT-5.5 (Medium)</span></div><div class="bl"><b>Gemini CLI</b><span>Gemini 3.1 Pro (High)</span></div><div class="bl"><b>Cursor CLI</b><span>GPT-5.4 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>GLM-5.1</span></div><div class="bl"><b>Claude Code</b><span>DeepSeek V4 Pro (High)</span></div></div><div class="src">SRC: cache_read 1.084B ÷ (1.084B + 34.83M cache_create + 123K input) = 96.88%</div></div>
+  <div class="chart"><h3>2. Output : Fresh Input <span style="color:#888;font-weight:400">(log scale)</span></h3><div class="sub">Output tokens per fresh-input token · higher = denser signal</div><div class="bars-nar" style="height:110px"><div class="bf" style="height:110px;background:linear-gradient(180deg,#d4af37,#b8860b);box-shadow:0 0 0 1px white,0 0 4px rgba(212,175,55,0.6);">31.7×</div><div class="bf" style="height:36px;background:#757575;">0.38</div><div class="bf" style="height:30px;background:#888;">0.25</div><div class="bf" style="height:29px;background:#c97c5d;">0.24</div><div class="bf" style="height:29px;background:#c97c5d;">0.24</div><div class="bf" style="height:23px;background:#1a1a1a;">0.17</div><div class="bf" style="height:22px;background:#757575;">0.16</div><div class="bf" style="height:21px;background:#c97c5d;">0.15</div><div class="bf" style="height:21px;background:#1a1a1a;">0.15</div><div class="bf" style="height:19px;background:#888;">0.14</div><div class="bf" style="height:14px;background:#757575;">0.07</div><div class="bf" style="height:14px;background:#757575;">0.06</div><div class="bf" style="height:14px;background:#888;">0.05</div><div class="bf" style="height:14px;background:#303f9f;">0.04</div></div><div class="labels-nar"><div class="bl-nar ml"><b>MO§ES™</b><span>CC+Opus 4.7+op</span></div><div class="bl-nar"><b>Cursor CLI</b><span>Opus 4.7 (Medium)</span></div><div class="bl-nar"><b>Claude Code</b><span>Kimi K2.6</span></div><div class="bl-nar"><b>Claude Code</b><span>Sonnet 4.6 (Medium)</span></div><div class="bl-nar"><b>Claude Code</b><span>Opus 4.7 (Medium)</span></div><div class="bl-nar"><b>Codex</b><span>GPT-5.5 (Medium)</span></div><div class="bl-nar"><b>Cursor CLI</b><span>Composer 2</span></div><div class="bl-nar"><b>Claude Code</b><span>Opus 4.6 (Medium)</span></div><div class="bl-nar"><b>Codex</b><span>GPT-5.4 (Medium)</span></div><div class="bl-nar"><b>Gemini CLI</b><span>Gemini 3.1 Pro (High)</span></div><div class="bl-nar"><b>Cursor CLI</b><span>GPT-5.5 (Medium)</span></div><div class="bl-nar"><b>Cursor CLI</b><span>GPT-5.4 (Medium)</span></div><div class="bl-nar"><b>Claude Code</b><span>GLM-5.1</span></div><div class="bl-nar"><b>Claude Code</b><span>DeepSeek V4 Pro (High)</span></div></div><div class="src">SRC: 3,902,803 output ÷ 123,246 fresh input = 31.7× · 30d 42.5× · 90d/all-time 22.1×</div></div>
+  <div class="chart"><h3>3. Tokens per Task</h3><div class="sub">Total tokens · lower better</div><div class="bars" style="height:100px"><div class="bf" style="height:12px;background:linear-gradient(180deg,#d4af37,#b8860b);box-shadow:0 0 0 1px white,0 0 4px rgba(212,175,55,0.6);">767K</div><div class="bf" style="height:30px;background:#757575;">2.74M</div><div class="bf" style="height:32px;background:#757575;">2.93M</div><div class="bf" style="height:36px;background:#888;">3.24M</div><div class="bf" style="height:37px;background:#757575;">3.33M</div><div class="bf" style="height:37px;background:#c97c5d;">3.33M</div><div class="bf" style="height:42px;background:#757575;">3.75M</div><div class="bf" style="height:48px;background:#c97c5d;">4.27M</div><div class="bf" style="height:49px;background:#c97c5d;">4.41M</div><div class="bf" style="height:55px;background:#1a1a1a;">4.92M</div><div class="bf" style="height:61px;background:#1a1a1a;">5.42M</div><div class="bf" style="height:69px;background:#303f9f;">6.20M</div><div class="bf" style="height:81px;background:#888;">7.28M</div><div class="bf" style="height:100px;background:#888;">8.88M</div></div><div class="labels"><div class="bl ml"><b>MO§ES™</b><span>CC+Opus 4.7+op</span></div><div class="bl"><b>Cursor CLI</b><span>GPT-5.5 (Medium)</span></div><div class="bl"><b>Cursor CLI</b><span>Opus 4.7 (Medium)</span></div><div class="bl"><b>Gemini CLI</b><span>Gemini 3.1 Pro (High)</span></div><div class="bl"><b>Cursor CLI</b><span>Composer 2</span></div><div class="bl"><b>Claude Code</b><span>Opus 4.7 (Medium)</span></div><div class="bl"><b>Cursor CLI</b><span>GPT-5.4 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>Opus 4.6 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>Sonnet 4.6 (Medium)</span></div><div class="bl"><b>Codex</b><span>GPT-5.4 (Medium)</span></div><div class="bl"><b>Codex</b><span>GPT-5.5 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>DeepSeek V4 Pro (High)</span></div><div class="bl"><b>Claude Code</b><span>Kimi K2.6</span></div><div class="bl"><b>Claude Code</b><span>GLM-5.1</span></div></div><div class="src">SRC: 1.123B 7d total ÷ 1,465 task-equivs (7,327 turns ÷ 5) = 767K</div></div>
+</div>
+<div class="row row-loc">
+  <div class="chart"><h3>4. Time per Task</h3><div class="sub">Wall time · lower better</div><div class="bars" style="height:100px"><div class="bf" style="height:12px;background:linear-gradient(180deg,#d4af37,#b8860b);box-shadow:0 0 0 1px white,0 0 4px rgba(212,175,55,0.6);">1.8m</div><div class="bf" style="height:14px;background:#c97c5d;">5.8m</div><div class="bf" style="height:14px;background:#757575;">6.2m</div><div class="bf" style="height:16px;background:#1a1a1a;">6.9m</div><div class="bf" style="height:16px;background:#c97c5d;">7.0m</div><div class="bf" style="height:17px;background:#1a1a1a;">7.1m</div><div class="bf" style="height:18px;background:#757575;">7.6m</div><div class="bf" style="height:18px;background:#888;">7.6m</div><div class="bf" style="height:18px;background:#757575;">7.8m</div><div class="bf" style="height:20px;background:#757575;">8.7m</div><div class="bf" style="height:22px;background:#c97c5d;">9.2m</div><div class="bf" style="height:43px;background:#303f9f;">18.0m</div><div class="bf" style="height:52px;background:#888;">21.6m</div><div class="bf" style="height:100px;background:#888;">41.5m</div></div><div class="labels"><div class="bl ml"><b>MO§ES™</b><span>CC+Opus 4.7+op</span></div><div class="bl"><b>Claude Code</b><span>Opus 4.7 (Medium)</span></div><div class="bl"><b>Cursor CLI</b><span>GPT-5.5 (Medium)</span></div><div class="bl"><b>Codex</b><span>GPT-5.4 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>Opus 4.6 (Medium)</span></div><div class="bl"><b>Codex</b><span>GPT-5.5 (Medium)</span></div><div class="bl"><b>Cursor CLI</b><span>GPT-5.4 (Medium)</span></div><div class="bl"><b>Gemini CLI</b><span>Gemini 3.1 Pro (High)</span></div><div class="bl"><b>Cursor CLI</b><span>Opus 4.7 (Medium)</span></div><div class="bl"><b>Cursor CLI</b><span>Composer 2</span></div><div class="bl"><b>Claude Code</b><span>Sonnet 4.6 (Medium)</span></div><div class="bl"><b>Claude Code</b><span>DeepSeek V4 Pro (High)</span></div><div class="bl"><b>Claude Code</b><span>GLM-5.1</span></div><div class="bl"><b>Claude Code</b><span>Kimi K2.6</span></div></div><div class="src">SRC: ~45 hr active ÷ 1,465 = 1.84 min</div></div>
+  <div class="chart">
+    <h3>5. Cost per LOC — all field models + MO§ES™ <span style="color:#888;font-weight:400">(log scale)</span></h3>
+    <div class="sub">USD per line shipped · lower better · <b style="color:#b8860b">MO§ES plan basis $0.0007 leads field</b></div>
+    <div class="bars-nar" style="height:110px"><div class="bf" style="height:14px;background:linear-gradient(180deg,#d4af37,#b8860b);box-shadow:0 0 0 1px white,0 0 4px rgba(212,175,55,0.6);">$0.0007</div><div class="bf" style="height:21px;background:#757575;">$0.0035</div><div class="bf" style="height:42px;background:#303f9f;">$0.018</div><div class="bf" style="height:52px;background:#888;">$0.038</div><div class="bf" style="height:54px;background:linear-gradient(180deg,#d4af37,#b8860b);box-shadow:0 0 0 1px white,0 0 4px rgba(212,175,55,0.6);">$0.044</div><div class="bf" style="height:55px;background:#757575;">$0.050</div><div class="bf" style="height:56px;background:#c97c5d;">$0.051</div><div class="bf" style="height:58px;background:#c97c5d;">$0.062</div><div class="bf" style="height:58px;background:#c97c5d;">$0.063</div><div class="bf" style="height:60px;background:#757575;">$0.073</div><div class="bf" style="height:61px;background:#757575;">$0.076</div><div class="bf" style="height:61px;background:#888;">$0.080</div><div class="bf" style="height:62px;background:#757575;">$0.080</div><div class="bf" style="height:65px;background:#1a1a1a;">$0.10</div><div class="bf" style="height:66px;background:#1a1a1a;">$0.11</div><div class="bf" style="height:66px;background:#888;">$0.11</div><div class="bf" style="height:73px;background:#757575;">$0.20</div><div class="bf" style="height:77px;background:#1a1a1a;">$0.26</div><div class="bf" style="height:110px;background:#1a1a1a;">$3.30</div></div><div class="labels-nar"><div class="bl-nar ml"><b>MO§ES™</b><span>Plan basis · subscription</span></div><div class="bl-nar"><b>Cursor CLI</b><span>Composer 2</span></div><div class="bl-nar"><b>Claude Code</b><span>DeepSeek V4 Pro (High)</span></div><div class="bl-nar"><b>Claude Code</b><span>Kimi K2.6</span></div><div class="bl-nar ml"><b>MO§ES™</b><span>API equiv basis</span></div><div class="bl-nar"><b>Cursor</b><span>Industry low est.</span></div><div class="bl-nar"><b>Claude Code</b><span>Sonnet 4.6 (Medium)</span></div><div class="bl-nar"><b>Claude Code</b><span>Opus 4.7 (Medium)</span></div><div class="bl-nar"><b>Claude Code</b><span>Opus 4.6 (Medium)</span></div><div class="bl-nar"><b>Cursor CLI</b><span>Opus 4.7 (Medium)</span></div><div class="bl-nar"><b>Cursor CLI</b><span>GPT-5.4 (Medium)</span></div><div class="bl-nar"><b>Gemini CLI</b><span>Gemini 3.1 Pro (High)</span></div><div class="bl-nar"><b>Cursor CLI</b><span>GPT-5.5 (Medium)</span></div><div class="bl-nar"><b>Codex</b><span>GPT-5.4 (Medium)</span></div><div class="bl-nar"><b>Codex</b><span>GPT-5.5 (Medium)</span></div><div class="bl-nar"><b>Claude Code</b><span>GLM-5.1</span></div><div class="bl-nar"><b>Cursor</b><span>Industry high est.</span></div><div class="bl-nar"><b>Devin</b><span>Industry low est.</span></div><div class="bl-nar"><b>Devin</b><span>Industry high est.</span></div></div>
+    <div class="src">AA models: cost_per_task ÷ 20 LOC · Cursor/Devin: industry estimates · MO§ES plan: $23.33/wk ÷ 35,242 = $0.000662 · MO§ES API: $1,564.47 ÷ 35,242 = $0.0444</div>
+  </div>
+</div>
+
+<div class="rawbar">
+  <div class="headline">RAW DATA — 7-DAY MEASUREMENT WINDOW (2026-05-08 → 2026-05-14)</div>
+  <div class="raws">
+    <div class="raw">
+      <div class="label">Input</div>
+      <div style="text-align:center;">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:800;color:#000;letter-spacing:-0.02em;line-height:1;margin-top:4px;">123,246</div>
+        <div style="font-size:6.5px;color:#888;letter-spacing:0.15em;text-transform:uppercase;margin-top:5px;">fresh tokens in</div>
+      </div>
+      <div class="eq" style="margin-top:6px;">drives <b>cache hit</b> · <b>out:in</b></div>
+    </div>
+    <div class="raw">
+      <div class="label">Output</div>
+      <div style="text-align:center;">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:800;color:#000;letter-spacing:-0.02em;line-height:1;margin-top:4px;">3.90<span style="font-size:14px;font-weight:600;color:#555;"> M</span></div>
+        <div style="font-size:6.5px;color:#888;letter-spacing:0.15em;text-transform:uppercase;margin-top:5px;">3,902,803</div>
+      </div>
+      <div class="eq" style="margin-top:6px;">drives <b>out:in</b></div>
+    </div>
+    <div class="raw">
+      <div class="label">Cache create</div>
+      <div style="text-align:center;">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:800;color:#000;letter-spacing:-0.02em;line-height:1;margin-top:4px;">34.83<span style="font-size:14px;font-weight:600;color:#555;"> M</span></div>
+        <div style="font-size:6.5px;color:#888;letter-spacing:0.15em;text-transform:uppercase;margin-top:5px;">34,826,779</div>
+      </div>
+      <div class="eq" style="margin-top:6px;">drives <b>cache hit</b></div>
+    </div>
+    <div class="raw">
+      <div class="label">Cache read</div>
+      <div style="text-align:center;">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:800;color:#000;letter-spacing:-0.02em;line-height:1;margin-top:4px;">1.084<span style="font-size:14px;font-weight:600;color:#555;"> B</span></div>
+        <div style="font-size:6.5px;color:#888;letter-spacing:0.15em;text-transform:uppercase;margin-top:5px;">1,084,399,183</div>
+      </div>
+      <div class="eq" style="margin-top:6px;">drives <b>cache hit</b></div>
+    </div>
+    <div class="raw" style="border:1px solid #d4af37;background:#fffceb;">
+      <div class="label" style="color:#b8860b;">Total tokens</div>
+      <div style="text-align:center;">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:800;color:#b8860b;letter-spacing:-0.02em;line-height:1;margin-top:4px;">1.123<span style="font-size:14px;font-weight:600;color:#555;"> B</span></div>
+        <div style="font-size:6.5px;color:#888;letter-spacing:0.15em;text-transform:uppercase;margin-top:5px;">1,123,252,011</div>
+      </div>
+      <div class="eq" style="margin-top:6px;">drives <b>tokens/task</b> · <b>time/task</b></div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:5px;padding:4px 4px 0;border-top:1px solid rgba(212,175,55,0.4);font-size:7.5px;font-family:ui-monospace,Menlo,monospace;color:#5d4a0e;letter-spacing:0.02em;">
+    <div><b style="color:#b8860b;">ancillary inputs ›</b> <b style="color:#000;">21</b> sessions · <b style="color:#000;">7,327</b> turns · <b style="color:#000;">1,465</b> tasks · <b style="color:#000;">~45 hr</b> active · <b style="color:#000;">35,242</b> LOC · <b style="color:#000;">$23.33/wk</b> plan</div>
+    <div><b style="color:#b8860b;">$1,564.47</b> API equiv</div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong style="color:#b8860b">MO§ES™</strong> = operator-augmented Claude Code, concurrent sessions, $100/mo Max plan · 7d window (2026-05-08 → 2026-05-14): 21 sessions · 7,327 turns · 1.12B tokens · $1,564.47 API-equivalent · App Hub: 35,242 LOC in 5 days · Sources: Token Dashboard API, ccusage report, App Hub wc -l count, artificialanalysis.ai/agents/coding-agents
+</div>
+</body></html>

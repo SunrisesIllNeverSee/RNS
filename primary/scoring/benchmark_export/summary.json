@@ -1,0 +1,1603 @@
+{
+  "window": {
+    "from": "2026-05-08",
+    "to": "2026-05-14"
+  },
+  "files_found": 98,
+  "sessions_with_turns": 97,
+  "totals": {
+    "turns": 9332,
+    "input_tokens": 331214,
+    "output_tokens": 5935260,
+    "cache_read": 1425781478,
+    "cache_creation_5m": 13721212,
+    "cache_creation_1h": 66308657,
+    "cache_creation_total": 80029869,
+    "total_tokens": 1512077821
+  },
+  "derived": {
+    "cache_hit_rate_pct": 94.6644,
+    "output_to_input_ratio": 17.92
+  },
+  "sessions": [
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0.jsonl",
+      "project": "application-hub",
+      "session_id": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "is_subagent": false,
+      "mtime": "2026-05-12T14:24:17.576690",
+      "turns": 1327,
+      "input_tokens": 49365,
+      "output_tokens": 1076836,
+      "cache_read": 428913614,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 17326110,
+      "models": [
+        "<synthetic>",
+        "claude-sonnet-4-6",
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-Commitment-Theory/d9c6374c-b6f5-4f73-acfc-5e8bd5fabc14.jsonl",
+      "project": "Commitment-Theory",
+      "session_id": "d9c6374c-b6f5-4f73-acfc-5e8bd5fabc14",
+      "is_subagent": false,
+      "mtime": "2026-05-08T09:29:12.614157",
+      "turns": 821,
+      "input_tokens": 1457,
+      "output_tokens": 756958,
+      "cache_read": 156150498,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 12125345,
+      "models": [
+        "<synthetic>",
+        "claude-opus-4-7",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/bc07d0ed-be87-4a79-a52a-516930b2df7f.jsonl",
+      "project": "application-hub",
+      "session_id": "bc07d0ed-be87-4a79-a52a-516930b2df7f",
+      "is_subagent": false,
+      "mtime": "2026-05-12T03:04:06.203747",
+      "turns": 785,
+      "input_tokens": 15903,
+      "output_tokens": 655004,
+      "cache_read": 165858991,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 5672075,
+      "models": [
+        "<synthetic>",
+        "claude-opus-4-7",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-CIVITAE/5c922968-4175-4d7b-9dba-2aa7d0ee3505.jsonl",
+      "project": "CIVITAE",
+      "session_id": "5c922968-4175-4d7b-9dba-2aa7d0ee3505",
+      "is_subagent": false,
+      "mtime": "2026-05-08T09:12:50.841588",
+      "turns": 670,
+      "input_tokens": 2824,
+      "output_tokens": 331431,
+      "cache_read": 133838685,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 5728917,
+      "models": [
+        "<synthetic>",
+        "claude-sonnet-4-6",
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-Thread-Workspace-projects-06-v5/264742c1-e340-4f96-9f77-f2b583275225.jsonl",
+      "project": "Thread-Workspace-projects-06-v5",
+      "session_id": "264742c1-e340-4f96-9f77-f2b583275225",
+      "is_subagent": false,
+      "mtime": "2026-05-08T08:44:58.758548",
+      "turns": 532,
+      "input_tokens": 7566,
+      "output_tokens": 725672,
+      "cache_read": 93380107,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 9909678,
+      "models": [
+        "<synthetic>",
+        "claude-opus-4-7",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/1275ef34-10a6-45ca-a4d5-5d6c19963bf1.jsonl",
+      "project": "application-hub",
+      "session_id": "1275ef34-10a6-45ca-a4d5-5d6c19963bf1",
+      "is_subagent": false,
+      "mtime": "2026-05-12T14:24:17.663852",
+      "turns": 494,
+      "input_tokens": 3177,
+      "output_tokens": 194943,
+      "cache_read": 76365722,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 1589082,
+      "models": [
+        "<synthetic>",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/68ec812b-2b2f-4ed7-adb5-41833b3f6e6d.jsonl",
+      "project": "application-hub",
+      "session_id": "68ec812b-2b2f-4ed7-adb5-41833b3f6e6d",
+      "is_subagent": false,
+      "mtime": "2026-05-11T19:44:06.096330",
+      "turns": 350,
+      "input_tokens": 80686,
+      "output_tokens": 375405,
+      "cache_read": 63588915,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 3974500,
+      "models": [
+        "claude-opus-4-7",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ad595554fd793471b.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ad595554fd793471b",
+      "is_subagent": true,
+      "mtime": "2026-05-11T12:26:18.709556",
+      "turns": 165,
+      "input_tokens": 169,
+      "output_tokens": 19216,
+      "cache_read": 11406677,
+      "cache_creation_5m": 199079,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-ae6ef2849b2658ca9.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-ae6ef2849b2658ca9",
+      "is_subagent": true,
+      "mtime": "2026-05-10T21:55:32.384765",
+      "turns": 143,
+      "input_tokens": 19245,
+      "output_tokens": 33536,
+      "cache_read": 8257200,
+      "cache_creation_5m": 168031,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-GPT-WorkFlow/cc563620-b938-4a1e-9fdf-4c54027e8ac5.jsonl",
+      "project": "GPT-WorkFlow",
+      "session_id": "cc563620-b938-4a1e-9fdf-4c54027e8ac5",
+      "is_subagent": false,
+      "mtime": "2026-05-08T08:44:55.037317",
+      "turns": 128,
+      "input_tokens": 296,
+      "output_tokens": 110230,
+      "cache_read": 22265299,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 2333997,
+      "models": [
+        "claude-sonnet-4-6",
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry/988e6a7b-f137-4b7a-819d-f469dda05ef0.jsonl",
+      "project": "-Users-dericmchenry",
+      "session_id": "988e6a7b-f137-4b7a-819d-f469dda05ef0",
+      "is_subagent": false,
+      "mtime": "2026-05-12T04:20:47.557116",
+      "turns": 128,
+      "input_tokens": 929,
+      "output_tokens": 36045,
+      "cache_read": 11088672,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 634236,
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "claude-sonnet-4-6",
+        "<synthetic>"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-rns/a07f0afe-cdb0-4b6e-b7d6-773f5e3c1a80.jsonl",
+      "project": "rns",
+      "session_id": "a07f0afe-cdb0-4b6e-b7d6-773f5e3c1a80",
+      "is_subagent": false,
+      "mtime": "2026-05-10T05:16:28.321521",
+      "turns": 127,
+      "input_tokens": 176,
+      "output_tokens": 85339,
+      "cache_read": 11941973,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 973797,
+      "models": [
+        "claude-opus-4-7",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a59d76cf7dd9f59d5.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a59d76cf7dd9f59d5",
+      "is_subagent": true,
+      "mtime": "2026-05-12T00:58:03.449410",
+      "turns": 125,
+      "input_tokens": 4258,
+      "output_tokens": 15923,
+      "cache_read": 7794134,
+      "cache_creation_5m": 288469,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-kd/95f89690-19e4-4768-b57d-31a523c4c87b.jsonl",
+      "project": "kd",
+      "session_id": "95f89690-19e4-4768-b57d-31a523c4c87b",
+      "is_subagent": false,
+      "mtime": "2026-05-09T08:34:46.679508",
+      "turns": 112,
+      "input_tokens": 182,
+      "output_tokens": 46137,
+      "cache_read": 10993301,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 538961,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a39367e80b50ebb3c.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a39367e80b50ebb3c",
+      "is_subagent": true,
+      "mtime": "2026-05-12T14:07:52.035397",
+      "turns": 103,
+      "input_tokens": 123,
+      "output_tokens": 176505,
+      "cache_read": 12828191,
+      "cache_creation_5m": 663678,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry/faa07167-eb2e-469f-aeec-ddb6ac1082ab.jsonl",
+      "project": "-Users-dericmchenry",
+      "session_id": "faa07167-eb2e-469f-aeec-ddb6ac1082ab",
+      "is_subagent": false,
+      "mtime": "2026-05-12T04:20:47.569632",
+      "turns": 98,
+      "input_tokens": 770,
+      "output_tokens": 30737,
+      "cache_read": 13318842,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 804610,
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a4558601ebfd8fe5e.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a4558601ebfd8fe5e",
+      "is_subagent": true,
+      "mtime": "2026-05-12T11:39:21.413418",
+      "turns": 92,
+      "input_tokens": 102,
+      "output_tokens": 18038,
+      "cache_read": 7577637,
+      "cache_creation_5m": 153617,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a031452871b1edb6e.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a031452871b1edb6e",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:12:57.532597",
+      "turns": 86,
+      "input_tokens": 202,
+      "output_tokens": 36031,
+      "cache_read": 5504810,
+      "cache_creation_5m": 285177,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ae60a8a8e571ad646.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ae60a8a8e571ad646",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:00:19.120298",
+      "turns": 85,
+      "input_tokens": 107,
+      "output_tokens": 17915,
+      "cache_read": 5398037,
+      "cache_creation_5m": 118324,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-Thread-Breakdowns-Practical-problem-solver/eaa7df6d-2fa4-42a6-b06c-68334d1a0d15.jsonl",
+      "project": "Thread-Breakdowns-Practical-problem-solver",
+      "session_id": "eaa7df6d-2fa4-42a6-b06c-68334d1a0d15",
+      "is_subagent": false,
+      "mtime": "2026-05-14T13:03:19.597688",
+      "turns": 85,
+      "input_tokens": 245,
+      "output_tokens": 22741,
+      "cache_read": 6934342,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 716475,
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "claude-sonnet-4-6",
+        "<synthetic>"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a8d2fad71a242fb33.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a8d2fad71a242fb33",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:04:03.287234",
+      "turns": 83,
+      "input_tokens": 199,
+      "output_tokens": 23723,
+      "cache_read": 4985754,
+      "cache_creation_5m": 183148,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-addc30d45a5373f84.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-addc30d45a5373f84",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:53:50.919991",
+      "turns": 77,
+      "input_tokens": 91,
+      "output_tokens": 37974,
+      "cache_read": 6113102,
+      "cache_creation_5m": 297641,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-ad5a0feee57e727ee.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-ad5a0feee57e727ee",
+      "is_subagent": true,
+      "mtime": "2026-05-11T21:22:06.180769",
+      "turns": 74,
+      "input_tokens": 227,
+      "output_tokens": 7399,
+      "cache_read": 2858676,
+      "cache_creation_5m": 125088,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a5e61045102e4351f.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a5e61045102e4351f",
+      "is_subagent": true,
+      "mtime": "2026-05-10T20:41:50.307009",
+      "turns": 72,
+      "input_tokens": 12784,
+      "output_tokens": 16206,
+      "cache_read": 3021583,
+      "cache_creation_5m": 116746,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-CIVITAE/8cbca583-3ab6-4185-a7b7-8e9eae0139ca.jsonl",
+      "project": "CIVITAE",
+      "session_id": "8cbca583-3ab6-4185-a7b7-8e9eae0139ca",
+      "is_subagent": false,
+      "mtime": "2026-05-11T11:57:40.950936",
+      "turns": 70,
+      "input_tokens": 181,
+      "output_tokens": 11309,
+      "cache_read": 5058943,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 751019,
+      "models": [
+        "<synthetic>",
+        "claude-sonnet-4-6",
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ada97a5e77b08fdcf.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ada97a5e77b08fdcf",
+      "is_subagent": true,
+      "mtime": "2026-05-12T00:51:25.645633",
+      "turns": 70,
+      "input_tokens": 186,
+      "output_tokens": 16258,
+      "cache_read": 4126993,
+      "cache_creation_5m": 187901,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a763242dde4cc27af.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a763242dde4cc27af",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:49:10.647414",
+      "turns": 66,
+      "input_tokens": 86,
+      "output_tokens": 27517,
+      "cache_read": 3781785,
+      "cache_creation_5m": 409614,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ab669c607d61a70e2.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ab669c607d61a70e2",
+      "is_subagent": true,
+      "mtime": "2026-05-12T00:58:27.599700",
+      "turns": 65,
+      "input_tokens": 73,
+      "output_tokens": 13747,
+      "cache_read": 4310506,
+      "cache_creation_5m": 161510,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a6ef753cb095c8002.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a6ef753cb095c8002",
+      "is_subagent": true,
+      "mtime": "2026-05-12T21:27:27.157027",
+      "turns": 64,
+      "input_tokens": 601,
+      "output_tokens": 28232,
+      "cache_read": 4561417,
+      "cache_creation_5m": 174640,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ae6933a6370e2b3fb.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ae6933a6370e2b3fb",
+      "is_subagent": true,
+      "mtime": "2026-05-12T00:57:49.285756",
+      "turns": 63,
+      "input_tokens": 179,
+      "output_tokens": 15386,
+      "cache_read": 3973962,
+      "cache_creation_5m": 158179,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a0db54e593e91dccc.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a0db54e593e91dccc",
+      "is_subagent": true,
+      "mtime": "2026-05-12T00:59:19.521032",
+      "turns": 61,
+      "input_tokens": 71,
+      "output_tokens": 13591,
+      "cache_read": 3226441,
+      "cache_creation_5m": 147035,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-af576b799e5d865f0.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-af576b799e5d865f0",
+      "is_subagent": true,
+      "mtime": "2026-05-12T16:48:28.591566",
+      "turns": 59,
+      "input_tokens": 66,
+      "output_tokens": 33497,
+      "cache_read": 4407119,
+      "cache_creation_5m": 124201,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a0ce0b1a3b516dba1.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a0ce0b1a3b516dba1",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:03:15.983747",
+      "turns": 56,
+      "input_tokens": 64,
+      "output_tokens": 25147,
+      "cache_read": 2800076,
+      "cache_creation_5m": 129257,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a37fd8855db9ebd5c.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a37fd8855db9ebd5c",
+      "is_subagent": true,
+      "mtime": "2026-05-11T13:03:30.304687",
+      "turns": 55,
+      "input_tokens": 65,
+      "output_tokens": 12809,
+      "cache_read": 3287958,
+      "cache_creation_5m": 127642,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a2c485ace4e587940.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a2c485ace4e587940",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:44:24.468314",
+      "turns": 55,
+      "input_tokens": 69,
+      "output_tokens": 21127,
+      "cache_read": 3066266,
+      "cache_creation_5m": 155707,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-aa965c55bb0cebb26.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-aa965c55bb0cebb26",
+      "is_subagent": true,
+      "mtime": "2026-05-12T21:25:25.386072",
+      "turns": 55,
+      "input_tokens": 65,
+      "output_tokens": 12625,
+      "cache_read": 3994390,
+      "cache_creation_5m": 166528,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-a70f788c579a0e175.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-a70f788c579a0e175",
+      "is_subagent": true,
+      "mtime": "2026-05-10T20:34:42.465182",
+      "turns": 54,
+      "input_tokens": 440,
+      "output_tokens": 16661,
+      "cache_read": 4510037,
+      "cache_creation_5m": 354766,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a87f7fa11d8c8db87.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a87f7fa11d8c8db87",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:34:17.398315",
+      "turns": 54,
+      "input_tokens": 1514,
+      "output_tokens": 10274,
+      "cache_read": 2753870,
+      "cache_creation_5m": 107358,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-adbcc4d438bf0f899.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-adbcc4d438bf0f899",
+      "is_subagent": true,
+      "mtime": "2026-05-12T11:26:52.957134",
+      "turns": 53,
+      "input_tokens": 29461,
+      "output_tokens": 22586,
+      "cache_read": 4065267,
+      "cache_creation_5m": 242270,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-aef141866b6d59c38.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-aef141866b6d59c38",
+      "is_subagent": true,
+      "mtime": "2026-05-12T11:28:29.928813",
+      "turns": 53,
+      "input_tokens": 63,
+      "output_tokens": 37412,
+      "cache_read": 4691242,
+      "cache_creation_5m": 222327,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ad61beb66c0b1b7b6.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ad61beb66c0b1b7b6",
+      "is_subagent": true,
+      "mtime": "2026-05-11T13:02:13.671032",
+      "turns": 52,
+      "input_tokens": 62,
+      "output_tokens": 9794,
+      "cache_read": 3151957,
+      "cache_creation_5m": 114058,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ae277d6f1669819e2.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ae277d6f1669819e2",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:33:05.093186",
+      "turns": 52,
+      "input_tokens": 16759,
+      "output_tokens": 3194,
+      "cache_read": 3237615,
+      "cache_creation_5m": 302634,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-a84152174a5bb5cd7.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-a84152174a5bb5cd7",
+      "is_subagent": true,
+      "mtime": "2026-05-10T20:34:05.758795",
+      "turns": 51,
+      "input_tokens": 91,
+      "output_tokens": 5921,
+      "cache_read": 3687429,
+      "cache_creation_5m": 281860,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-a8de0f2f9bb6244e1.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-a8de0f2f9bb6244e1",
+      "is_subagent": true,
+      "mtime": "2026-05-10T20:38:17.482898",
+      "turns": 51,
+      "input_tokens": 61,
+      "output_tokens": 9932,
+      "cache_read": 3686879,
+      "cache_creation_5m": 161548,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-stats/424835a9-f02b-44f2-8628-b173d1a610e5.jsonl",
+      "project": "~/stats",
+      "session_id": "424835a9-f02b-44f2-8628-b173d1a610e5",
+      "is_subagent": false,
+      "mtime": "2026-05-14T15:36:13.286983",
+      "turns": 50,
+      "input_tokens": 62,
+      "output_tokens": 38663,
+      "cache_read": 3299449,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 226976,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-Pickle-AI/a04ca554-9dbb-44b4-85ae-6183fd626118.jsonl",
+      "project": "Pickle-AI",
+      "session_id": "a04ca554-9dbb-44b4-85ae-6183fd626118",
+      "is_subagent": false,
+      "mtime": "2026-05-09T07:45:04.100510",
+      "turns": 49,
+      "input_tokens": 12612,
+      "output_tokens": 45700,
+      "cache_read": 4131852,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 374331,
+      "models": [
+        "<synthetic>",
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-af83572b8343135c1.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-af83572b8343135c1",
+      "is_subagent": true,
+      "mtime": "2026-05-12T16:27:39.616037",
+      "turns": 48,
+      "input_tokens": 53,
+      "output_tokens": 26153,
+      "cache_read": 2964534,
+      "cache_creation_5m": 113141,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-Commitment-Theory/1427627f-3a8e-4edf-9be4-c2f7b8ce4137.jsonl",
+      "project": "Commitment-Theory",
+      "session_id": "1427627f-3a8e-4edf-9be4-c2f7b8ce4137",
+      "is_subagent": false,
+      "mtime": "2026-05-08T09:25:29.733647",
+      "turns": 47,
+      "input_tokens": 82,
+      "output_tokens": 115195,
+      "cache_read": 5245534,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 634183,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-aad5bd9bb40d98112.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-aad5bd9bb40d98112",
+      "is_subagent": true,
+      "mtime": "2026-05-10T21:26:56.687844",
+      "turns": 47,
+      "input_tokens": 4972,
+      "output_tokens": 14108,
+      "cache_read": 1799617,
+      "cache_creation_5m": 104936,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-aa6d037f3648394c6.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-aa6d037f3648394c6",
+      "is_subagent": true,
+      "mtime": "2026-05-12T21:24:16.708573",
+      "turns": 47,
+      "input_tokens": 82,
+      "output_tokens": 12318,
+      "cache_read": 2924343,
+      "cache_creation_5m": 280968,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-ab86a4675505064c9.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-ab86a4675505064c9",
+      "is_subagent": true,
+      "mtime": "2026-05-10T19:42:13.057720",
+      "turns": 46,
+      "input_tokens": 1421,
+      "output_tokens": 14877,
+      "cache_read": 1572620,
+      "cache_creation_5m": 109032,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a1944383be1e4dceb.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a1944383be1e4dceb",
+      "is_subagent": true,
+      "mtime": "2026-05-12T00:50:06.150280",
+      "turns": 46,
+      "input_tokens": 162,
+      "output_tokens": 14453,
+      "cache_read": 2365788,
+      "cache_creation_5m": 142185,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a54e0581a9eeb9346.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a54e0581a9eeb9346",
+      "is_subagent": true,
+      "mtime": "2026-05-10T21:25:33.563308",
+      "turns": 45,
+      "input_tokens": 49,
+      "output_tokens": 14924,
+      "cache_read": 1519106,
+      "cache_creation_5m": 142071,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-ac1a33e228c7138d0.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-ac1a33e228c7138d0",
+      "is_subagent": true,
+      "mtime": "2026-05-12T15:24:33.652798",
+      "turns": 45,
+      "input_tokens": 50,
+      "output_tokens": 12345,
+      "cache_read": 2163085,
+      "cache_creation_5m": 90807,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a39bd1a60126b82d4.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a39bd1a60126b82d4",
+      "is_subagent": true,
+      "mtime": "2026-05-11T14:04:30.041085",
+      "turns": 44,
+      "input_tokens": 333,
+      "output_tokens": 27782,
+      "cache_read": 2148688,
+      "cache_creation_5m": 235803,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-funny-mclaren-a6cf41/5b19d702-95c2-4de8-8e64-5432a0a1c92e.jsonl",
+      "project": "application-hub--claude-worktrees-funny-mclaren-a6cf41",
+      "session_id": "5b19d702-95c2-4de8-8e64-5432a0a1c92e",
+      "is_subagent": false,
+      "mtime": "2026-05-12T03:04:06.256563",
+      "turns": 43,
+      "input_tokens": 57,
+      "output_tokens": 14351,
+      "cache_read": 2249860,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 321612,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a55feff0408f12221.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a55feff0408f12221",
+      "is_subagent": true,
+      "mtime": "2026-05-12T21:24:09.323850",
+      "turns": 43,
+      "input_tokens": 68,
+      "output_tokens": 20699,
+      "cache_read": 3100157,
+      "cache_creation_5m": 246323,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ae73c05e4b213fe3b.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ae73c05e4b213fe3b",
+      "is_subagent": true,
+      "mtime": "2026-05-11T12:13:18.111918",
+      "turns": 40,
+      "input_tokens": 46,
+      "output_tokens": 8296,
+      "cache_read": 1380298,
+      "cache_creation_5m": 106214,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a7728fccc22bd88a1.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a7728fccc22bd88a1",
+      "is_subagent": true,
+      "mtime": "2026-05-10T19:31:30.364657",
+      "turns": 39,
+      "input_tokens": 42,
+      "output_tokens": 27066,
+      "cache_read": 1995860,
+      "cache_creation_5m": 162631,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a0c4302d4c28858f7.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a0c4302d4c28858f7",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:30:11.211695",
+      "turns": 38,
+      "input_tokens": 2306,
+      "output_tokens": 3679,
+      "cache_read": 1467683,
+      "cache_creation_5m": 162602,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-Commitment-Theory/b18be713-fa06-43d9-b713-1c960a63922b.jsonl",
+      "project": "Commitment-Theory",
+      "session_id": "b18be713-fa06-43d9-b713-1c960a63922b",
+      "is_subagent": false,
+      "mtime": "2026-05-08T16:39:26.406317",
+      "turns": 34,
+      "input_tokens": 54,
+      "output_tokens": 56180,
+      "cache_read": 2638863,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 787939,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-ab6e9d218cab5c01d.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-ab6e9d218cab5c01d",
+      "is_subagent": true,
+      "mtime": "2026-05-11T16:26:15.337547",
+      "turns": 34,
+      "input_tokens": 37,
+      "output_tokens": 13810,
+      "cache_read": 1735328,
+      "cache_creation_5m": 156301,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a7cdfe16ff22eb338.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a7cdfe16ff22eb338",
+      "is_subagent": true,
+      "mtime": "2026-05-12T16:57:28.847026",
+      "turns": 33,
+      "input_tokens": 40,
+      "output_tokens": 19833,
+      "cache_read": 1852843,
+      "cache_creation_5m": 99096,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a7fbf0224884c32f8.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a7fbf0224884c32f8",
+      "is_subagent": true,
+      "mtime": "2026-05-10T17:03:36.095032",
+      "turns": 32,
+      "input_tokens": 40,
+      "output_tokens": 16501,
+      "cache_read": 1054535,
+      "cache_creation_5m": 134354,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-aed056c92847eab8c.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-aed056c92847eab8c",
+      "is_subagent": true,
+      "mtime": "2026-05-10T19:51:19.143600",
+      "turns": 32,
+      "input_tokens": 52,
+      "output_tokens": 3606,
+      "cache_read": 1836173,
+      "cache_creation_5m": 183674,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a516d6a95136430a7.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a516d6a95136430a7",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:35:32.090008",
+      "turns": 30,
+      "input_tokens": 42,
+      "output_tokens": 17838,
+      "cache_read": 1496953,
+      "cache_creation_5m": 122038,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a11c68dfb6aee3f52.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a11c68dfb6aee3f52",
+      "is_subagent": true,
+      "mtime": "2026-05-10T17:03:21.509245",
+      "turns": 29,
+      "input_tokens": 35,
+      "output_tokens": 8207,
+      "cache_read": 661254,
+      "cache_creation_5m": 63335,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a6121bb43b62193b6.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a6121bb43b62193b6",
+      "is_subagent": true,
+      "mtime": "2026-05-12T15:20:23.523953",
+      "turns": 27,
+      "input_tokens": 30,
+      "output_tokens": 4055,
+      "cache_read": 949978,
+      "cache_creation_5m": 105817,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ae2594de53472f4c9.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ae2594de53472f4c9",
+      "is_subagent": true,
+      "mtime": "2026-05-11T12:57:22.267689",
+      "turns": 26,
+      "input_tokens": 46,
+      "output_tokens": 2941,
+      "cache_read": 1175414,
+      "cache_creation_5m": 207176,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-aca30e37cb5722c4d.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-aca30e37cb5722c4d",
+      "is_subagent": true,
+      "mtime": "2026-05-11T14:36:17.598280",
+      "turns": 25,
+      "input_tokens": 131,
+      "output_tokens": 1491,
+      "cache_read": 3384769,
+      "cache_creation_5m": 467984,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-haiku-4-5-20251001"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a6fb82f8ad1fe4be0.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a6fb82f8ad1fe4be0",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:31:34.442978",
+      "turns": 25,
+      "input_tokens": 35,
+      "output_tokens": 5801,
+      "cache_read": 970360,
+      "cache_creation_5m": 76127,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a0dba0162701e5bc6.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a0dba0162701e5bc6",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:32:04.391962",
+      "turns": 25,
+      "input_tokens": 37,
+      "output_tokens": 5073,
+      "cache_read": 1162154,
+      "cache_creation_5m": 108248,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a5a6d8ea36996760d.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a5a6d8ea36996760d",
+      "is_subagent": true,
+      "mtime": "2026-05-12T21:22:13.346127",
+      "turns": 25,
+      "input_tokens": 35,
+      "output_tokens": 4049,
+      "cache_read": 1540631,
+      "cache_creation_5m": 126767,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a19252c5cc2cd9e41.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a19252c5cc2cd9e41",
+      "is_subagent": true,
+      "mtime": "2026-05-12T01:31:13.961156",
+      "turns": 24,
+      "input_tokens": 36,
+      "output_tokens": 3562,
+      "cache_read": 947661,
+      "cache_creation_5m": 84695,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/4bd1aebc-7cf1-4bca-8e05-5e75236e5ccf.jsonl",
+      "project": "application-hub",
+      "session_id": "4bd1aebc-7cf1-4bca-8e05-5e75236e5ccf",
+      "is_subagent": false,
+      "mtime": "2026-05-14T09:09:38.402450",
+      "turns": 23,
+      "input_tokens": 40,
+      "output_tokens": 4246,
+      "cache_read": 951088,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 287690,
+      "models": [
+        "<synthetic>",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a8a065e142d230d5b.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a8a065e142d230d5b",
+      "is_subagent": true,
+      "mtime": "2026-05-11T12:11:45.223856",
+      "turns": 22,
+      "input_tokens": 28,
+      "output_tokens": 10415,
+      "cache_read": 709163,
+      "cache_creation_5m": 123456,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-a59eff13de0946e9d.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-a59eff13de0946e9d",
+      "is_subagent": true,
+      "mtime": "2026-05-10T19:46:34.088824",
+      "turns": 21,
+      "input_tokens": 7755,
+      "output_tokens": 1807,
+      "cache_read": 763514,
+      "cache_creation_5m": 108959,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a0210e02cda128f4c.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a0210e02cda128f4c",
+      "is_subagent": true,
+      "mtime": "2026-05-12T12:55:05.532306",
+      "turns": 18,
+      "input_tokens": 23,
+      "output_tokens": 41176,
+      "cache_read": 986079,
+      "cache_creation_5m": 82307,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-a28c1f3b159ac08d1.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-a28c1f3b159ac08d1",
+      "is_subagent": true,
+      "mtime": "2026-05-10T19:45:18.657094",
+      "turns": 17,
+      "input_tokens": 84,
+      "output_tokens": 1979,
+      "cache_read": 2289526,
+      "cache_creation_5m": 406615,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-haiku-4-5-20251001"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-a78b6791de3133261.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-a78b6791de3133261",
+      "is_subagent": true,
+      "mtime": "2026-05-11T22:43:48.885644",
+      "turns": 17,
+      "input_tokens": 3763,
+      "output_tokens": 1135,
+      "cache_read": 2310291,
+      "cache_creation_5m": 348322,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-haiku-4-5-20251001"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a71dec87de17eb22a.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a71dec87de17eb22a",
+      "is_subagent": true,
+      "mtime": "2026-05-12T08:30:07.326433",
+      "turns": 17,
+      "input_tokens": 42390,
+      "output_tokens": 4850,
+      "cache_read": 572782,
+      "cache_creation_5m": 217613,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/e3106564-3e07-457f-ab19-c195b1df6144.jsonl",
+      "project": "application-hub",
+      "session_id": "e3106564-3e07-457f-ab19-c195b1df6144",
+      "is_subagent": false,
+      "mtime": "2026-05-10T04:02:46.256228",
+      "turns": 16,
+      "input_tokens": 43,
+      "output_tokens": 8920,
+      "cache_read": 957431,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 378650,
+      "models": [
+        "claude-sonnet-4-6",
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a945ab3142a046094.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a945ab3142a046094",
+      "is_subagent": true,
+      "mtime": "2026-05-12T12:53:52.003588",
+      "turns": 16,
+      "input_tokens": 21,
+      "output_tokens": 33001,
+      "cache_read": 772381,
+      "cache_creation_5m": 81286,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a3d949fad79a7e08e.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a3d949fad79a7e08e",
+      "is_subagent": true,
+      "mtime": "2026-05-12T12:56:45.572215",
+      "turns": 15,
+      "input_tokens": 22,
+      "output_tokens": 13265,
+      "cache_read": 592921,
+      "cache_creation_5m": 58651,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-blissful-elgamal-5be6da/bc07d0ed-be87-4a79-a52a-516930b2df7f/subagents/agent-a5c92f6dc90d1cb1f.jsonl",
+      "project": "bc07d0ed-be87-4a79-a52a-516930b2df7f",
+      "session_id": "agent-a5c92f6dc90d1cb1f",
+      "is_subagent": true,
+      "mtime": "2026-05-10T07:15:07.138389",
+      "turns": 12,
+      "input_tokens": 2505,
+      "output_tokens": 452,
+      "cache_read": 267049,
+      "cache_creation_5m": 311016,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-ab3df25a33d8a736b.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-ab3df25a33d8a736b",
+      "is_subagent": true,
+      "mtime": "2026-05-10T19:49:30.271798",
+      "turns": 11,
+      "input_tokens": 21,
+      "output_tokens": 4979,
+      "cache_read": 489839,
+      "cache_creation_5m": 91521,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-ae5ba94f7379b974e.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-ae5ba94f7379b974e",
+      "is_subagent": true,
+      "mtime": "2026-05-12T03:07:51.302711",
+      "turns": 11,
+      "input_tokens": 53,
+      "output_tokens": 867,
+      "cache_read": 882824,
+      "cache_creation_5m": 854229,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-haiku-4-5-20251001"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a1f4ed5e12d345395.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a1f4ed5e12d345395",
+      "is_subagent": true,
+      "mtime": "2026-05-12T12:52:29.981629",
+      "turns": 11,
+      "input_tokens": 16,
+      "output_tokens": 19701,
+      "cache_read": 404111,
+      "cache_creation_5m": 81681,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-signal-ecosystem-ASH-Estate-Project/74d2a988-0f58-4922-818a-77efe04ab7c1.jsonl",
+      "project": "signal-ecosystem-ASH-Estate-Project",
+      "session_id": "74d2a988-0f58-4922-818a-77efe04ab7c1",
+      "is_subagent": false,
+      "mtime": "2026-05-12T19:16:50.781613",
+      "turns": 10,
+      "input_tokens": 18,
+      "output_tokens": 1116,
+      "cache_read": 381131,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 95631,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-mcp-eval/b49972d1-797e-4925-99d3-6029f58e1ffe/subagents/agent-ad4da2c1cb7ccc76e.jsonl",
+      "project": "b49972d1-797e-4925-99d3-6029f58e1ffe",
+      "session_id": "agent-ad4da2c1cb7ccc76e",
+      "is_subagent": true,
+      "mtime": "2026-05-11T12:08:42.894240",
+      "turns": 9,
+      "input_tokens": 15,
+      "output_tokens": 3129,
+      "cache_read": 181772,
+      "cache_creation_5m": 65783,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-af89b83be20a61fa8.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-af89b83be20a61fa8",
+      "is_subagent": true,
+      "mtime": "2026-05-10T19:48:48.345938",
+      "turns": 8,
+      "input_tokens": 18,
+      "output_tokens": 1083,
+      "cache_read": 288816,
+      "cache_creation_5m": 103945,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-aa4daf5dbddbe5987.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-aa4daf5dbddbe5987",
+      "is_subagent": true,
+      "mtime": "2026-05-10T20:23:50.001503",
+      "turns": 8,
+      "input_tokens": 18,
+      "output_tokens": 4213,
+      "cache_read": 296374,
+      "cache_creation_5m": 98420,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a935d6a8cf61240ea.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a935d6a8cf61240ea",
+      "is_subagent": true,
+      "mtime": "2026-05-12T21:07:21.826216",
+      "turns": 8,
+      "input_tokens": 21,
+      "output_tokens": 538,
+      "cache_read": 909530,
+      "cache_creation_5m": 414343,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "<synthetic>"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-a04d65fb60cce42b8.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-a04d65fb60cce42b8",
+      "is_subagent": true,
+      "mtime": "2026-05-12T21:06:46.277527",
+      "turns": 7,
+      "input_tokens": 18,
+      "output_tokens": 380,
+      "cache_read": 1091436,
+      "cache_creation_5m": 41590,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "<synthetic>"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub--claude-worktrees-nostalgic-goldstine-ee4100/d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec/subagents/agent-aa6e1cbc8debe7f0b.jsonl",
+      "project": "d3a8abb3-8f49-47ca-b6dd-3336fdfae8ec",
+      "session_id": "agent-aa6e1cbc8debe7f0b",
+      "is_subagent": true,
+      "mtime": "2026-05-12T21:06:07.209960",
+      "turns": 6,
+      "input_tokens": 15,
+      "output_tokens": 296,
+      "cache_read": 909530,
+      "cache_creation_5m": 3945,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "<synthetic>"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-Pickle-AI/8aafeb35-21fa-4ab2-b008-64c6b86bd08a.jsonl",
+      "project": "Pickle-AI",
+      "session_id": "8aafeb35-21fa-4ab2-b008-64c6b86bd08a",
+      "is_subagent": false,
+      "mtime": "2026-05-09T08:34:51.452758",
+      "turns": 5,
+      "input_tokens": 20,
+      "output_tokens": 3512,
+      "cache_read": 226873,
+      "cache_creation_5m": 0,
+      "cache_creation_1h": 122843,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    },
+    {
+      "file": "/Users/dericmchenry/.claude/projects/-Users-dericmchenry-Desktop-application-hub/b38ed464-7189-4676-a139-5b235cafc2a0/subagents/agent-a9f8eee7ad6158415.jsonl",
+      "project": "b38ed464-7189-4676-a139-5b235cafc2a0",
+      "session_id": "agent-a9f8eee7ad6158415",
+      "is_subagent": true,
+      "mtime": "2026-05-10T19:44:49.834462",
+      "turns": 5,
+      "input_tokens": 20,
+      "output_tokens": 3681,
+      "cache_read": 46713,
+      "cache_creation_5m": 67172,
+      "cache_creation_1h": 0,
+      "models": [
+        "claude-opus-4-7"
+      ]
+    }
+  ]
+}
