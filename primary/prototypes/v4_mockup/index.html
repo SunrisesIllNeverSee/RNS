@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SigRank — Live Leaderboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-0: #0a0a0c;
+    --bg-1: #111114;
+    --bg-2: #17171b;
+    --bg-3: #1f1f24;
+    --border-subtle: #1c1c21;
+    --border: #26262d;
+    --border-emphasis: #34343d;
+    --text-0: #fafafa;
+    --text-1: #e4e4e7;
+    --text-2: #a1a1aa;
+    --text-3: #71717a;
+    --text-4: #52525b;
+    --text-5: #3f3f46;
+    --gold: #f5a020;
+    --gold-soft: #d4a574;
+    --gold-bg: rgba(245, 160, 32, 0.08);
+    --gold-border: rgba(245, 160, 32, 0.25);
+    --accent: #4f9eff;
+    --accent-soft: #7eb8ff;
+    --accent-bg: rgba(79, 158, 255, 0.08);
+    --green: #34d399;
+    --red: #f87171;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: 'Geist Mono', 'SF Mono', Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-0); color: var(--text-1);
+    font-family: var(--sans); font-size: 15px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "cv01", "cv11";
+  }
+  ::selection { background: var(--gold); color: var(--bg-0); }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(245,160,32,0.05), transparent);
+  }
+  main { position: relative; z-index: 1; }
+
+  /* ── Nav ─────────────────────────────────────────────────────── */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(10, 10, 12, 0.7);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .nav-inner {
+    max-width: 1400px; margin: 0 auto; padding: 14px 32px;
+    display: flex; align-items: center; gap: 32px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 16px; color: var(--text-0);
+    letter-spacing: -0.01em; text-decoration: none;
+  }
+  .brand-glyph {
+    width: 22px; height: 22px; border-radius: 5px;
+    background: linear-gradient(135deg, var(--gold), #c98510);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bg-0); font-weight: 800; font-size: 13px;
+  }
+  .nav-links { display: flex; gap: 2px; flex: 1; }
+  .nav-links a {
+    padding: 6px 12px; border-radius: 6px;
+    color: var(--text-2); font-size: 14px; font-weight: 500;
+    text-decoration: none; transition: all 0.15s;
+  }
+  .nav-links a:hover { color: var(--text-0); background: var(--bg-2); }
+  .nav-links a.active { color: var(--text-0); background: var(--bg-2); }
+  .search-wrap {
+    background: var(--bg-1); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 12px;
+    display: flex; align-items: center; gap: 8px;
+    min-width: 280px;
+  }
+  .search-wrap input {
+    background: transparent; border: none; outline: none;
+    color: var(--text-1); font-family: var(--sans); font-size: 13px;
+    width: 100%;
+  }
+  .search-wrap input::placeholder { color: var(--text-4); }
+  .search-wrap .kbd {
+    font-family: var(--mono); font-size: 11px; color: var(--text-4);
+    border: 1px solid var(--border); border-radius: 4px;
+    padding: 1px 5px;
+  }
+  .btn {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    padding: 7px 13px; border-radius: 6px; cursor: pointer;
+    transition: all 0.15s; border: 1px solid transparent;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-ghost { background: transparent; color: var(--text-2); border-color: var(--border); }
+  .btn-ghost:hover { color: var(--text-0); background: var(--bg-1); border-color: var(--border-emphasis); }
+  .btn-primary { background: var(--text-0); color: var(--bg-0); font-weight: 600; }
+  .btn-primary:hover { background: var(--text-1); }
+  .btn-gold { background: var(--gold); color: var(--bg-0); font-weight: 600; }
+  .btn-gold:hover { background: var(--gold-soft); }
+
+  /* ── Page header ─────────────────────────────────────────────── */
+  .page-header {
+    max-width: 1400px; margin: 0 auto; padding: 48px 32px 32px;
+  }
+  .page-header .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    color: var(--text-2); font-size: 12px; font-weight: 500;
+    padding: 5px 12px; border-radius: 100px;
+    margin-bottom: 20px; font-family: var(--mono);
+  }
+  .page-header .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green); box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { opacity: 0.4; } }
+  .page-header h1 {
+    font-size: 44px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.025em; line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .page-header p {
+    font-size: 16px; color: var(--text-2); max-width: 640px;
+    line-height: 1.55;
+  }
+  .page-header-row {
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
+    margin-top: 24px;
+  }
+  .quick-stats { display: flex; gap: 32px; }
+  .quick-stat .num {
+    font-family: var(--mono); font-size: 22px; font-weight: 600;
+    color: var(--text-0); letter-spacing: -0.02em; line-height: 1;
+  }
+  .quick-stat .num.gold { color: var(--gold); }
+  .quick-stat .num.green { color: var(--green); }
+  .quick-stat .lbl {
+    font-size: 12px; color: var(--text-3); margin-top: 4px;
+  }
+
+  /* ── Filters ────────────────────────────────────────────────── */
+  .filter-bar {
+    max-width: 1400px; margin: 0 auto; padding: 0 32px 24px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .filter-group {
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    border-radius: 8px; padding: 3px; display: flex; gap: 1px;
+  }
+  .filter-group button {
+    background: transparent; border: none; color: var(--text-2);
+    padding: 6px 12px; border-radius: 5px; font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: var(--sans); transition: all 0.15s;
+  }
+  .filter-group button:hover:not(.active) { color: var(--text-0); }
+  .filter-group button.active {
+    background: var(--bg-3); color: var(--text-0);
+  }
+  .filter-divider {
+    width: 1px; height: 24px; background: var(--border-subtle);
+  }
+  .filter-label {
+    font-size: 12px; color: var(--text-3); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.04em; font-family: var(--mono);
+  }
+
+  /* ── Two-column layout for above-the-fold ─────────────────────── */
+  .above-fold {
+    max-width: 1400px; margin: 0 auto; padding: 0 32px 32px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .card {
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    border-radius: 12px; overflow: hidden;
+  }
+  .card-head {
+    padding: 16px 20px; border-bottom: 1px solid var(--border-subtle);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .card-head h3 {
+    font-size: 14px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.01em;
+  }
+  .card-head .sub {
+    font-size: 12px; color: var(--text-3); margin-left: auto;
+    font-family: var(--mono);
+  }
+  .card-head .icon {
+    width: 26px; height: 26px; border-radius: 6px;
+    background: var(--gold-bg); border: 1px solid var(--gold-border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 13px;
+  }
+
+  .mini-table { width: 100%; border-collapse: collapse; }
+  .mini-table th {
+    padding: 8px 20px; text-align: left; font-size: 11px;
+    color: var(--text-4); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    background: transparent; border-bottom: 1px solid var(--border-subtle);
+    font-family: var(--mono);
+  }
+  .mini-table td {
+    padding: 12px 20px; font-size: 13px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-2);
+  }
+  .mini-table tr:last-child td { border-bottom: none; }
+  .mini-table tr:hover td { background: var(--bg-2); cursor: pointer; }
+  .mini-table .name {
+    color: var(--text-0); font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mini-table .delta { color: var(--green); font-family: var(--mono); font-weight: 600; }
+  .mini-table .delta.minus { color: var(--red); }
+  .mini-table .right { text-align: right; }
+  .mini-table .mono { font-family: var(--mono); color: var(--text-1); }
+  .mini-table .accent { color: var(--gold); font-weight: 600; }
+
+  /* ── Class badges ─────────────────────────────────────────────── */
+  .cls {
+    display: inline-flex; align-items: center; padding: 2px 7px;
+    border-radius: 4px; font-family: var(--mono);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .cls-T { color: #f5a020; background: rgba(245,160,32,0.10); border: 1px solid rgba(245,160,32,0.25); }
+  .cls-Ap { color: #7eb8ff; background: rgba(126,184,255,0.08); border: 1px solid rgba(126,184,255,0.20); }
+  .cls-A { color: #5b8fcf; background: rgba(91,143,207,0.08); border: 1px solid rgba(91,143,207,0.20); }
+  .cls-P { color: #a78bfa; background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.20); }
+  .cls-B { color: #94a3b8; background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.20); }
+  .cls-S { color: #34d399; background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.20); }
+  .cls-R { color: #fb923c; background: rgba(251,146,60,0.08); border: 1px solid rgba(251,146,60,0.20); }
+
+  /* ── Live counter strip ──────────────────────────────────────── */
+  .live-strip {
+    max-width: 1400px; margin: 0 auto 32px; padding: 0 32px;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
+  }
+  .live-cell {
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .live-cell .lbl {
+    font-size: 11px; color: var(--text-4); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    font-family: var(--mono); margin-bottom: 6px;
+  }
+  .live-cell .val {
+    font-family: var(--mono); font-size: 24px; font-weight: 600;
+    color: var(--text-0); letter-spacing: -0.02em; line-height: 1;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .live-cell .val .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green); box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ── Main leaderboard ─────────────────────────────────────────── */
+  .leaderboard {
+    max-width: 1400px; margin: 0 auto 32px; padding: 0 32px;
+  }
+  .lb-card {
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    border-radius: 12px; overflow: hidden;
+  }
+  .lb-head {
+    padding: 18px 24px; border-bottom: 1px solid var(--border-subtle);
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .lb-head h2 {
+    font-size: 18px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.015em;
+  }
+  .lb-head .meta {
+    display: flex; gap: 16px; align-items: center; font-size: 12px;
+    color: var(--text-3); font-family: var(--mono);
+  }
+  .lb-head .meta .integrity {
+    color: var(--green); display: flex; align-items: center; gap: 4px;
+  }
+  .lb-head .actions { margin-left: auto; display: flex; gap: 6px; }
+
+  .lb-tabs {
+    display: flex; padding: 12px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+    overflow-x: auto; gap: 2px;
+  }
+  .lb-tabs button {
+    background: transparent; border: none; color: var(--text-3);
+    padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: var(--sans); white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .lb-tabs button:hover:not(.active) { color: var(--text-0); background: var(--bg-2); }
+  .lb-tabs button.active {
+    background: var(--bg-3); color: var(--text-0);
+  }
+
+  .lb-table { width: 100%; border-collapse: collapse; }
+  .lb-table thead th {
+    padding: 10px 16px; text-align: left;
+    font-size: 11px; font-weight: 500; color: var(--text-4);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    background: var(--bg-0); border-bottom: 1px solid var(--border-subtle);
+    font-family: var(--mono); white-space: nowrap;
+  }
+  .lb-table thead th.right { text-align: right; }
+  .lb-table tbody td {
+    padding: 14px 16px; border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+  }
+  .lb-table tbody tr:last-child td { border-bottom: none; }
+  .lb-table tbody tr { transition: background 0.1s; cursor: pointer; }
+  .lb-table tbody tr:hover { background: var(--bg-2); }
+
+  .lb-table .rank {
+    font-family: var(--mono); font-size: 14px; color: var(--text-3);
+    font-weight: 500; text-align: right; padding-right: 0;
+  }
+  .lb-table .rank-medal {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+  }
+  .rank-1 { background: linear-gradient(135deg, rgba(245,160,32,0.2), rgba(245,160,32,0.05)); border: 1px solid rgba(245,160,32,0.4); color: var(--gold); }
+  .rank-2 { background: rgba(170,170,170,0.1); border: 1px solid rgba(170,170,170,0.3); color: #d4d4d4; }
+  .rank-3 { background: rgba(184,115,51,0.1); border: 1px solid rgba(184,115,51,0.3); color: #c9854d; }
+
+  .op-cell {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .op-avatar {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--bg-3); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 13px; color: var(--text-2);
+    font-weight: 600; flex-shrink: 0;
+  }
+  .op-info .name {
+    font-size: 14px; font-weight: 500; color: var(--text-0);
+    letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .op-info .loc {
+    font-size: 12px; color: var(--text-4); margin-top: 2px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pf {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; border-radius: 4px;
+    font-family: var(--mono); font-size: 9px; font-weight: 700;
+  }
+  .pf-claude { background: rgba(217,119,6,0.15); color: #f59e0b; border: 1px solid rgba(217,119,6,0.3); }
+  .pf-chatgpt { background: rgba(16,163,127,0.15); color: #10a37f; border: 1px solid rgba(16,163,127,0.3); }
+  .pf-gemini { background: rgba(66,133,244,0.15); color: #6ba2f4; border: 1px solid rgba(66,133,244,0.3); }
+  .pf-pi { background: rgba(99,102,241,0.15); color: #818cf8; border: 1px solid rgba(99,102,241,0.3); }
+
+  .signa {
+    font-family: var(--mono); font-size: 16px; font-weight: 700;
+    color: var(--gold); text-align: right; letter-spacing: -0.01em;
+  }
+  .metric-val {
+    font-family: var(--mono); font-size: 13px; color: var(--text-1);
+    font-weight: 500; text-align: right;
+  }
+  .metric-val.accent { color: var(--text-0); font-weight: 600; }
+  .age {
+    font-family: var(--mono); font-size: 12px; color: var(--text-3);
+    text-align: right;
+  }
+  .seen {
+    font-family: var(--mono); font-size: 11px; color: var(--text-4);
+    text-align: right;
+  }
+  .sparkline { width: 64px; height: 22px; }
+
+  .delta-up { color: var(--green); font-family: var(--mono); font-weight: 600; }
+  .delta-down { color: var(--red); font-family: var(--mono); font-weight: 600; }
+
+  .lb-foot {
+    padding: 16px 24px; display: flex; align-items: center; gap: 12px;
+    background: var(--bg-0); border-top: 1px solid var(--border-subtle);
+  }
+  .pagination {
+    display: flex; gap: 4px; align-items: center; margin-left: auto;
+    font-family: var(--mono); font-size: 12px; color: var(--text-3);
+  }
+  .pagination button {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-2); width: 28px; height: 28px; border-radius: 6px;
+    cursor: pointer; font-family: var(--mono);
+  }
+  .pagination button:hover { background: var(--bg-2); color: var(--text-0); }
+
+  /* ── Signalgeist slices ──────────────────────────────────────── */
+  .geist-section {
+    max-width: 1400px; margin: 0 auto 32px; padding: 0 32px;
+  }
+  .geist-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .geist-card {
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    border-radius: 12px; padding: 20px;
+  }
+  .geist-card h4 {
+    font-size: 13px; font-weight: 600; color: var(--text-0);
+    margin-bottom: 4px; letter-spacing: -0.01em;
+  }
+  .geist-card .sub {
+    font-size: 11px; color: var(--text-4); margin-bottom: 16px;
+    font-family: var(--mono);
+  }
+  .geist-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid var(--border-subtle);
+    font-size: 13px;
+  }
+  .geist-row:last-child { border-bottom: none; }
+  .geist-row .name { color: var(--text-1); flex: 1; font-weight: 500; }
+  .geist-row .val { color: var(--gold); font-weight: 600; font-family: var(--mono); }
+
+  /* ── Section h2 ──────────────────────────────────────────────── */
+  .section-head {
+    max-width: 1400px; margin: 0 auto; padding: 16px 32px 16px;
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+  .section-head h2 {
+    font-size: 22px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.02em;
+  }
+  .section-head .more {
+    font-size: 13px; color: var(--text-3); text-decoration: none;
+  }
+  .section-head .more:hover { color: var(--text-0); }
+
+  /* ── Footer ─────────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: 32px;
+    margin-top: 64px;
+    max-width: 1400px; margin-left: auto; margin-right: auto;
+    text-align: center;
+    color: var(--text-4); font-size: 12px; font-family: var(--mono);
+  }
+  footer a { color: var(--text-3); margin: 0 8px; }
+  footer a:hover { color: var(--text-1); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="nav-inner">
+    <a href="intro.html" class="brand">
+      <div class="brand-glyph">◈</div>
+      SigRank
+    </a>
+    <div class="nav-links">
+      <a href="intro.html">About</a>
+      <a href="index.html" class="active">Leaderboard</a>
+      <a href="profile.html">Operators</a>
+      <a href="#">Circles</a>
+      <a href="#">Metrics</a>
+      <a href="#">Hall of Signal</a>
+      <a href="#">Pro</a>
+    </div>
+    <div class="search-wrap">
+      <span style="color:var(--text-4);">⌕</span>
+      <input placeholder="Search operators, circles..." />
+      <span class="kbd">⌘K</span>
+    </div>
+    <a href="#" class="btn btn-primary">Submit Snapshot</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="eyebrow">
+      <span class="dot"></span>
+      <span>LIVE · updated 14:23 UTC · 5 min cache</span>
+    </div>
+    <h1>Global leaderboard</h1>
+    <p>Top operators by SIGNA RATE across all AI platforms. Updated continuously from signed snapshots submitted by operators worldwide.</p>
+
+    <div class="page-header-row">
+      <div class="quick-stats">
+        <div class="quick-stat">
+          <div class="num">38,041</div>
+          <div class="lbl">Total operators</div>
+        </div>
+        <div class="quick-stat">
+          <div class="num green">1,847</div>
+          <div class="lbl">Active now</div>
+        </div>
+        <div class="quick-stat">
+          <div class="num gold">312</div>
+          <div class="lbl">Transmitter-class</div>
+        </div>
+        <div class="quick-stat">
+          <div class="num">96.4</div>
+          <div class="lbl">Top SIGNA RATE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-bar">
+    <span class="filter-label">Platform</span>
+    <div class="filter-group">
+      <button class="active">All</button>
+      <button>Claude</button>
+      <button>ChatGPT</button>
+      <button>Gemini</button>
+      <button>Pi</button>
+      <button>Multi</button>
+    </div>
+    <div class="filter-divider"></div>
+    <span class="filter-label">Window</span>
+    <div class="filter-group">
+      <button>24h</button>
+      <button>7d</button>
+      <button class="active">30d</button>
+      <button>90d</button>
+      <button>All time</button>
+    </div>
+    <div class="filter-divider"></div>
+    <span class="filter-label">Class</span>
+    <div class="filter-group">
+      <button class="active">All</button>
+      <button>Transmitter</button>
+      <button>Architect+</button>
+      <button>Architect</button>
+      <button>Power</button>
+    </div>
+  </div>
+
+  <!-- Live counter -->
+  <div class="live-strip">
+    <div class="live-cell">
+      <div class="lbl">Global Active</div>
+      <div class="val"><span class="dot"></span>1,847</div>
+    </div>
+    <div class="live-cell">
+      <div class="lbl">Claude</div>
+      <div class="val">612</div>
+    </div>
+    <div class="live-cell">
+      <div class="lbl">ChatGPT</div>
+      <div class="val">798</div>
+    </div>
+    <div class="live-cell">
+      <div class="lbl">Gemini</div>
+      <div class="val">287</div>
+    </div>
+    <div class="live-cell">
+      <div class="lbl">Pi</div>
+      <div class="val">88</div>
+    </div>
+    <div class="live-cell">
+      <div class="lbl">Multi</div>
+      <div class="val">62</div>
+    </div>
+  </div>
+
+  <!-- Above the fold side-by-side -->
+  <div class="above-fold">
+
+    <div class="card">
+      <div class="card-head">
+        <div class="icon">★</div>
+        <h3>Today's Signal Leaders</h3>
+        <span class="sub">Last 24h</span>
+      </div>
+      <table class="mini-table">
+        <tbody>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-T">TRANS</span>
+                TransVaultOrigin
+              </div>
+            </td>
+            <td class="right delta">+180</td>
+            <td class="right mono">2,700</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-Ap">ARCH+</span>
+                ArchiveSignal
+              </div>
+            </td>
+            <td class="right delta">+154</td>
+            <td class="right mono">2,210</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-Ap">ARCH+</span>
+                CrossWeaver
+              </div>
+            </td>
+            <td class="right delta">+142</td>
+            <td class="right mono">1,988</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-A">ARCH</span>
+                RiddleSocket
+              </div>
+            </td>
+            <td class="right delta">+118</td>
+            <td class="right mono">1,654</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-A">ARCH</span>
+                GhostRelay
+              </div>
+            </td>
+            <td class="right delta">+96</td>
+            <td class="right mono">1,422</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="icon">⚡</div>
+        <h3>Top performances</h3>
+        <span class="sub">Last 24h · by SIGNA</span>
+      </div>
+      <table class="mini-table">
+        <tbody>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-T">TRANS</span>
+                TransVaultOrigin
+              </div>
+            </td>
+            <td class="right mono">0.87</td>
+            <td class="right accent">96.4</td>
+            <td class="right" style="color:var(--text-4); font-family:var(--mono); font-size:11px;">16h</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-T">TRANS</span>
+                QuietGiant
+              </div>
+            </td>
+            <td class="right mono">0.89</td>
+            <td class="right accent">90.1</td>
+            <td class="right" style="color:var(--text-4); font-family:var(--mono); font-size:11px;">12h</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-Ap">ARCH+</span>
+                CrossWeaver
+              </div>
+            </td>
+            <td class="right mono">0.82</td>
+            <td class="right accent">89.7</td>
+            <td class="right" style="color:var(--text-4); font-family:var(--mono); font-size:11px;">2h</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-A">ARCH</span>
+                GhostRelay
+              </div>
+            </td>
+            <td class="right mono">0.73</td>
+            <td class="right accent">78.4</td>
+            <td class="right" style="color:var(--text-4); font-family:var(--mono); font-size:11px;">43m</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">
+                <span class="cls cls-P">POWER</span>
+                PromplexCore
+              </div>
+            </td>
+            <td class="right mono">0.64</td>
+            <td class="right accent">68.2</td>
+            <td class="right" style="color:var(--text-4); font-family:var(--mono); font-size:11px;">1h</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Main leaderboard -->
+  <div class="leaderboard">
+    <div class="lb-card">
+      <div class="lb-head">
+        <h2>Top operators</h2>
+        <div class="meta">
+          <span>Sorted by SIGNA RATE</span>
+          <span>·</span>
+          <span>30-day window</span>
+          <span class="integrity">
+            <span style="font-size: 10px;">●</span> Integrity: Maintained
+          </span>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ghost">Filters</button>
+          <button class="btn btn-ghost">Export</button>
+        </div>
+      </div>
+
+      <div class="lb-tabs">
+        <button class="active">SIGNA RATE</button>
+        <button>Compression</button>
+        <button>Session Depth</button>
+        <button>Token Throughput</button>
+        <button>Prompt Complexity</button>
+        <button>Cross-Thread</button>
+        <button>Signal Force</button>
+      </div>
+
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;" class="right">#</th>
+            <th>Operator</th>
+            <th style="width: 80px;">Class</th>
+            <th class="right" style="width: 90px;">SIGNA</th>
+            <th class="right">Comp</th>
+            <th class="right">SD</th>
+            <th class="right">TT</th>
+            <th class="right">PC</th>
+            <th class="right">CT</th>
+            <th class="right">SF</th>
+            <th class="right" style="width: 80px;">Trend</th>
+            <th class="right">Age</th>
+            <th class="right">Last</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td class="rank"><span class="rank-medal rank-1">1</span></td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar" style="color:var(--gold);">T</div>
+                <div class="op-info">
+                  <div class="name">TransVaultOrigin</div>
+                  <div class="loc"><span class="pf pf-claude">C</span> Claude · Buffalo, US</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-T">TRANS</span></td>
+            <td><div class="signa">96.4</div></td>
+            <td><div class="metric-val accent">0.87</div></td>
+            <td><div class="metric-val">26.1</div></td>
+            <td><div class="metric-val">18.4k</div></td>
+            <td><div class="metric-val">92</div></td>
+            <td><div class="metric-val">37</div></td>
+            <td><div class="metric-val">12.8</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,18 L8,16 L16,14 L24,15 L32,12 L40,9 L48,7 L56,5 L64,3" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">14d</div></td>
+            <td><div class="seen">16h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank"><span class="rank-medal rank-2">2</span></td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">A</div>
+                <div class="op-info">
+                  <div class="name">ArchiveSignal</div>
+                  <div class="loc"><span class="pf pf-claude">C</span> Claude · Berlin, DE</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-Ap">ARCH+</span></td>
+            <td><div class="signa">89.7</div></td>
+            <td><div class="metric-val accent">0.82</div></td>
+            <td><div class="metric-val">22.1</div></td>
+            <td><div class="metric-val">14.3k</div></td>
+            <td><div class="metric-val">84</div></td>
+            <td><div class="metric-val">31</div></td>
+            <td><div class="metric-val">9.4</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,16 L8,15 L16,14 L24,12 L32,10 L40,11 L48,8 L56,6 L64,5" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">7mo</div></td>
+            <td><div class="seen">2h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank"><span class="rank-medal rank-3">3</span></td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">X</div>
+                <div class="op-info">
+                  <div class="name">CrossWeaver</div>
+                  <div class="loc"><span class="pf pf-chatgpt">G</span> ChatGPT · Toronto, CA</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-Ap">ARCH+</span></td>
+            <td><div class="signa">87.3</div></td>
+            <td><div class="metric-val accent">0.81</div></td>
+            <td><div class="metric-val">24.4</div></td>
+            <td><div class="metric-val">12.1k</div></td>
+            <td><div class="metric-val">88</div></td>
+            <td><div class="metric-val">41</div></td>
+            <td><div class="metric-val">7.1</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,14 L8,13 L16,12 L24,10 L32,11 L40,9 L48,7 L56,8 L64,6" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">21d</div></td>
+            <td><div class="seen">18h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">4</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">D</div>
+                <div class="op-info">
+                  <div class="name">DeepChannel</div>
+                  <div class="loc"><span class="pf pf-gemini">G</span> Gemini · Tokyo, JP</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-Ap">ARCH+</span></td>
+            <td><div class="signa">84.2</div></td>
+            <td><div class="metric-val">0.79</div></td>
+            <td><div class="metric-val">31.0</div></td>
+            <td><div class="metric-val">11.9k</div></td>
+            <td><div class="metric-val">76</div></td>
+            <td><div class="metric-val">28</div></td>
+            <td><div class="metric-val">6.4</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,12 L8,13 L16,11 L24,12 L32,10 L40,9 L48,11 L56,8 L64,7" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">9mo</div></td>
+            <td><div class="seen">3h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">5</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">R</div>
+                <div class="op-info">
+                  <div class="name">RiddleSocket</div>
+                  <div class="loc"><span class="pf pf-claude">C</span> Claude · Toronto, CA</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-A">ARCH</span></td>
+            <td><div class="signa">79.6</div></td>
+            <td><div class="metric-val">0.74</div></td>
+            <td><div class="metric-val">22.8</div></td>
+            <td><div class="metric-val">10.4k</div></td>
+            <td><div class="metric-val">71</div></td>
+            <td><div class="metric-val">22</div></td>
+            <td><div class="metric-val">5.8</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,15 L8,14 L16,15 L24,13 L32,14 L40,12 L48,10 L56,9 L64,11" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">2mo</div></td>
+            <td><div class="seen">7h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">6</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">G</div>
+                <div class="op-info">
+                  <div class="name">GhostRelay</div>
+                  <div class="loc"><span class="pf pf-claude">C</span> Claude · Paris, FR</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-A">ARCH</span></td>
+            <td><div class="signa">78.4</div></td>
+            <td><div class="metric-val">0.73</div></td>
+            <td><div class="metric-val">19.6</div></td>
+            <td><div class="metric-val">10.9k</div></td>
+            <td><div class="metric-val">79</div></td>
+            <td><div class="metric-val">24</div></td>
+            <td><div class="metric-val">5.1</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,17 L8,15 L16,14 L24,13 L32,11 L40,10 L48,12 L56,9 L64,8" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">6mo</div></td>
+            <td><div class="seen">43m</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">7</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">P</div>
+                <div class="op-info">
+                  <div class="name">PromplexCore</div>
+                  <div class="loc"><span class="pf pf-gemini">G</span> Gemini · Seoul, KR</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-P">POWER</span></td>
+            <td><div class="signa">68.2</div></td>
+            <td><div class="metric-val">0.64</div></td>
+            <td><div class="metric-val">14.8</div></td>
+            <td><div class="metric-val">9.7k</div></td>
+            <td><div class="metric-val">94</div></td>
+            <td><div class="metric-val">16</div></td>
+            <td><div class="metric-val">3.7</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,14 L8,15 L16,13 L24,14 L32,12 L40,13 L48,11 L56,10 L64,9" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">3mo</div></td>
+            <td><div class="seen">1h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">8</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">Q</div>
+                <div class="op-info">
+                  <div class="name">QuietGiant</div>
+                  <div class="loc"><span class="pf pf-claude">C</span> Claude · Stockholm, SE</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-P">POWER</span></td>
+            <td><div class="signa">66.4</div></td>
+            <td><div class="metric-val accent">0.89</div></td>
+            <td><div class="metric-val">11.2</div></td>
+            <td><div class="metric-val">3.2k</div></td>
+            <td><div class="metric-val">62</div></td>
+            <td><div class="metric-val">14</div></td>
+            <td><div class="metric-val">3.2</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,10 L8,11 L16,9 L24,10 L32,8 L40,9 L48,7 L56,8 L64,6" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">4mo</div></td>
+            <td><div class="seen">12h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">9</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">P</div>
+                <div class="op-info">
+                  <div class="name">Power:24-87553</div>
+                  <div class="loc"><span class="pf pf-pi">π</span> Pi · Tokyo, JP</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-P">POWER</span></td>
+            <td><div class="signa">62.1</div></td>
+            <td><div class="metric-val">0.67</div></td>
+            <td><div class="metric-val">12.5</div></td>
+            <td><div class="metric-val">8.4k</div></td>
+            <td><div class="metric-val">58</div></td>
+            <td><div class="metric-val">11</div></td>
+            <td><div class="metric-val">2.9</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,15 L8,13 L16,14 L24,12 L32,13 L40,11 L48,12 L56,10 L64,11" stroke="#fbbf24" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">3mo</div></td>
+            <td><div class="seen">2h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">10</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">B</div>
+                <div class="op-info">
+                  <div class="name">Base:24-67921</div>
+                  <div class="loc"><span class="pf pf-chatgpt">G</span> ChatGPT · London, UK</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-B">BASE</span></td>
+            <td><div class="signa">48.7</div></td>
+            <td><div class="metric-val">0.47</div></td>
+            <td><div class="metric-val">9.4</div></td>
+            <td><div class="metric-val">5.6k</div></td>
+            <td><div class="metric-val">42</div></td>
+            <td><div class="metric-val">8</div></td>
+            <td><div class="metric-val">2.1</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,12 L8,13 L16,14 L24,15 L32,13 L40,14 L48,12 L56,13 L64,14" stroke="#a1a1aa" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">5mo</div></td>
+            <td><div class="seen">4h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">11</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">S</div>
+                <div class="op-info">
+                  <div class="name">SeekerOmega</div>
+                  <div class="loc"><span class="pf pf-chatgpt">G</span> ChatGPT · Madrid, ES</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-S">SEEKER</span></td>
+            <td><div class="signa">38.4</div></td>
+            <td><div class="metric-val">0.36</div></td>
+            <td><div class="metric-val">7.2</div></td>
+            <td><div class="metric-val">4.8k</div></td>
+            <td><div class="metric-val">52</div></td>
+            <td><div class="metric-val">6</div></td>
+            <td><div class="metric-val">1.8</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,14 L8,13 L16,14 L24,12 L32,11 L40,12 L48,10 L56,11 L64,9" stroke="#34d399" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">1mo</div></td>
+            <td><div class="seen">8h</div></td>
+          </tr>
+
+          <tr>
+            <td class="rank">12</td>
+            <td>
+              <div class="op-cell">
+                <div class="op-avatar">R</div>
+                <div class="op-info">
+                  <div class="name">RefinerPi</div>
+                  <div class="loc"><span class="pf pf-pi">π</span> Pi · Mumbai, IN</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="cls cls-R">REF</span></td>
+            <td><div class="signa">26.4</div></td>
+            <td><div class="metric-val">0.24</div></td>
+            <td><div class="metric-val">5.6</div></td>
+            <td><div class="metric-val">3.1k</div></td>
+            <td><div class="metric-val">38</div></td>
+            <td><div class="metric-val">4</div></td>
+            <td><div class="metric-val">1.2</div></td>
+            <td class="right">
+              <svg class="sparkline" viewBox="0 0 64 22" preserveAspectRatio="none">
+                <path d="M0,12 L8,13 L16,11 L24,12 L32,13 L40,11 L48,12 L56,10 L64,11" stroke="#a1a1aa" stroke-width="1.5" fill="none"/>
+              </svg>
+            </td>
+            <td><div class="age">2mo</div></td>
+            <td><div class="seen">11h</div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="lb-foot">
+        <span style="color:var(--text-3); font-size: 12px; font-family: var(--mono);">Showing 1–12 of 38,041</span>
+        <div class="pagination">
+          <button>‹</button>
+          <span style="padding: 0 8px;">Page 1 of 3,170</span>
+          <button>›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signalgeist section -->
+  <div class="section-head">
+    <h2>Signalgeist · 90-day slices</h2>
+    <a href="#" class="more">View all metric leaders →</a>
+  </div>
+  <div class="geist-section">
+    <div class="geist-grid">
+
+      <div class="geist-card">
+        <h4>Highest Compression</h4>
+        <div class="sub">All-time bounded purity score</div>
+        <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">0.94</span></div>
+        <div class="geist-row"><span class="name">QuietGiant</span><span class="val">0.92</span></div>
+        <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">0.88</span></div>
+        <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">0.86</span></div>
+        <div class="geist-row"><span class="name">DeepChannel</span><span class="val">0.84</span></div>
+      </div>
+
+      <div class="geist-card">
+        <h4>Most Improved SNR</h4>
+        <div class="sub">90-day signal-to-noise gain</div>
+        <div class="geist-row"><span class="name">GhostRelay</span><span class="val">+0.08</span></div>
+        <div class="geist-row"><span class="name">DeepChannel</span><span class="val">+0.06</span></div>
+        <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">+0.05</span></div>
+        <div class="geist-row"><span class="name">PromplexCore</span><span class="val">+0.04</span></div>
+        <div class="geist-row"><span class="name">RiddleSocket</span><span class="val">+0.04</span></div>
+      </div>
+
+      <div class="geist-card">
+        <h4>Most Active</h4>
+        <div class="sub">Total tokens · 30-day window</div>
+        <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">18,450</span></div>
+        <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">14,320</span></div>
+        <div class="geist-row"><span class="name">GhostRelay</span><span class="val">10,880</span></div>
+        <div class="geist-row"><span class="name">PromplexCore</span><span class="val">9,712</span></div>
+        <div class="geist-row"><span class="name">DeepChannel</span><span class="val">11,884</span></div>
+      </div>
+
+      <div class="geist-card">
+        <h4>Deepest Channels</h4>
+        <div class="sub">Avg session depth · all-time</div>
+        <div class="geist-row"><span class="name">DeepChannel</span><span class="val">31.0</span></div>
+        <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">26.1</span></div>
+        <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">24.4</span></div>
+        <div class="geist-row"><span class="name">RiddleSocket</span><span class="val">22.8</span></div>
+        <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">22.1</span></div>
+      </div>
+
+      <div class="geist-card">
+        <h4>Most Complex Prompts</h4>
+        <div class="sub">PC sub-score composite</div>
+        <div class="geist-row"><span class="name">PromplexCore</span><span class="val">94</span></div>
+        <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">92</span></div>
+        <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">88</span></div>
+        <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">84</span></div>
+        <div class="geist-row"><span class="name">GhostRelay</span><span class="val">79</span></div>
+      </div>
+
+      <div class="geist-card">
+        <h4>Most Cross-Threaded</h4>
+        <div class="sub">Long-range continuity refs</div>
+        <div class="geist-row"><span class="name">CrossWeaver</span><span class="val">41</span></div>
+        <div class="geist-row"><span class="name">TransVaultOrigin</span><span class="val">37</span></div>
+        <div class="geist-row"><span class="name">ArchiveSignal</span><span class="val">31</span></div>
+        <div class="geist-row"><span class="name">DeepChannel</span><span class="val">28</span></div>
+        <div class="geist-row"><span class="name">GhostRelay</span><span class="val">24</span></div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  SigRank © 2026 · Ruleset v1.0 · Last updated 14:23 UTC · <a href="#">Methodology</a><a href="#">Privacy</a><a href="#">Status</a><a href="#">API</a>
+</footer>
+
+</body>
+</html>
