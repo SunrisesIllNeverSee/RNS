@@ -301,6 +301,200 @@
   }
   .metric-card .change.minus { color: var(--red); }
 
+  /* ── Score Breakdown (conversion view) ──────────────────────── */
+  .breakdown-card {
+    background: var(--bg-1); border: 1px solid var(--border-subtle);
+    border-radius: 14px; overflow: hidden; margin-bottom: 40px;
+  }
+  .breakdown-head {
+    padding: 20px 28px; border-bottom: 1px solid var(--border-subtle);
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .breakdown-head .title-block { flex: 1; min-width: 220px; }
+  .breakdown-head h3 {
+    font-size: 16px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.015em; margin-bottom: 4px;
+  }
+  .breakdown-head .sub {
+    font-size: 12px; color: var(--text-3); font-family: var(--mono);
+  }
+  .breakdown-head .tier-toggle {
+    display: flex; background: var(--bg-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 3px; gap: 1px;
+  }
+  .breakdown-head .tier-toggle button {
+    background: transparent; border: none; color: var(--text-2);
+    padding: 6px 14px; border-radius: 5px; font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: var(--sans);
+  }
+  .breakdown-head .tier-toggle button.active {
+    background: var(--bg-3); color: var(--text-0);
+  }
+  .breakdown-head .tier-toggle button.pro {
+    color: var(--gold);
+  }
+
+  /* Telemetry receipts strip */
+  .telemetry-strip {
+    background: var(--bg-0); padding: 18px 28px;
+    border-bottom: 1px solid var(--border-subtle);
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px;
+  }
+  .tlm {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .tlm .key {
+    font-family: var(--mono); font-size: 10px; color: var(--text-4);
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .tlm .val {
+    font-family: var(--mono); font-size: 16px; font-weight: 600;
+    color: var(--text-0); letter-spacing: -0.01em;
+  }
+
+  /* Conversion rows */
+  .breakdown-rows { }
+  .br-row {
+    display: grid; grid-template-columns: 220px 60px 1fr 90px 80px;
+    gap: 24px; align-items: center;
+    padding: 20px 28px; border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.15s;
+  }
+  .br-row:hover { background: var(--bg-2); }
+  .br-row:last-child { border-bottom: none; }
+  .br-row.pro-locked {
+    background: linear-gradient(180deg, rgba(245,160,32,0.03), transparent);
+  }
+  .br-input {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .br-input .head {
+    font-family: var(--mono); font-size: 10px; color: var(--text-4);
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .br-input .formula {
+    font-family: var(--mono); font-size: 12px; color: var(--text-2);
+    line-height: 1.45;
+  }
+  .br-input .formula .var { color: var(--gold); font-weight: 500; }
+  .br-input .formula .op { color: var(--text-4); }
+  .br-input .compute {
+    font-family: var(--mono); font-size: 12px; color: var(--text-1);
+    margin-top: 4px; font-weight: 500;
+  }
+  .br-input .compute .out { color: var(--gold); font-weight: 600; }
+
+  .br-arrow {
+    text-align: center; font-family: var(--mono); color: var(--gold);
+    font-size: 22px; line-height: 1;
+  }
+
+  .br-output { }
+  .br-output .head {
+    font-family: var(--mono); font-size: 10px; color: var(--gold);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;
+  }
+  .br-output h4 {
+    font-size: 15px; font-weight: 600; color: var(--text-0);
+    letter-spacing: -0.01em; margin-bottom: 2px;
+  }
+  .br-output p {
+    font-size: 12px; color: var(--text-3); line-height: 1.45;
+  }
+
+  .br-score {
+    text-align: right;
+  }
+  .br-score .num {
+    font-family: var(--mono); font-size: 24px; font-weight: 600;
+    color: var(--text-0); letter-spacing: -0.02em; line-height: 1;
+  }
+  .br-score .num.gold { color: var(--gold); }
+  .br-score .num.locked { color: var(--text-4); }
+  .br-score .delta {
+    font-family: var(--mono); font-size: 10px; color: var(--green);
+    margin-top: 4px; font-weight: 500;
+  }
+  .br-score .locked-text {
+    font-family: var(--mono); font-size: 10px; color: var(--gold);
+    margin-top: 4px;
+  }
+
+  .br-quality {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+  }
+  .br-quality .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 100px;
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    white-space: nowrap;
+  }
+  .br-quality .pill.clean {
+    background: rgba(52,211,153,0.10);
+    border: 1px solid rgba(52,211,153,0.25); color: var(--green);
+  }
+  .br-quality .pill.strong {
+    background: rgba(126,184,255,0.08);
+    border: 1px solid rgba(126,184,255,0.20); color: #7eb8ff;
+  }
+  .br-quality .pill.weak {
+    background: rgba(245,160,32,0.10);
+    border: 1px solid var(--gold-border); color: var(--gold);
+  }
+  .br-quality .conf {
+    font-family: var(--mono); font-size: 9px; color: var(--text-4);
+  }
+
+  /* Final SIGNA computation footer */
+  .br-final {
+    background: linear-gradient(180deg, rgba(245,160,32,0.05), var(--bg-0));
+    border-top: 1px solid var(--gold-border);
+    padding: 24px 28px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  .br-final .label {
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .br-final .formula {
+    font-family: var(--mono); font-size: 13px; color: var(--text-2);
+    flex: 1;
+  }
+  .br-final .formula .var { color: var(--gold); font-weight: 500; }
+  .br-final .equals {
+    font-family: var(--mono); font-size: 13px; color: var(--text-4);
+  }
+  .br-final .result {
+    font-family: var(--mono); font-size: 28px; font-weight: 700;
+    color: var(--gold); letter-spacing: -0.02em;
+  }
+
+  /* Pro upsell row inside breakdown */
+  .pro-callout {
+    background: linear-gradient(135deg, rgba(245,160,32,0.06), transparent);
+    border-top: 1px solid var(--gold-border);
+    padding: 20px 28px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .pro-callout .lock-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--gold-bg); border: 1px solid var(--gold-border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 16px; flex-shrink: 0;
+  }
+  .pro-callout .text { flex: 1; }
+  .pro-callout .text h5 {
+    font-size: 13px; font-weight: 600; color: var(--text-0); margin-bottom: 2px;
+  }
+  .pro-callout .text p {
+    font-size: 12px; color: var(--text-3); line-height: 1.45;
+  }
+  .pro-callout .btn-upgrade {
+    background: var(--gold); color: var(--bg-0); font-weight: 600;
+    padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer;
+    font-family: var(--sans); font-size: 13px;
+  }
+
   /* ── Analytics row ──────────────────────────────────────────── */
   .analytics-grid {
     display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 16px;
@@ -674,6 +868,191 @@
         <div class="value">18.4k</div>
         <div class="bar"><div class="bar-fill" style="width: 95%;"></div></div>
         <div class="change">+2.4k vs 30d ago</div>
+      </div>
+    </div>
+
+    <!-- Score Breakdown — Conversion view -->
+    <div class="section-h">
+      <h2>Score breakdown</h2>
+      <span class="sub">Free tier · proxies from token telemetry</span>
+      <span class="right" style="margin-left:auto;">
+        <a href="#" style="color:var(--gold);text-decoration:none;font-weight:500;">★ Upgrade to Pro for exact scores →</a>
+      </span>
+    </div>
+
+    <div class="breakdown-card">
+      <div class="breakdown-head">
+        <div class="title-block">
+          <h3>How your SIGNA RATE was computed</h3>
+          <div class="sub">7-day window · ruleset v1.0 · ed25519-signed submission · audit verified</div>
+        </div>
+        <div class="tier-toggle">
+          <button class="active">Free tier</button>
+          <button class="pro">Pro tier (sig_army)</button>
+        </div>
+      </div>
+
+      <!-- Raw telemetry receipts -->
+      <div class="telemetry-strip">
+        <div class="tlm">
+          <div class="key">Fresh Input</div>
+          <div class="val">123,246</div>
+        </div>
+        <div class="tlm">
+          <div class="key">Output</div>
+          <div class="val">3.90M</div>
+        </div>
+        <div class="tlm">
+          <div class="key">Cache Read</div>
+          <div class="val">1.08B</div>
+        </div>
+        <div class="tlm">
+          <div class="key">Cache Create</div>
+          <div class="val">34.8M</div>
+        </div>
+        <div class="tlm">
+          <div class="key">Sessions / Turns</div>
+          <div class="val">21 / 7,327</div>
+        </div>
+        <div class="tlm">
+          <div class="key">Active Minutes</div>
+          <div class="val">~2,700</div>
+        </div>
+      </div>
+
+      <!-- Conversion rows -->
+      <div class="breakdown-rows">
+
+        <div class="br-row">
+          <div class="br-input">
+            <div class="head">INPUT · TELEMETRY</div>
+            <div class="formula"><span class="var">output</span> <span class="op">/ (</span><span class="var">output</span> <span class="op">+</span> <span class="var">fresh_input</span><span class="op">)</span></div>
+            <div class="compute">3,902,803 / 4,026,049 = <span class="out">0.9694</span></div>
+          </div>
+          <div class="br-arrow">→</div>
+          <div class="br-output">
+            <div class="head">COMP · CORE 5</div>
+            <h4>Compression Ratio</h4>
+            <p>Bounded signal-purity. The closer to 1.0, the more output per fresh token.</p>
+          </div>
+          <div class="br-score">
+            <div class="num gold">0.97</div>
+            <div class="delta">+0.05 vs 30d</div>
+          </div>
+          <div class="br-quality">
+            <span class="pill clean">● Clean</span>
+            <span class="conf">High confidence</span>
+          </div>
+        </div>
+
+        <div class="br-row">
+          <div class="br-input">
+            <div class="head">INPUT · TELEMETRY</div>
+            <div class="formula"><span class="var">cache_read</span> <span class="op">/ (</span><span class="var">read</span> <span class="op">+</span> <span class="var">create</span> <span class="op">+</span> <span class="var">input</span><span class="op">)</span></div>
+            <div class="compute">1.084B / 1.119B = <span class="out">0.9688</span> → 96.88%</div>
+          </div>
+          <div class="br-arrow">→</div>
+          <div class="br-output">
+            <div class="head">CT · CORE 5</div>
+            <h4>Cross-Thread Referencing</h4>
+            <p>Continuity persistence across sessions. Cache reuse as the proxy signal.</p>
+          </div>
+          <div class="br-score">
+            <div class="num">37</div>
+            <div class="delta">+6 vs 30d</div>
+          </div>
+          <div class="br-quality">
+            <span class="pill clean">● Clean</span>
+            <span class="conf">High confidence</span>
+          </div>
+        </div>
+
+        <div class="br-row">
+          <div class="br-input">
+            <div class="head">INPUT · TELEMETRY</div>
+            <div class="formula"><span class="var">turns_total</span> <span class="op">/</span> <span class="var">sessions</span></div>
+            <div class="compute">7,327 / 21 = <span class="out">348.9</span> avg</div>
+          </div>
+          <div class="br-arrow">→</div>
+          <div class="br-output">
+            <div class="head">SD · CORE 5</div>
+            <h4>Session Depth</h4>
+            <p>Bucketed [0,100]. Turns proxy chains — Pro tier reveals actual reply-chain length.</p>
+          </div>
+          <div class="br-score">
+            <div class="num">26.1</div>
+            <div class="delta">+3.9 vs 30d</div>
+          </div>
+          <div class="br-quality">
+            <span class="pill strong">● Strong</span>
+            <span class="conf">Turns ≠ chains</span>
+          </div>
+        </div>
+
+        <div class="br-row">
+          <div class="br-input">
+            <div class="head">INPUT · TELEMETRY</div>
+            <div class="formula"><span class="op">min(100, 20·log₁₀(</span><span class="var">output</span><span class="op">))</span></div>
+            <div class="compute">log₁₀(3.90M) × 20 = <span class="out">100</span> (capped)</div>
+          </div>
+          <div class="br-arrow">→</div>
+          <div class="br-output">
+            <div class="head">TT · CORE 5</div>
+            <h4>Token Throughput</h4>
+            <p>Log-scaled bandwidth. Prevents volume gaming while rewarding sustained output.</p>
+          </div>
+          <div class="br-score">
+            <div class="num">18.4k</div>
+            <div class="delta">+2.4k vs 30d</div>
+          </div>
+          <div class="br-quality">
+            <span class="pill clean">● Direct</span>
+            <span class="conf">Exact</span>
+          </div>
+        </div>
+
+        <div class="br-row pro-locked">
+          <div class="br-input">
+            <div class="head">INPUT · CONVERSATION TEXT</div>
+            <div class="formula"><span class="op">weighted(</span><span class="var">layers</span><span class="op">,</span> <span class="var">recursion</span><span class="op">,</span> <span class="var">entities</span><span class="op">)</span></div>
+            <div class="compute" style="color: var(--gold);">⊘ Requires sig_army prompt analysis</div>
+          </div>
+          <div class="br-arrow">→</div>
+          <div class="br-output">
+            <div class="head">PC · CORE 5</div>
+            <h4>Prompt Complexity</h4>
+            <p>Structural sophistication of prompts. Raw input volume is NOT a complexity proxy.</p>
+          </div>
+          <div class="br-score">
+            <div class="num locked">~92</div>
+            <div class="locked-text">Estimated</div>
+          </div>
+          <div class="br-quality">
+            <span class="pill weak">★ Pro only</span>
+            <span class="conf">sig_army audit</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Final SIGNA RATE computation -->
+      <div class="br-final">
+        <div class="label">SIGNA RATE</div>
+        <div class="formula">
+          <span class="op">0.30·(</span><span class="var">96.94</span><span class="op">) + 0.20·(</span><span class="var">100</span><span class="op">) + 0.20·(</span><span class="var">92</span><span class="op">) + 0.15·(</span><span class="var">96</span><span class="op">) + 0.15·(</span><span class="var">100</span><span class="op">)</span>
+        </div>
+        <div class="equals">=</div>
+        <div class="result">96.4</div>
+      </div>
+
+      <!-- Pro upsell -->
+      <div class="pro-callout">
+        <div class="lock-icon">⊕</div>
+        <div class="text">
+          <h5>Unlock exact computation with Signalgeist Pro</h5>
+          <p>sig_army replaces the PC estimate with full sub-score breakdown (instruction layers, recursion, system entities, constraint density). Adds Drift Ratio detection. Earns the Audit Verified badge.</p>
+        </div>
+        <button class="btn-upgrade">★ Upgrade — $19/mo</button>
       </div>
     </div>
 
