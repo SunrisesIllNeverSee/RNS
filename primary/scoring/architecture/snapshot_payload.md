@@ -41,7 +41,6 @@ The canonical JSON payload submitted by a local agent to `POST /api/v1/snapshots
   "composites": {
     "signa_rate": 96.4,
     "signal_force": 12.8,
-    "sdrm_score": null,
     "drift_ratio": null
   },
 
@@ -119,7 +118,6 @@ The canonical JSON payload submitted by a local agent to `POST /api/v1/snapshots
 |---|---|---|---|
 | `signa_rate` | float | no | If agent computed it; server will recompute regardless |
 | `signal_force` | float | no | If agent computed |
-| `sdrm_score` | float | no | Provisional metric |
 | `drift_ratio` | float | no | Precision tier only |
 
 ### `raw_telemetry`

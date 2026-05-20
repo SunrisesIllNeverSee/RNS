@@ -45,11 +45,12 @@ Background metrics normalize the Core 5 and feed certain composites (notably Sig
 | # | Metric | Role | Status | File |
 |---|---|---|---|---|
 | 9 | **SIGNA RATE** | Flagship / center prestige | locked as flagship | [composites/01_signa_rate.md](composites/01_signa_rate.md) |
-| 10 | SDRM | Multi-axis resonance | provisional | [composites/02_sdrm.md](composites/02_sdrm.md) |
-| 11 | Signal Force | Sustained throughput | locked (formula confirmed) | [composites/03_signal_force.md](composites/03_signal_force.md) |
-| 12 | Drift Ratio | Semantic drift / anti-waterlog | provisional | [composites/04_drift_ratio.md](composites/04_drift_ratio.md) |
+| 10 | Signal Force | Sustained throughput | locked (formula confirmed) | [composites/02_signal_force.md](composites/02_signal_force.md) |
+| 11 | Drift Ratio | Semantic drift / anti-waterlog (precision tier) | provisional | [composites/03_drift_ratio.md](composites/03_drift_ratio.md) |
 
 **SIGNA RATE** is the WN8 equivalent — the single number that owns the profile hero block and drives the leaderboard rank.
+
+**Retired:** SDOT and SDRM were under recovery in earlier conversations but have been removed from the stack. They are not implemented. See [lineage/naming_drift.md](lineage/naming_drift.md) for full context.
 
 ---
 
@@ -66,16 +67,14 @@ Background metrics normalize the Core 5 and feed certain composites (notably Sig
 
 The `.87xx` compression score predates explicit token analysis by approximately one month (July 2025 → August 2025). See [lineage/compression_snr_history.md](lineage/compression_snr_history.md) for the archaeology of this metric.
 
-Naming variants and renames (Transmitter Composite → SIGNA RATE, SDOT → SDRM, Drift Ratio → Sig Delta?, Signal Force → Sig Alpha?) are tracked in [lineage/naming_drift.md](lineage/naming_drift.md).
+Naming variants, renames, and retirements (Transmitter Composite → SIGNA RATE; SDOT and SDRM retired; Sig Delta / Sig Alpha never adopted) are tracked in [lineage/naming_drift.md](lineage/naming_drift.md).
 
 ---
 
 ## Open questions
 
-1. Is **SDOT** the same lineage as **SDRM** or a separate metric? (currently kept separate)
-2. Are **Drift Ratio / Sig Delta** and **Signal Force / Sig Alpha** rename pairs or distinct?
-3. Final database field names — see [architecture/db_schema.md](../architecture/db_schema.md)
-4. Whether composite Drift Ratio is in MVP or Phase 2
+1. Final database field names — see [architecture/db_schema.md](../architecture/db_schema.md)
+2. Whether composite Drift Ratio is in MVP or Phase 2 (currently Phase 2 / precision tier only)
 
 ---
 

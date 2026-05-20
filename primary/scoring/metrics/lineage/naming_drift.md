@@ -43,46 +43,36 @@ The SigRank metric system went through ~8 months of naming evolution across GPT 
 
 ---
 
-## SDOT vs SDRM
+## SDOT and SDRM — RETIRED
 
-**Status: unresolved — kept separate**
+**Status: removed from active stack**
 
-| Term | Likely meaning | Period |
+| Term | What it tried to be | Resolution |
 |---|---|---|
-| SDOT | Signal Delta Over Time — slope/delta concept | earlier |
-| SDRM | Signal Density Resonance Metric — multi-axis | later |
+| SDOT | Signal Delta Over Time — slope/delta concept | retired |
+| SDRM | Signal Density Resonance Metric — multi-axis | retired |
 
-The user explicitly stated in GPT thread-0369 (2026-03-10): "SDRM may be separated from SDOT... I can't remember what happened that caused the shift."
+Both were under recovery in GPT thread-0369. Neither had a confirmed formula. Neither was in any active prototype. They were "system constructions" from GPT outputs that never landed as locked metrics.
 
-**Decision:** Do not merge SDOT and SDRM. Track both. Recovery may eventually clarify whether SDRM replaced, absorbed, or split from SDOT.
+**Decision (locked):** Both retired. Not implemented. Not in the database. Not in the snapshot payload. If a real multi-axis resonance metric is needed later, it'll be designed fresh with a clear formula — not resurrected from undefined GPT-era branches.
 
 ---
 
-## Drift Ratio / Sig Delta?
+## Drift Ratio (Sig Delta hypothesis — resolved)
 
-**Status: unresolved**
+The earlier theory: "drift ratio became sig delta to match signal force as sig alpha."
 
-Possible rename in later sessions:
-- **Drift Ratio (DR%)** — original name
-- **Sig Delta** — possible later rename, paired with Signal Force → Sig Alpha
+That rename **never materialized**. No prototype uses Sig Delta. No spec uses Sig Delta. The original name **Drift Ratio (DR%)** stands as canonical.
 
-The user noted: "I believe the SDRM may have been that drift ratio became sig delta to match signal force as sig alpha."
-
-**Decision:** **Drift Ratio** remains the canonical name. If Sig Delta is later confirmed as the public name, rename in one pass.
+**Decision (locked):** Drift Ratio is the canonical name. "Sig Delta" was a possible rename that never happened — drop the alias from active vocabulary.
 
 ---
 
-## Signal Force / Sig Alpha?
+## Signal Force (Sig Alpha hypothesis — resolved)
 
-**Status: unresolved**
+Same pattern. The hypothesized rename to "Sig Alpha" never landed. No prototype uses Sig Alpha. The v2 Signal Codex shipped with **Signal Force (SF)**.
 
-| Label | Period | Source |
-|---|---|---|
-| Signal Force (SF) | ongoing | v2 Signal Codex |
-| SigForce | display label | v1 HTML |
-| Sig Alpha | possible rename | GPT thread-0369 hint |
-
-**Decision:** **Signal Force** remains canonical. Watch for "Sig Alpha" in newer material.
+**Decision (locked):** Signal Force is the canonical name. "Sig Alpha" was a possible rename that never happened — drop the alias.
 
 ---
 

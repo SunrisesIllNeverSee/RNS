@@ -19,7 +19,7 @@ Apply Recency Modifier → LIVE_SIGNA_RATE
         ↓
 Assign Class Tier (uses Compression + SIGNA RATE)
         ↓
-Compute Auxiliary Composites (Signal Force, SDRM, Drift)
+Compute Auxiliary Composites (Signal Force, Drift Ratio)
         ↓
 Write to metric_snapshots
         ↓
@@ -127,14 +127,6 @@ See [class_tiers.md](class_tiers.md) — `assign_class(compression_ratio, signa_
 SF = (total_messages_lifetime × session_depth_avg) / account_age_days
 SF_SCORE = min(100, 20 × log10(SF + 1))   // for display
 ```
-
-### SDRM (provisional)
-```
-THREAD_RATE = cross_thread_score / message_volume
-SDRM = (compression_ratio × (session_depth_avg + prompt_complexity / 10)) × THREAD_RATE × 100
-```
-
-(SDRM formula remains under recovery — this is a working placeholder.)
 
 ### Drift Ratio (precision tier only)
 ```

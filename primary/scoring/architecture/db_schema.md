@@ -182,7 +182,6 @@ CREATE TABLE metric_snapshots (
 
   -- Composites
   signa_rate         NUMERIC(5,2),
-  sdrm_score         NUMERIC(5,2),
   signal_force       NUMERIC(10,2),
   drift_ratio        NUMERIC(5,2),
 

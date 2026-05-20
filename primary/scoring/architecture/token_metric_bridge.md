@@ -193,7 +193,6 @@ These don't need proxying — they're already counts:
 | Token Throughput | direct | direct |
 | Prompt Complexity | weak estimate | exact (full sub-score breakdown) |
 | Drift Ratio | not computed | computed |
-| SDRM | partial | full |
 | Class assignment | yes | yes (with confidence) |
 | Leaderboard rank | yes | yes (with audit verified badge) |
 | Profile sub-score breakdown | top-level only | full drilldown |
@@ -218,6 +217,6 @@ The precision tier is the upsell. The free tier is the funnel. The token bridge 
 1. **First**: build the free tier completely. Token telemetry submission → proxy computation → Core 5 scores → SIGNA RATE → class → leaderboard.
 2. **Second**: ship the leaderboard publicly with free tier scores.
 3. **Third**: build the precision tier as an upsell that operators opt into. Connect sig_army for exact PC and Compression.
-4. **Fourth**: add precision-only metrics (Drift Ratio, full SDRM).
+4. **Fourth**: add precision-only metrics (Drift Ratio).
 
 The free tier alone is shippable. Don't gate launch on precision.
