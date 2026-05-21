@@ -16,7 +16,7 @@ The v4 mockup pages (`intro.html`, `index.html`, `profile.html`) contain a mix o
 ### Repo + spec
 | What | Value | Source |
 |---|---|---|
-| Core 5 metric names | Compression Ratio, Prompt Complexity, Cross-Thread, Session Depth, Token Throughput | `Sigrank/layer-1-foundation/metrics/00_README.md` |
+| Core 5 metric names | Compression Ratio, Prompt Complexity, Cross-Thread, Session Depth, Token Throughput | `1_sigrank/1.2_layer-1-foundation/metrics/00_README.md` |
 | Background 3 metrics | Message Volume, Account Age, Total Messages | spec |
 | Composites (3) | SIGNA RATE, Signal Force, Drift Ratio | spec (SDOT/SDRM retired) |
 | Total active metrics | 11 | spec |
@@ -205,7 +205,7 @@ All sparklines are 🔴 **PLACEHOLDER** — generated paths for visual effect, n
 | Best Ever #1 since 2026-05-14 | 🔴 placeholder |
 
 ### Badges
-The badge **system** exists in spec (`Sigrank/layer-2-mechanics/db_schema.md` has `badges` and `operator_badges` tables). The **specific badges displayed** on profile.html are 🔴 **PLACEHOLDER** — no badge engine has actually computed any awards yet.
+The badge **system** exists in spec (`1_sigrank/1.3_layer-2-mechanics/db_schema.md` has `badges` and `operator_badges` tables). The **specific badges displayed** on profile.html are 🔴 **PLACEHOLDER** — no badge engine has actually computed any awards yet.
 
 ### Conversion section examples (intro.html + profile.html)
 | Value | Status |

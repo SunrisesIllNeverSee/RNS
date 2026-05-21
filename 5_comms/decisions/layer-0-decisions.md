@@ -7,7 +7,7 @@ Append-only record of decisions affecting the ground foundation (root numbers, c
 ## 2026-05-21 · Layer scaffold model adopted
 
 **Decided by:** operator + VSClaude-OPUS47-LEAD
-**Decision:** Project organized into 4 layers (Layer 0 ground / Layer 1 foundation / Layer 2 mechanics / Layer 3 frontend) plus `comms/` + `references/` + `inbox/`.
+**Decision:** Project organized into 4 layers (Layer 0 ground / Layer 1 foundation / Layer 2 mechanics / Layer 3 frontend) plus `5_comms/` + `4_references/` + `_inbox/`.
 **Reasoning:** Operator wants explicit scaffolding with Layer 0 as the unbuilt-on bedrock that everything else builds from. Mirrors the dimensional-resolution stack in CONSERVATION_LAW.md.
 **Reversal cost:** Medium — would require unwinding directory moves.
 
@@ -66,7 +66,7 @@ Append-only record of decisions affecting the ground foundation (root numbers, c
 ## 2026-05-21 · CANON.md location
 
 **Decided by:** operator
-**Decision:** CANON.md moved from `Sigrank/layer-0-ground/build/CANON.md` to `Sigrank/layer-0-ground/build/CANON.md`.
+**Decision:** CANON.md moved from `1_sigrank/1.1_layer-0-ground/build/CANON.md` to `1_sigrank/1.1_layer-0-ground/build/CANON.md`.
 **Reversal cost:** Low — `git mv` preserves history.
 
 ---
@@ -76,5 +76,5 @@ Append-only record of decisions affecting the ground foundation (root numbers, c
 1. Should B.03 lifetime count be computed via one-time `extract_benchmark_window.py --all-time` scan, or via continuous append-only counter?
 2. Active minutes (T.08) estimation algorithm — three options listed in MOSES_REFERENCE; which do we pick?
 3. Drift Ratio (C.03) alignment signal — 5 options in SOURCE_DATA.md (repetition heuristics / sentence-transformers / topic coherence / sig_army / reset heuristics) — operator hasn't picked.
-4. Other metrics the operator mentioned owing — pending drop into `inbox/`.
+4. Other metrics the operator mentioned owing — pending drop into `_inbox/`.
 5. Old master list documents — pending operator paths.

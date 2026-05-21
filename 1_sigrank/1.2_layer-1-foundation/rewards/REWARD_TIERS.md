@@ -119,4 +119,4 @@ When proposing a new reward:
 2. Specify trigger source (class / badge / supporter / Hall)
 3. Specify whether revocable
 4. Specify Layer 3 display requirements
-5. Note in `comms/decisions/layer-1-decisions.md`
+5. Note in `5_comms/decisions/layer-1-decisions.md`

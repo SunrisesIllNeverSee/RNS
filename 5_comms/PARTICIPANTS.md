@@ -69,17 +69,17 @@ Until the operator declares foundation locked:
 - **CONTRIBUTOR** authority:
   - Implement code per spec (no spec changes)
   - Run tests
-  - Lock specific files in `comms/locks/current.json` while editing
-  - Hand off via `comms/handoffs/`
+  - Lock specific files in `5_comms/locks/current.json` while editing
+  - Hand off via `5_comms/handoffs/`
 
 - **REVIEWER** authority:
   - Read everything
-  - Propose feedback via `comms/messages/`
+  - Propose feedback via `5_comms/messages/`
   - Cannot edit
 
 - **TESTER** authority:
   - Read everything
-  - Write to `tests/` and `comms/test-reports/`
+  - Write to `tests/` and `5_comms/test-reports/`
   - Cannot edit specs or production code
 
 ---
@@ -88,15 +88,15 @@ Until the operator declares foundation locked:
 
 When a new participant joins:
 
-1. Operator drops their info in `inbox/new-participant-{id}.md`
+1. Operator drops their info in `_inbox/new-participant-{id}.md`
 2. LEAD reviews, confirms identity tuple
 3. LEAD adds row to "Active participants" table above
-4. LEAD writes welcome message in `comms/messages/{date}/{time}-LEAD-to-{new}.md` with:
+4. LEAD writes welcome message in `5_comms/messages/{date}/{time}-LEAD-to-{new}.md` with:
    - Their scope
    - Locks they should claim
    - Open questions for them to consider
    - Authority limits
-5. New participant writes their first heartbeat to `comms/active/{participant_id}.json`
+5. New participant writes their first heartbeat to `5_comms/active/{participant_id}.json`
 
 ---
 
@@ -104,11 +104,11 @@ When a new participant joins:
 
 When a participant rotates off:
 
-1. Write `comms/handoffs/` document if work is incomplete
-2. Move heartbeat from `comms/active/` to `comms/active/_history/`
-3. Release all locks in `comms/locks/current.json`
+1. Write `5_comms/handoffs/` document if work is incomplete
+2. Move heartbeat from `5_comms/active/` to `5_comms/active/_history/`
+3. Release all locks in `5_comms/locks/current.json`
 4. Move row from "Active" to "Historical" table here, with `ended_at` date
-5. Final message in `comms/messages/` summarizing what was completed
+5. Final message in `5_comms/messages/` summarizing what was completed
 
 ---
 
@@ -123,7 +123,7 @@ Operator-HUMAN-OWNER
 Operator:
 - Does not write heartbeats (they're always-on)
 - Does not claim locks (they have implicit authority over all files)
-- Drops new info in `inbox/` instead of `comms/messages/`
+- Drops new info in `_inbox/` instead of `5_comms/messages/`
 - Receives status reports from LEAD via direct chat (this conversation), not via comms files
 - Is the only one who can:
   - Commit (after double-confirm)

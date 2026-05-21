@@ -472,9 +472,9 @@ Pure read path. Fast. Cached.
 | **Runtime** | Browser |
 | **Status** | 🟢 LOCKED |
 | **Inputs** | Leaderboard data from S.31 · realtime updates from S.32 |
-| **Process** | Pass data to `Sigrank/components/sigrank/` components (`LeaderboardTable`, `ProfilePanel`, etc.) which render the UI. |
+| **Process** | Pass data to `1_sigrank/1.5_components/sigrank/` components (`LeaderboardTable`, `ProfilePanel`, etc.) which render the UI. |
 | **Outputs** | Rendered HTML/CSS in browser |
-| **Implementation** | `sigrank-web/app/` + `Sigrank/components/sigrank/` |
+| **Implementation** | `sigrank-web/app/` + `1_sigrank/1.5_components/sigrank/` |
 
 ---
 
@@ -566,4 +566,4 @@ Quick reference: which canonical IDs each step touches.
 
 *S.01 locked for Claude Code only; other platform adapters Phase 2.
 
-See `Sigrank/layer-0-ground/build/GREENING.md` for the path to all-🟢.
+See `1_sigrank/1.1_layer-0-ground/build/GREENING.md` for the path to all-🟢.

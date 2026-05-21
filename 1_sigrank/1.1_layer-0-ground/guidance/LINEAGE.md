@@ -21,7 +21,7 @@ Operator observed that some interactions produce dense, coherent output (high si
 The philosophical formalization: signal is preserved when commitment is sustained. Without commitment, signal disperses into noise. This became the bedrock — the conservation law's "why."
 
 ### Phase 2 · SigSystem
-The word-level engine. Quantifies language by classifying words and tokens as signal or noise within their statement context. Lives in `Sigrank/sig_army/` and `Sigrank/word_vault/` — the 4,900-token classifier was built here.
+The word-level engine. Quantifies language by classifying words and tokens as signal or noise within their statement context. Lives in `2_secondary/sig_army/` and `2_secondary/word_vault/` — the 4,900-token classifier was built here.
 
 The word vault is the operationalization of SigSystem at scale.
 

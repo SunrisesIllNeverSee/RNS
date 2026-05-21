@@ -58,20 +58,20 @@ comms/
 
 When a model starts working:
 
-1. Write `comms/active/{participant_id}.json`:
+1. Write `5_comms/active/{participant_id}.json`:
 
 ```json
 {
   "participant_id": "VSClaude-OPUS47-LEAD",
   "started_at": "2026-05-21T14:23:00Z",
   "scope": "Layer 0 foundation + comms scaffolding",
-  "current_file": "Sigrank/layer-0-ground/build/CANON.md",
+  "current_file": "1_sigrank/1.1_layer-0-ground/build/CANON.md",
   "last_heartbeat": "2026-05-21T14:45:12Z"
 }
 ```
 
 2. Update `last_heartbeat` every ~5 minutes during active work
-3. On finish, move file to `comms/active/_history/{participant_id}-{timestamp}.json` (deactivate)
+3. On finish, move file to `5_comms/active/_history/{participant_id}-{timestamp}.json` (deactivate)
 
 If `last_heartbeat` is >1 hour old, treat the participant as offline (could be force-killed, network drop, etc.).
 
@@ -108,7 +108,7 @@ Save to `messages/2026-05-21/14-30-VSClaude-to-all.md`.
 
 When one model passes work to another:
 
-1. Write `comms/handoffs/{date}-{from}-to-{to}-{topic}.md`:
+1. Write `5_comms/handoffs/{date}-{from}-to-{to}-{topic}.md`:
 
 ```markdown
 ---
@@ -129,8 +129,8 @@ topic: Layer 2 mechanics — billing implementation
 - Write Python tests against Stripe test mode
 
 ## Pickup files
-- Specs: Sigrank/layer-2-mechanics/billing/*.md
-- Schema: Sigrank/layer-2-mechanics/db_schema.md
+- Specs: 1_sigrank/1.3_layer-2-mechanics/billing/*.md
+- Schema: 1_sigrank/1.3_layer-2-mechanics/db_schema.md
 
 ## Open questions
 - Should Pro yearly include a discount or just match monthly × 12?
@@ -139,10 +139,10 @@ topic: Layer 2 mechanics — billing implementation
 ## Authority limits
 - Do NOT change RS.xx parameters
 - Do NOT commit without operator double-confirm
-- Lock files in comms/locks/current.json before editing
+- Lock files in 5_comms/locks/current.json before editing
 ```
 
-2. Update `comms/locks/current.json` to remove old locks (releasing files)
+2. Update `5_comms/locks/current.json` to remove old locks (releasing files)
 3. Receiving model reads handoff, picks up, claims their own locks
 
 ---
@@ -162,17 +162,17 @@ Major decisions get logged per layer:
 **Reversal cost:** Low — just expose the field
 ```
 
-Append to `comms/decisions/layer-{N}-decisions.md`.
+Append to `5_comms/decisions/layer-{N}-decisions.md`.
 
 ---
 
 ## Lock protocol
 
-`comms/locks/current.json` prevents conflicting edits:
+`5_comms/locks/current.json` prevents conflicting edits:
 
 ```json
 {
-  "Sigrank/layer-0-ground/build/CANON.md": {
+  "1_sigrank/1.1_layer-0-ground/build/CANON.md": {
     "claimed_by": "VSClaude-OPUS47-LEAD",
     "claimed_at": "2026-05-21T14:23:00Z",
     "expires_at": "2026-05-21T16:23:00Z",
@@ -193,10 +193,10 @@ The operator is the **single source of truth**. All participants:
 
 - Propose, don't commit, until operator double-confirms
 - Surface open questions to the operator before assuming
-- Use `inbox/` for the operator to drop new info (operator → models)
-- Use this `comms/` for model ↔ model communication
+- Use `_inbox/` for the operator to drop new info (operator → models)
+- Use this `5_comms/` for model ↔ model communication
 
-The operator does NOT participate in comms/ as a peer — they direct from above.
+The operator does NOT participate in 5_comms/ as a peer — they direct from above.
 
 ---
 
@@ -208,7 +208,7 @@ The Claude Code hook system (settings.json) can automate parts of this:
 |---|---|
 | SessionStart | Write to `active/{participant_id}.json` |
 | Stop | Move active file to `_history/`, release locks |
-| UserPromptSubmit | Check `inbox/` for new messages, surface to model |
+| UserPromptSubmit | Check `_inbox/` for new messages, surface to model |
 | PreToolUse (Edit/Write) | Check `locks/current.json` for conflicts |
 
 For now, this is manual / convention-based. Hooks can be added when the comms layer activates.
@@ -221,5 +221,5 @@ Reference patterns: `~/Desktop/claude-switchboard-plugin/builder/target-plugin/h
 
 - [`PARTICIPANTS.md`](PARTICIPANTS.md) — active participant registry
 - [`decisions/`](decisions/) — decision logs per layer
-- [`../inbox/README.md`](../inbox/README.md) — operator → models channel
+- [`../_inbox/README.md`](../_inbox/README.md) — operator → models channel
 - [`../MODERATOR_NOTE.md`](../MODERATOR_NOTE.md) — moderator framing

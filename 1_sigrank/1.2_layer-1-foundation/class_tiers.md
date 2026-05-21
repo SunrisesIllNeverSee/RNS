@@ -44,7 +44,7 @@ function assign_class(compression, signa_rate) {
 
 ## Class colors (for UI)
 
-Locked in `Sigrank/components/sigrank/tokens.ts`:
+Locked in `1_sigrank/1.5_components/sigrank/tokens.ts`:
 
 | Class | Hex | Use |
 |---|---|---|

@@ -82,4 +82,4 @@ When proposing a new badge:
 3. Estimate target rarity
 4. Define glyph and category
 5. If criteria reference RS.xx proprietary parameters, mark badge as "ruleset-dependent" and version it with the ruleset
-6. Note in `comms/decisions/layer-1-decisions.md`
+6. Note in `5_comms/decisions/layer-1-decisions.md`

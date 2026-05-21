@@ -21,7 +21,7 @@ Append-only record of decisions affecting the mechanics layer (processing, stora
 
 **Decided by:** operator + VSClaude-OPUS47-LEAD
 **Decision:** Added `IPO.md` (input/process/output per pipeline step) and `GREENING.md` (path to all-green status).
-**Affects:** `layer-2-mechanics/IPO.md`, `layer-0-ground/build/GREENING.md`
+**Affects:** `1.3_layer-2-mechanics/IPO.md`, `1.1_layer-0-ground/build/GREENING.md`
 **Reversal cost:** Low.
 
 ---
@@ -46,7 +46,7 @@ Append-only record of decisions affecting the mechanics layer (processing, stora
 - Hourly: activity charts
 - Daily (00:00 UTC): Signalgeist 90d, Hall, badge eval, Top 10 metrics
 - On-submit: operator's own profile
-**Affects:** `layer-2-mechanics/refresh_cadences.md`
+**Affects:** `1.3_layer-2-mechanics/refresh_cadences.md`
 **Reversal cost:** Low — cadences are tunable per-surface.
 
 ---
