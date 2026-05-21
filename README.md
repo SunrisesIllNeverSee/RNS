@@ -14,6 +14,25 @@ Research, tools, and prototypes around **signal vs. noise** measurement in human
 | `signal-Areana/` | Signal Arena — full-stack web app (React + Express + Drizzle/Postgres) for interactive signal analysis. |
 | `word_vault/` | Generated word-level vault — ~4,900 markdown files, one per token, with classification, signal weight, noise weight, and trajectory. |
 
+## Conversation Pipeline
+
+| Step       | Folder        | What it is                                            |
+| ---------- | ------------- | ----------------------------------------------------- |
+| Drop       | `_inbox/`      | Raw exports land here                                 |
+| Layer 1    | `raw/`        | Routed source files — untouched, source of truth      |
+| Layer 2    | `4_references/` | Formatted conversation folders — standard routing     |
+| Layer 2 ★  | `primary/`    | Reserved for high-signal threads only                 |
+
+Each formatted conversation folder contains:
+
+```text
+[Conversation Name]/
+├── Raw Conversation/    ← copy of source
+├── 01_Formatted_Conversation.md
+├── 02_Turns_Structured.md
+└── 03_TOC_Summary.md
+```
+
 ## Status
 
 Pre-publication. This is consolidated research material from active projects, not a polished release. Code and data dumps from analysis runs are kept locally and **excluded** from this repo (see `.gitignore`).

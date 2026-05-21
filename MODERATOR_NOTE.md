@@ -17,7 +17,7 @@ For anyone (human or AI moderator, future model joining the build, or operator r
 - **Identity:** Deric McHenry (`dericmchenry@gmail.com`)
 - **Operator tuple:** `Operator-HUMAN-OWNER`
 - **Authority:** Final decision on everything. Owns RS.xx proprietary parameters. Owns ruleset versions. Owns commits.
-- **Status:** OG SIGRANK — the originator of the conservation-law mapping that all current builds rest on (see `Sigrank/layer-0-ground/guidance/CONSERVATION_LAW.md` and `LINEAGE.md`).
+- **Status:** OG SIGRANK — the originator of the conservation-law mapping that all current builds rest on (see `1_sigrank/1.1_layer-0-ground/guidance/CONSERVATION_LAW.md` and `LINEAGE.md`).
 
 ---
 
@@ -38,7 +38,7 @@ For anyone (human or AI moderator, future model joining the build, or operator r
 {ENVIRONMENT}-{MODEL}-{ROLE}
 ```
 
-See `comms/PARTICIPANTS.md` for full registry and protocol for joining.
+See `5_comms/PARTICIPANTS.md` for full registry and protocol for joining.
 
 ---
 
@@ -60,21 +60,21 @@ See `comms/PARTICIPANTS.md` for full registry and protocol for joining.
 
 ```
 LAYER 0 — Ground Foundation (the unbuilt-on bedrock)
-  Sigrank/layer-0-ground/
+  1_sigrank/1.1_layer-0-ground/
     ├── build/      — production canon (use to compute)
     │     CANON.md · SOURCE_DATA.md · GREENING.md · ROOT_NUMBERS.md · MOSES_REFERENCE.md
     └── guidance/   — philosophical context (interprets the compute)
           CONSERVATION_LAW.md · LINEAGE.md · TOKENS_PER_WORD.md
 
 LAYER 1 — Foundation (built on Layer 0)
-  Sigrank/layer-1-foundation/
+  1_sigrank/1.2_layer-1-foundation/
     ├── metrics/    — the 11 equations (M.xx / B.xx / C.xx) + lineage
     ├── class_tiers.md     — K.01-K.09
     ├── badges/     — BG.xx catalog
     └── rewards/    — RW.xx tier mapping
 
 LAYER 2 — Mechanics (built on Layers 0 + 1)
-  Sigrank/layer-2-mechanics/
+  1_sigrank/1.3_layer-2-mechanics/
     ├── IPO.md, db_schema.md, api_spec.md, snapshot_payload.md
     ├── scoring_formula.md, token_metric_bridge.md
     ├── deployment_topology.md, build_layers.md
@@ -82,21 +82,21 @@ LAYER 2 — Mechanics (built on Layers 0 + 1)
     └── refresh_cadences.md
 
 LAYER 3 — Frontend (built on all previous)
-  Sigrank/layer-3-frontend/
+  1_sigrank/1.4_layer-3-frontend/
     ├── site_architecture.md
     ├── v3_mockup/, v4_mockup/
     └── stripe_checkout_ui.md
 ```
 
 Plus:
-- `comms/` — multi-model project communication system
-- `references/` — material we used to build, not needed at runtime
-- `inbox/` — operator → models drop zone
-- `Sigrank/components/sigrank/` — 12 TSX components for the production Next.js app
-- `Sigrank/sig_army/` + `Sigrank/word_vault/` + `Sigrank/WordToken-SNR-Classifier/` — the SigSystem-resolution engine for Pro tier
-- `Sigrank/agent/` — local agent (Python CLI) spec
-- `secondary/` — existing partial Next.js attempts (SiGlobe, signal-Areana) for component salvage
-- `outliers/` — old prototypes not directly used
+- `5_comms/` — multi-model project communication system
+- `4_references/` — material we used to build, not needed at runtime
+- `_inbox/` — operator → models drop zone
+- `1_sigrank/1.5_components/sigrank/` — 12 TSX components for the production Next.js app
+- `2_secondary/sig_army/` + `2_secondary/word_vault/` + `2_secondary/WordToken-SNR-Classifier/` — the SigSystem-resolution engine for Pro tier
+- `1_sigrank/1.6_agent/` — local agent (Python CLI) spec
+- `2_secondary/` — existing partial Next.js attempts (SiGlobe, signal-Areana) for component salvage
+- `3_outliers/` — old prototypes not directly used
 
 ---
 
@@ -124,10 +124,10 @@ Plus:
 ## Open decisions (as of 2026-05-21)
 
 Tracked across decision logs:
-- `comms/decisions/layer-0-decisions.md`
-- `comms/decisions/layer-1-decisions.md`
-- `comms/decisions/layer-2-decisions.md`
-- `comms/decisions/layer-3-decisions.md`
+- `5_comms/decisions/layer-0-decisions.md`
+- `5_comms/decisions/layer-1-decisions.md`
+- `5_comms/decisions/layer-2-decisions.md`
+- `5_comms/decisions/layer-3-decisions.md`
 
 Key items waiting on operator:
 1. B.03 lifetime count — one-time scan vs append-only counter
@@ -144,14 +144,14 @@ Key items waiting on operator:
 
 Read in order:
 1. This file (you're already here)
-2. `Sigrank/layer-0-ground/build/CANON.md` — every ID and the formula structure
-3. `Sigrank/layer-0-ground/build/ROOT_NUMBERS.md` — what the equations consume
-4. `Sigrank/layer-0-ground/build/MOSES_REFERENCE.md` — the only fully-verified operator
-5. `Sigrank/layer-0-ground/guidance/CONSERVATION_LAW.md` — why the math works
-6. `Sigrank/layer-0-ground/guidance/LINEAGE.md` — historical context
-7. `comms/decisions/layer-*-decisions.md` — what's been decided and why
-8. `Sigrank/layer-2-mechanics/deployment_topology.md` — how it runs
-9. `Sigrank/layer-3-frontend/site_architecture.md` — what it looks like
+2. `1_sigrank/1.1_layer-0-ground/build/CANON.md` — every ID and the formula structure
+3. `1_sigrank/1.1_layer-0-ground/build/ROOT_NUMBERS.md` — what the equations consume
+4. `1_sigrank/1.1_layer-0-ground/build/MOSES_REFERENCE.md` — the only fully-verified operator
+5. `1_sigrank/1.1_layer-0-ground/guidance/CONSERVATION_LAW.md` — why the math works
+6. `1_sigrank/1.1_layer-0-ground/guidance/LINEAGE.md` — historical context
+7. `5_comms/decisions/layer-*-decisions.md` — what's been decided and why
+8. `1_sigrank/1.3_layer-2-mechanics/deployment_topology.md` — how it runs
+9. `1_sigrank/1.4_layer-3-frontend/site_architecture.md` — what it looks like
 
 Then read the relevant layer for whatever you're picking up.
 
@@ -159,12 +159,12 @@ Then read the relevant layer for whatever you're picking up.
 
 ## How to join the build (if you're another AI model)
 
-1. Operator drops a `inbox/new-participant-{your_env}.md` file with your identity tuple and scope
-2. Current LEAD reviews, adds you to `comms/PARTICIPANTS.md`
-3. LEAD writes welcome message in `comms/messages/{today}/`
-4. You write your first heartbeat to `comms/active/{your_id}.json`
-5. Claim files you need to edit in `comms/locks/current.json`
-6. Operate per `comms/README.md` protocol
+1. Operator drops a `_inbox/new-participant-{your_env}.md` file with your identity tuple and scope
+2. Current LEAD reviews, adds you to `5_comms/PARTICIPANTS.md`
+3. LEAD writes welcome message in `5_comms/messages/{today}/`
+4. You write your first heartbeat to `5_comms/active/{your_id}.json`
+5. Claim files you need to edit in `5_comms/locks/current.json`
+6. Operate per `5_comms/README.md` protocol
 
 ---
 
@@ -174,7 +174,7 @@ This is the operator's pride and joy. Treat it that way. The system is built on 
 
 Don't break the invariants. Don't conflate the layers. Don't get ahead of the operator. Don't commit without double-confirm.
 
-When in doubt, ask. When the operator answers, take it down in `comms/decisions/`.
+When in doubt, ask. When the operator answers, take it down in `5_comms/decisions/`.
 
 ---
 

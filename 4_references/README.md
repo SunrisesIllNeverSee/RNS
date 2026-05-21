@@ -1,8 +1,8 @@
-# references/ — material we used to build, not needed at runtime
+# 4_references/ — material we used to build, not needed at runtime
 
 This folder holds everything that informed the SigRank build but **is not part of the production site or scoring system**. Source material, historical prototypes, benchmark artifacts, competitor analysis, archived research.
 
-**If it's referenced by `Sigrank/` or `comms/`, it stays here.** If it's not, it can be archived externally.
+**If it's referenced by `1_sigrank/` or `5_comms/`, it stays here.** If it's not, it can be archived externally.
 
 ---
 
@@ -59,26 +59,26 @@ Research notes on SDOT (Signal Delta Over Time) — a metric that was under cons
 
 ## What does NOT belong here
 
-- Production canon (lives in `Sigrank/layer-0-ground/build/`)
-- Production guidance (lives in `Sigrank/layer-0-ground/guidance/`)
-- Active mockups (live in `Sigrank/layer-3-frontend/v4_mockup/`)
-- Components used at runtime (live in `Sigrank/components/sigrank/`)
-- Active spec documents (live in `Sigrank/layer-{1,2,3}-*/`)
-- Multi-model coordination (lives in `comms/`)
-- Operator-dropped new info (lives in `inbox/`)
+- Production canon (lives in `1_sigrank/1.1_layer-0-ground/build/`)
+- Production guidance (lives in `1_sigrank/1.1_layer-0-ground/guidance/`)
+- Active mockups (live in `1_sigrank/1.4_layer-3-frontend/v4_mockup/`)
+- Components used at runtime (live in `1_sigrank/1.5_components/sigrank/`)
+- Active spec documents (live in `1_sigrank/1.{2,3,4}_layer-*/`)
+- Multi-model coordination (lives in `5_comms/`)
+- Operator-dropped new info (lives in `_inbox/`)
 
 ---
 
 ## When to move things in or out
 
-**Move INTO `references/` when:**
+**Move INTO `4_references/` when:**
 - A doc was used as inspiration but isn't operative anymore
 - An old prototype is superseded by a newer one
 - A research note is no longer part of the active build
 
-**Move OUT of `references/` when:**
-- A reference doc gets promoted to canon (move to `layer-0-ground/`)
-- A historical metric gets re-activated (move to `layer-1-foundation/metrics/`)
+**Move OUT of `4_references/` when:**
+- A reference doc gets promoted to canon (move to `1.1_layer-0-ground/`)
+- A historical metric gets re-activated (move to `1.2_layer-1-foundation/metrics/`)
 
 When moving, use `git mv` to preserve history.
 
@@ -86,5 +86,5 @@ When moving, use `git mv` to preserve history.
 
 ## See also
 
-- [`../Sigrank/layer-0-ground/guidance/LINEAGE.md`](../Sigrank/layer-0-ground/guidance/LINEAGE.md) — historical context for what's in this folder
-- [`../Sigrank/layer-0-ground/build/MOSES_REFERENCE.md`](../Sigrank/layer-0-ground/build/MOSES_REFERENCE.md) — canon row that ties back to `benchmark_export/summary.json` here
+- [`../1_sigrank/1.1_layer-0-ground/guidance/LINEAGE.md`](../1_sigrank/1.1_layer-0-ground/guidance/LINEAGE.md) — historical context for what's in this folder
+- [`../1_sigrank/1.1_layer-0-ground/build/MOSES_REFERENCE.md`](../1_sigrank/1.1_layer-0-ground/build/MOSES_REFERENCE.md) — canon row that ties back to `benchmark_export/summary.json` here
