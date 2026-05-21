@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "description": "File-level coordination lock registry. Before editing, check whether file is locked by another participant. Add row when claiming, remove when done.",
+    "schema": {
+      "file_path": "string — repo-relative path",
+      "claimed_by": "string — participant_id from comms/PARTICIPANTS.md",
+      "claimed_at": "ISO 8601 timestamp",
+      "expires_at": "ISO 8601 — locks auto-expire after 2h of inactivity",
+      "reason": "string — what change is being made"
+    },
+    "expiry_policy": "Locks expire 2 hours after claimed_at unless heartbeat refreshes them. Expired locks are released by next participant who needs the file."
+  },
+  "locks": {}
+}

@@ -703,7 +703,7 @@
   }
   .canon-id.real { color: var(--green); }
 
-  /* ── Source pinned banner (top of body) ─────────────────────── */
+  /* ── Source banner (static · scrolls away with page) ────────── */
   .source-banner {
     background: rgba(245,160,32,0.06);
     border-bottom: 1px solid var(--gold-border);
@@ -712,15 +712,9 @@
     font-family: var(--mono);
     font-size: 12px;
     color: var(--text-2);
-    position: sticky;
-    top: 0;
-    z-index: 51;
   }
   .source-banner strong { color: var(--gold); font-weight: 600; }
   .source-banner a { color: var(--text-0); text-decoration: underline; }
-
-  /* nudge nav.top below the banner */
-  nav.top { top: 33px; }
 
   /* ── Responsive ─────────────────────────────────────────────── */
   @media (max-width: 900px) {
@@ -737,7 +731,7 @@
 
 <div class="source-banner">
   <strong>⚠ MOCKUP · DEMO DATA</strong> · Numbers with <span class="ph">*</span> are placeholders.
-  Every value is rooted in <a href="../../scoring/CANON.md">CANON.md</a> (canonical IDs) and
+  Every value is rooted in <a href="../../layer-0-ground/build/CANON.md">CANON.md</a> (canonical IDs) and
   <a href="DATA_LEDGER.md">DATA_LEDGER.md</a> (placeholder audit).
 </div>
 
