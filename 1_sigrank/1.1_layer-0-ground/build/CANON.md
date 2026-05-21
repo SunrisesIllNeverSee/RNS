@@ -200,9 +200,11 @@ Identity / normalization context. Required for composites but not direct leaderb
 
 ---
 
-# IV. Composites
+# IV. Composites — Big 3 (inside the 11 core)
 
-Derived metrics. The flagship plus two advanced.
+The three composite metrics that complete the 11-core stack: Core 5 + Background 3 + **Big 3** = 11.
+
+> **Corrected 2026-05-21:** This section previously listed SIGNA RATE + Signal Force + Drift Ratio as the Big 3. Per operator correction, the correct Big 3 is **SIGNA RATE + SDOT + SDRM**. Signal Force and Drift Ratio are extras outside the 11 core — see Section IV-B.
 
 ## `C.01` — SIGNA RATE (the flagship)
 
@@ -219,25 +221,57 @@ Derived metrics. The flagship plus two advanced.
 | **MO§ES reference** | `[NOT COMPUTED]` ← requires server scoring engine to be built |
 | **Spec doc** | `metrics/composites/01_signa_rate.md` |
 
-## `C.02` — Signal Force (SF)
+## `C.02` — SDOT (Signal Delta Over Time)
 
 | Field | Value |
 |---|---|
 | **Canonical ID** | **C.02** |
-| **DB column** | `metric_snapshots.signal_force` |
-| **Formula (raw)** | `(B.03 × M.04_raw) / B.02` |
-| **Formula (score)** | `min(100, 20 × log₁₀(C.02_raw + 1))` |
-| **Domain (raw)** | `[0, ∞)` · **Domain (score)** `[0, 100]` |
-| **Status** | 🟢 LOCKED |
-| **Required inputs** | B.03, M.04, B.02 |
-| **MO§ES reference** | `[TBD]` ← needs B.03 (lifetime totals); partial inputs available |
-| **Spec doc** | `metrics/composites/02_signal_force.md` |
+| **DB column** | `metric_snapshots.sdot_score` |
+| **Formula (provisional)** | `SIGNA_RATE(window_n) - SIGNA_RATE(window_n-1)` (self-delta) — population-relative variant under consideration |
+| **Domain** | `[-100, +100]` (signed delta) |
+| **Status** | 🟡 PROVISIONAL — formula not locked |
+| **Required inputs** | SIGNA RATE history (min 2 windows) |
+| **MO§ES reference** | `[TBD]` ← needs multi-window scoring history |
+| **Spec doc** | `metrics/composites/02_sdot.md` |
 
-## `C.03` — Drift Ratio (DR%)
+## `C.03` — SDRM (Signal Density Resonance Metric)
 
 | Field | Value |
 |---|---|
 | **Canonical ID** | **C.03** |
+| **DB column** | `metric_snapshots.sdrm_score` |
+| **Formula (provisional)** | `(Compression × (SD + PC)) × Thread_Rate` where `Thread_Rate = CT / Total_Messages` |
+| **Domain** | `[0, 100]` (scoring normalization TBD) |
+| **Status** | 🟡 PROVISIONAL — formula carried from v2 prototype, not locked |
+| **Required inputs** | M.01, M.04, M.02, M.03, B.03 |
+| **MO§ES reference** | `[TBD]` |
+| **Spec doc** | `metrics/composites/03_sdrm.md` |
+
+---
+
+# IV-B. Extras (outside the 11 core)
+
+Tracked, rankable, displayable — but **not** part of the 11-core stack and **not** weighted into SIGNA RATE. Live in `metrics/extras/`.
+
+## `E.01` — Signal Force (SF · aliases: sigalpha, Sig Alpha)
+
+| Field | Value |
+|---|---|
+| **Canonical ID** | **E.01** (was C.02) |
+| **DB column** | `metric_snapshots.signal_force` |
+| **Formula (raw)** | `(B.03 × M.04_raw) / B.02` |
+| **Formula (score)** | `min(100, 20 × log₁₀(E.01_raw + 1))` |
+| **Domain (raw)** | `[0, ∞)` · **Domain (score)** `[0, 100]` |
+| **Status** | 🟢 LOCKED |
+| **Required inputs** | B.03, M.04, B.02 |
+| **MO§ES reference** | `[TBD]` ← needs B.03 (lifetime totals); partial inputs available |
+| **Spec doc** | `metrics/extras/01_signal_force.md` |
+
+## `E.02` — Drift Ratio (DR% · aliases: sigdrift, Sig Delta)
+
+| Field | Value |
+|---|---|
+| **Canonical ID** | **E.02** (was C.03) |
 | **DB column** | `metric_snapshots.drift_ratio` |
 | **Formula** | `(aligned_messages / total_messages) × 100` |
 | **Alignment scoring** | requires semantic vector analysis — `[PROPRIETARY]` |
@@ -245,7 +279,7 @@ Derived metrics. The flagship plus two advanced.
 | **Status** | 🟡 PROVISIONAL — precision tier only · no free-tier proxy |
 | **Tier** | Precision tier (sig_army) ONLY |
 | **MO§ES reference** | `[NOT COMPUTED]` ← sig_army not yet run |
-| **Spec doc** | `metrics/composites/03_drift_ratio.md` |
+| **Spec doc** | `metrics/extras/02_drift_ratio.md` |
 
 ---
 

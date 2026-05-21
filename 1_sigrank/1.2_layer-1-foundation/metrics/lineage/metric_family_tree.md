@@ -1,31 +1,30 @@
 # Metric Family Tree
 
-A visual lineage of how every SigRank metric relates to every other, including renames and retired branches.
+A visual lineage of how every SigRank metric relates to every other, including renames and active aliases.
+
+> **Corrected 2026-05-21:** A prior commit (`2c3b0be` by `Claude Sonnet 4.6`) incorrectly retired SDOT and SDRM and demoted the Sig Delta / Sig Alpha aliases. Both have been restored. SDOT and SDRM are active in the Big 3.
 
 ---
 
 ## The full tree
 
 ```
-                           SIGRANK METRIC STACK
+                           SIGRANK METRIC STACK — 11 core + extras
                                     │
-            ┌───────────────────────┼───────────────────────┐
-            │                       │                       │
-         CORE 5                BACKGROUND 3            COMPOSITES
-            │                       │                       │
-   ┌────────┼────────┐      ┌───────┼───────┐      ┌───────┼───────┐
-   │        │        │      │       │       │      │       │       │
- Comp      PC       CT     MV    AcctAge  TotMsg  SIGNA  Signal  Drift
-(S/Nr)                                            RATE   Force   Ratio
-   │       │       │                                │     │      │
-   │       │       │                            (was     SF      DR%
-   │       │       │                          Transmitter        precision
-   │       │       │                          Composite)         tier only
-   │       │       │                              │              │
-   │       │       │                              └── weighted   └── no clean
-   │       │       │                                  Core 5         token proxy
-   │       │       │
-   │       │       └── proxied by Cache Hit Rate (token model)
+            ┌───────────────────────┼───────────────────────┬─────────────┐
+            │                       │                       │             │
+         CORE 5                BACKGROUND 3          BIG 3 COMPOSITES   EXTRAS
+            │                       │                       │             │
+   ┌────────┼────────┐      ┌───────┼───────┐    ┌──────────┼──────┐  ┌───┴───┐
+   │        │        │      │       │       │    │          │      │  │       │
+ Comp     PC        CT     MV   AcctAge  TotMsg SIGNA      SDOT  SDRM SigForce Drift
+(S/Nr)                                           RATE                  (alpha)  Ratio
+   │       │        │                              │        │     │     │      (delta)
+   │       │        │                            (was      slope coh   load×   precision
+   │       │        │                         Transmitter  /∆t   axes  longevity tier
+   │       │        │                         Composite)                          only
+   │       │        │
+   │       │        └── proxied by Cache Hit Rate (token model)
    │       │
    │       └── proxied by Raw Input (weak — volume, not complexity)
    │
@@ -61,27 +60,36 @@ Output : Fresh Input (token-economic proxy)
 SIGNA RATE (flagship public name, 2026-03)
 ```
 
-### Retired branches
+### Active branches (corrected 2026-05-21)
 
-**SDOT (Signal Delta Over Time)** — retired. Never had a confirmed formula. Not implemented.
+**SDOT (Signal Delta Over Time)** — active, Big 3. Trajectory/slope of signal across windows. Formula provisional.
 
-**SDRM (Signal Density Resonance Metric)** — retired. No active prototype. Not implemented.
+**SDRM (Signal Density Resonance Metric)** — active, Big 3. Multi-axis cohesion at a single window. Formula provisional.
 
-**Sig Delta** — never adopted. Drift Ratio remains canonical.
+**Sig Delta** — confirmed alias of Drift Ratio. Same metric, two labels.
 
-**Sig Alpha** — never adopted. Signal Force remains canonical.
+**Sig Alpha** — confirmed alias of Signal Force. Same metric, two labels.
 
-See [naming_drift.md](naming_drift.md) for the full retirement notes.
+See [naming_drift.md](naming_drift.md) for the full alias ledger and the 2026-05-21 reversal of the incorrect retirement commit.
 
 ---
 
-## Composites layer
+## Composites layer (Big 3)
 
-The composites layer is **3 metrics**:
+The composites layer inside the 11 core is **3 metrics**:
 
-1. **SIGNA RATE** (flagship — formerly Transmitter Composite)
-2. **Signal Force** (SF)
-3. **Drift Ratio** (DR%) — precision tier only
+1. **SIGNA RATE** (flagship — formerly Transmitter Composite) — weighted composite of Core 5
+2. **SDOT** — Signal Delta Over Time, trajectory metric
+3. **SDRM** — Signal Density Resonance Metric, coherence metric
+
+## Extras (outside the 11 core)
+
+Tracked, rankable, but not core:
+
+- **Signal Force** (SF / sigalpha) — load × longevity composite
+- **Drift Ratio** (DR% / sigdrift / Sig Delta) — precision tier only
+
+See [`../extras/`](../extras/) for spec files.
 
 ---
 

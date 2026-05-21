@@ -15,6 +15,8 @@ Append-only record of decisions affecting the foundation layer (11 equations, cl
 **Renamed:** Transmitter Composite → SIGNA RATE (C.01)
 **Reversal cost:** High — would unwind multiple specs.
 
+> ⚠️ **CORRECTION 2026-05-21 (operator):** Big-3 composition above is WRONG. See resolution below.
+
 ---
 
 ## 2026-05-21 · Badges added to Layer 1
@@ -88,3 +90,34 @@ Reading the ChatGPT session, four token-side concepts emerged that aren't yet fi
 3. Should Hall of Signal records be tracked retroactively from existing data, or only forward from launch?
 4. Class promotion stickiness (3 consecutive cycles) — confirmed in CANON RS.07 — but should we visualize the "pending promotion" state to operators (e.g., "2 of 3 cycles confirmed")?
 5. Each of the five candidates above (per the 2026-05-21 entry).
+
+---
+
+## 2026-05-21 · Big 3 composition resolved + SDOT/SDRM restored + extras layer defined
+
+**Decided by:** operator (correction in chat)
+**Decision:** The 11-core stack is locked as:
+
+- **Core 5:** M.01–M.05 (Compression Ratio, Prompt Complexity, Cross-Thread, Session Depth, Token Throughput)
+- **Background 3:** B.01–B.03 (Message Volume, Account Age, Total Messages)
+- **Big 3 (composites inside the 11 core):** SIGNA RATE (C.01) · SDOT (C.02) · SDRM (C.03)
+
+**Outside the 11 core (extras):**
+
+- Signal Force (E.01 · aliases sigalpha, Sig Alpha)
+- Drift Ratio (E.02 · aliases sigdrift, Sig Delta)
+
+**Provenance:** Prior commit `2c3b0be` (Claude Sonnet 4.6, 2026-05-20 16:41) unilaterally retired SDOT/SDRM and demoted the Sig Delta / Sig Alpha aliases. That commit's claims are reversed. SDOT and SDRM are restored from the original spec foundation (commit `eaefdd1`, 2026-05-20 16:06). The alias relationships are confirmed: Sig Delta = Drift Ratio, Sig Alpha = Signal Force.
+
+**Files affected:**
+
+- `1_sigrank/1.1_layer-0-ground/build/CANON.md` — Composites section restructured into Big 3 (C.01–C.03) + extras (E.01–E.02)
+- `1_sigrank/1.2_layer-1-foundation/metrics/composites/` — `02_sdot.md` created, `03_sdrm.md` restored from git, Signal Force + Drift Ratio moved out
+- `1_sigrank/1.2_layer-1-foundation/metrics/extras/` — new folder for Signal Force + Drift Ratio
+- `1_sigrank/1.2_layer-1-foundation/metrics/lineage/naming_drift.md` — retirement claims reversed; aliases reinstated
+- `1_sigrank/1.2_layer-1-foundation/metrics/lineage/metric_family_tree.md` — tree diagram updated to show 11 core + extras
+- `1_sigrank/1.2_layer-1-foundation/metrics/00_README.md` — stack table rewritten
+
+**Open formula items:** SDOT and SDRM are PROVISIONAL — neither has a locked formula. Working hypotheses are in their spec files.
+
+**Reversal cost:** Medium. The schema (`metric_snapshots`) needs columns added for `sdot_score` and `sdrm_score`, but that hasn't been deployed yet so it's purely doc-level today.

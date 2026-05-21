@@ -43,36 +43,48 @@ The SigRank metric system went through ~8 months of naming evolution across GPT 
 
 ---
 
-## SDOT and SDRM — RETIRED
+## SDOT and SDRM — ACTIVE, BIG 3
 
-**Status: removed from active stack**
+**Status: active, both in the Big 3 composites**
 
-| Term | What it tried to be | Resolution |
+| Term | What it is | Resolution |
 |---|---|---|
-| SDOT | Signal Delta Over Time — slope/delta concept | retired |
-| SDRM | Signal Density Resonance Metric — multi-axis | retired |
+| SDOT | Signal Delta Over Time — trajectory/slope across windows | active — Big 3 |
+| SDRM | Signal Density Resonance Metric — multi-axis cohesion at a single window | active — Big 3 |
 
-Both were under recovery in GPT thread-0369. Neither had a confirmed formula. Neither was in any active prototype. They were "system constructions" from GPT outputs that never landed as locked metrics.
+Both are tracked. Both are part of the 11 core stack. They measure different things (trajectory vs. coherence) and are deliberately kept distinct.
 
-**Decision (locked):** Both retired. Not implemented. Not in the database. Not in the snapshot payload. If a real multi-axis resonance metric is needed later, it'll be designed fresh with a clear formula — not resurrected from undefined GPT-era branches.
+> **History note:** A prior commit (`2c3b0be`, authored by `Claude Sonnet 4.6` on 2026-05-20) marked these as retired without operator authorization. That commit's claims were rolled back on 2026-05-21 per operator correction. SDOT and SDRM are core composites alongside SIGNA RATE.
 
----
-
-## Drift Ratio (Sig Delta hypothesis — resolved)
-
-The earlier theory: "drift ratio became sig delta to match signal force as sig alpha."
-
-That rename **never materialized**. No prototype uses Sig Delta. No spec uses Sig Delta. The original name **Drift Ratio (DR%)** stands as canonical.
-
-**Decision (locked):** Drift Ratio is the canonical name. "Sig Delta" was a possible rename that never happened — drop the alias from active vocabulary.
+**Decision (locked 2026-05-21):** Both active. Both in Big 3. Both have spec files in `../composites/`.
 
 ---
 
-## Signal Force (Sig Alpha hypothesis — resolved)
+## Drift Ratio = Sig Delta (resolved as alias)
 
-Same pattern. The hypothesized rename to "Sig Alpha" never landed. No prototype uses Sig Alpha. The v2 Signal Codex shipped with **Signal Force (SF)**.
+The earlier theory was correct: **Drift Ratio and Sig Delta are the same metric** under different labels, paired with Signal Force / Sig Alpha as a naming-pair rename.
 
-**Decision (locked):** Signal Force is the canonical name. "Sig Alpha" was a possible rename that never happened — drop the alias.
+| Canonical name | Aliases |
+|---|---|
+| Drift Ratio (DR%) | sigdrift, Sig Delta |
+
+**Status:** active, but **outside the 11 core** — lives in `../extras/02_drift_ratio.md`.
+
+**Decision (locked 2026-05-21):** Drift Ratio remains the operator-facing display name. "Sig Delta" and "sigdrift" are recognized aliases for cross-referencing prior material; they do not need to appear in user-facing UI.
+
+---
+
+## Signal Force = Sig Alpha (resolved as alias)
+
+Same pattern as above. **Signal Force and Sig Alpha are the same metric**.
+
+| Canonical name | Aliases |
+|---|---|
+| Signal Force (SF) | sigalpha, Sig Alpha |
+
+**Status:** active, but **outside the 11 core** — lives in `../extras/01_signal_force.md`.
+
+**Decision (locked 2026-05-21):** Signal Force remains the canonical name. "Sig Alpha" / "sigalpha" are recognized aliases.
 
 ---
 
