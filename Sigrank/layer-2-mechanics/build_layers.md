@@ -85,7 +85,7 @@ Infrastructure. Stateful. Operates the system.
 
 ### B1. Database (Supabase Postgres)
 - **Purpose**: Source of truth for all data
-- **Repo**: Migrations in `rns/primary/scoring/architecture/migrations/` (public)
+- **Repo**: Migrations in `rns/Sigrank/layer-2-mechanics/migrations/` (public)
 - **Tech**: Supabase Postgres, RLS policies, Realtime, pgvector
 - **Depends on**: nothing
 - **Status**: `mvp`
@@ -396,7 +396,7 @@ The public face.
 
 ### E1. Main Web App
 - **Purpose**: Public leaderboard, operator profiles, all the BlitzStars-style pages
-- **Repo**: `sigrank-web` (new public repo, imports `rns/components/sigrank/`)
+- **Repo**: `sigrank-web` (new public repo, imports `rns/Sigrank/components/sigrank/`)
 - **Tech**: Next.js App Router + TypeScript + Tailwind + Supabase client + Realtime
 - **Depends on**: B1, B4
 - **Status**: `mvp`
@@ -886,7 +886,7 @@ This is the order I'd actually build in. Each step is independently demoable.
 | `sigrank-scoring-worker` | **private** | algo library, Railway worker, scoring engine, ruleset config, badge engine |
 | `sigrank-sig-army` | **private** | precision tier, word_vault, Drift Ratio, sig_army engine |
 | `sigrank-agent` | public | Python CLI, adapters, signing |
-| `sigrank-web` | public | Next.js app — imports `rns/components/sigrank/` |
+| `sigrank-web` | public | Next.js app — imports `rns/Sigrank/components/sigrank/` |
 | `sigrank-mcp` | public | MCP server |
 | `sigrank-claude-plugin` | public | Claude Code plugin |
 | `sigrank-landing` | public | Marketing site |

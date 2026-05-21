@@ -2,7 +2,7 @@
 
 This folder holds everything that informed the SigRank build but **is not part of the production site or scoring system**. Source material, historical prototypes, benchmark artifacts, competitor analysis, archived research.
 
-**If it's referenced by `primary/` or `comms/`, it stays here.** If it's not, it can be archived externally.
+**If it's referenced by `Sigrank/` or `comms/`, it stays here.** If it's not, it can be archived externally.
 
 ---
 
@@ -59,11 +59,11 @@ Research notes on SDOT (Signal Delta Over Time) — a metric that was under cons
 
 ## What does NOT belong here
 
-- Production canon (lives in `primary/scoring/layer-0-ground/build/`)
-- Production guidance (lives in `primary/scoring/layer-0-ground/guidance/`)
-- Active mockups (live in `primary/scoring/layer-3-frontend/v4_mockup/`)
-- Components used at runtime (live in `components/sigrank/`)
-- Active spec documents (live in `primary/scoring/layer-{1,2,3}-*/`)
+- Production canon (lives in `Sigrank/layer-0-ground/build/`)
+- Production guidance (lives in `Sigrank/layer-0-ground/guidance/`)
+- Active mockups (live in `Sigrank/layer-3-frontend/v4_mockup/`)
+- Components used at runtime (live in `Sigrank/components/sigrank/`)
+- Active spec documents (live in `Sigrank/layer-{1,2,3}-*/`)
 - Multi-model coordination (lives in `comms/`)
 - Operator-dropped new info (lives in `inbox/`)
 
@@ -86,5 +86,5 @@ When moving, use `git mv` to preserve history.
 
 ## See also
 
-- [`../primary/scoring/layer-0-ground/guidance/LINEAGE.md`](../primary/scoring/layer-0-ground/guidance/LINEAGE.md) — historical context for what's in this folder
-- [`../primary/scoring/layer-0-ground/build/MOSES_REFERENCE.md`](../primary/scoring/layer-0-ground/build/MOSES_REFERENCE.md) — canon row that ties back to `benchmark_export/summary.json` here
+- [`../Sigrank/layer-0-ground/guidance/LINEAGE.md`](../Sigrank/layer-0-ground/guidance/LINEAGE.md) — historical context for what's in this folder
+- [`../Sigrank/layer-0-ground/build/MOSES_REFERENCE.md`](../Sigrank/layer-0-ground/build/MOSES_REFERENCE.md) — canon row that ties back to `benchmark_export/summary.json` here

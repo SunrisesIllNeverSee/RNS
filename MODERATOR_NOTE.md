@@ -17,7 +17,7 @@ For anyone (human or AI moderator, future model joining the build, or operator r
 - **Identity:** Deric McHenry (`dericmchenry@gmail.com`)
 - **Operator tuple:** `Operator-HUMAN-OWNER`
 - **Authority:** Final decision on everything. Owns RS.xx proprietary parameters. Owns ruleset versions. Owns commits.
-- **Status:** OG SIGRANK — the originator of the conservation-law mapping that all current builds rest on (see `primary/scoring/layer-0-ground/guidance/CONSERVATION_LAW.md` and `LINEAGE.md`).
+- **Status:** OG SIGRANK — the originator of the conservation-law mapping that all current builds rest on (see `Sigrank/layer-0-ground/guidance/CONSERVATION_LAW.md` and `LINEAGE.md`).
 
 ---
 
@@ -60,21 +60,21 @@ See `comms/PARTICIPANTS.md` for full registry and protocol for joining.
 
 ```
 LAYER 0 — Ground Foundation (the unbuilt-on bedrock)
-  primary/scoring/layer-0-ground/
+  Sigrank/layer-0-ground/
     ├── build/      — production canon (use to compute)
     │     CANON.md · SOURCE_DATA.md · GREENING.md · ROOT_NUMBERS.md · MOSES_REFERENCE.md
     └── guidance/   — philosophical context (interprets the compute)
           CONSERVATION_LAW.md · LINEAGE.md · TOKENS_PER_WORD.md
 
 LAYER 1 — Foundation (built on Layer 0)
-  primary/scoring/layer-1-foundation/
+  Sigrank/layer-1-foundation/
     ├── metrics/    — the 11 equations (M.xx / B.xx / C.xx) + lineage
     ├── class_tiers.md     — K.01-K.09
     ├── badges/     — BG.xx catalog
     └── rewards/    — RW.xx tier mapping
 
 LAYER 2 — Mechanics (built on Layers 0 + 1)
-  primary/scoring/layer-2-mechanics/
+  Sigrank/layer-2-mechanics/
     ├── IPO.md, db_schema.md, api_spec.md, snapshot_payload.md
     ├── scoring_formula.md, token_metric_bridge.md
     ├── deployment_topology.md, build_layers.md
@@ -82,7 +82,7 @@ LAYER 2 — Mechanics (built on Layers 0 + 1)
     └── refresh_cadences.md
 
 LAYER 3 — Frontend (built on all previous)
-  primary/scoring/layer-3-frontend/
+  Sigrank/layer-3-frontend/
     ├── site_architecture.md
     ├── v3_mockup/, v4_mockup/
     └── stripe_checkout_ui.md
@@ -92,9 +92,9 @@ Plus:
 - `comms/` — multi-model project communication system
 - `references/` — material we used to build, not needed at runtime
 - `inbox/` — operator → models drop zone
-- `components/sigrank/` — 12 TSX components for the production Next.js app
-- `primary/sig_army/` + `primary/word_vault/` + `primary/WordToken-SNR-Classifier/` — the SigSystem-resolution engine for Pro tier
-- `primary/agent/` — local agent (Python CLI) spec
+- `Sigrank/components/sigrank/` — 12 TSX components for the production Next.js app
+- `Sigrank/sig_army/` + `Sigrank/word_vault/` + `Sigrank/WordToken-SNR-Classifier/` — the SigSystem-resolution engine for Pro tier
+- `Sigrank/agent/` — local agent (Python CLI) spec
 - `secondary/` — existing partial Next.js attempts (SiGlobe, signal-Areana) for component salvage
 - `outliers/` — old prototypes not directly used
 
@@ -144,14 +144,14 @@ Key items waiting on operator:
 
 Read in order:
 1. This file (you're already here)
-2. `primary/scoring/layer-0-ground/build/CANON.md` — every ID and the formula structure
-3. `primary/scoring/layer-0-ground/build/ROOT_NUMBERS.md` — what the equations consume
-4. `primary/scoring/layer-0-ground/build/MOSES_REFERENCE.md` — the only fully-verified operator
-5. `primary/scoring/layer-0-ground/guidance/CONSERVATION_LAW.md` — why the math works
-6. `primary/scoring/layer-0-ground/guidance/LINEAGE.md` — historical context
+2. `Sigrank/layer-0-ground/build/CANON.md` — every ID and the formula structure
+3. `Sigrank/layer-0-ground/build/ROOT_NUMBERS.md` — what the equations consume
+4. `Sigrank/layer-0-ground/build/MOSES_REFERENCE.md` — the only fully-verified operator
+5. `Sigrank/layer-0-ground/guidance/CONSERVATION_LAW.md` — why the math works
+6. `Sigrank/layer-0-ground/guidance/LINEAGE.md` — historical context
 7. `comms/decisions/layer-*-decisions.md` — what's been decided and why
-8. `primary/scoring/layer-2-mechanics/deployment_topology.md` — how it runs
-9. `primary/scoring/layer-3-frontend/site_architecture.md` — what it looks like
+8. `Sigrank/layer-2-mechanics/deployment_topology.md` — how it runs
+9. `Sigrank/layer-3-frontend/site_architecture.md` — what it looks like
 
 Then read the relevant layer for whatever you're picking up.
 

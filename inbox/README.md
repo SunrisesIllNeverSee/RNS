@@ -59,9 +59,9 @@ If the file requires another participant (e.g., needs Python implementation), LE
 
 ## What does NOT belong in inbox/
 
-- **Direct edits to canon** — operator can edit `primary/scoring/layer-0-ground/build/CANON.md` directly; doesn't need to go through inbox
+- **Direct edits to canon** — operator can edit `Sigrank/layer-0-ground/build/CANON.md` directly; doesn't need to go through inbox
 - **Model output** — models write to `comms/messages/` instead
-- **Production code** — that goes in `primary/` or `secondary/` directly
+- **Production code** — that goes in `Sigrank/` or `secondary/` directly
 - **Tests** — those go in `tests/` (not yet created)
 
 ---

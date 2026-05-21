@@ -162,7 +162,7 @@ See [../scoring/architecture/api_spec.md](../scoring/architecture/api_spec.md) f
 
 ## Open questions
 
-1. Where does the Python CLI live in this repo long-term? `primary/agent/` or its own subpackage?
+1. Where does the Python CLI live in this repo long-term? `Sigrank/agent/` or its own subpackage?
 2. Should we ship Claude Code as a built-in adapter from day one (it's the obvious starting point)?
 3. Do we want a Codex / Cursor CLI extension before or after the Python CLI is stable?
 4. Public key registration — auto-trust on first submission or require email verification?
@@ -177,4 +177,4 @@ See [../scoring/architecture/api_spec.md](../scoring/architecture/api_spec.md) f
 2. Architecture is approved
 3. The scoring engine spec is locked
 
-The HTML prototypes in [../prototypes/](../prototypes/) provide visual reference. The components in [../../components/sigrank/](../../components/sigrank/) provide the UI building blocks.
+The HTML prototypes in [../prototypes/](../prototypes/) provide visual reference. The components in [../../Sigrank/components/sigrank/](../../Sigrank/components/sigrank/) provide the UI building blocks.

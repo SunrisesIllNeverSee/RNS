@@ -36,7 +36,7 @@ Last reviewed: 2026-05-20 · Ruleset version: **1.0**
 Every ID maps to:
 - A row in this document
 - A DB column or scoring-engine constant
-- A spec doc under `primary/scoring/`
+- A spec doc under `Sigrank/layer-0-ground/build/`
 
 **Rule:** If a value isn't `[ID]`-tagged in this document, do NOT use it for build decisions.
 
@@ -474,7 +474,7 @@ Effective: 2026-05-14 onwards (date placeholder until first real scoring run).
 The complete spec set this document references:
 
 ```
-primary/scoring/
+Sigrank/layer-0-ground/build/
 ├── CANON.md                                  ← THIS FILE
 ├── extract_benchmark_window.py               ← MO§ES extraction script
 ├── 03_moses_5_benchmarks.md                  ← MO§ES 5 categories

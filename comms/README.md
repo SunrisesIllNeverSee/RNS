@@ -65,7 +65,7 @@ When a model starts working:
   "participant_id": "VSClaude-OPUS47-LEAD",
   "started_at": "2026-05-21T14:23:00Z",
   "scope": "Layer 0 foundation + comms scaffolding",
-  "current_file": "primary/scoring/layer-0-ground/build/CANON.md",
+  "current_file": "Sigrank/layer-0-ground/build/CANON.md",
   "last_heartbeat": "2026-05-21T14:45:12Z"
 }
 ```
@@ -129,8 +129,8 @@ topic: Layer 2 mechanics — billing implementation
 - Write Python tests against Stripe test mode
 
 ## Pickup files
-- Specs: primary/scoring/layer-2-mechanics/billing/*.md
-- Schema: primary/scoring/layer-2-mechanics/db_schema.md
+- Specs: Sigrank/layer-2-mechanics/billing/*.md
+- Schema: Sigrank/layer-2-mechanics/db_schema.md
 
 ## Open questions
 - Should Pro yearly include a discount or just match monthly × 12?
@@ -172,7 +172,7 @@ Append to `comms/decisions/layer-{N}-decisions.md`.
 
 ```json
 {
-  "primary/scoring/layer-0-ground/build/CANON.md": {
+  "Sigrank/layer-0-ground/build/CANON.md": {
     "claimed_by": "VSClaude-OPUS47-LEAD",
     "claimed_at": "2026-05-21T14:23:00Z",
     "expires_at": "2026-05-21T16:23:00Z",

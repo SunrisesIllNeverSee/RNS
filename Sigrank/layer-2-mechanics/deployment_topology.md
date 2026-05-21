@@ -12,7 +12,7 @@ How SigRank actually runs in production. The split between open-source layers an
 │ (Privacy / trust / community contribution / funnel)              │
 ├──────────────────────────────────────────────────────────────────┤
 │ • Local Agent       → Python CLI, GitHub public repo             │
-│ • Web Frontend      → Next.js + components/sigrank/              │
+│ • Web Frontend      → Next.js + Sigrank/components/sigrank/              │
 │ • Snapshot schema   → JSON spec, documented                      │
 │ • Adapter SDK       → Community can add new platforms            │
 │ • Signing layer     → Standard ed25519, no secret sauce          │
@@ -61,7 +61,7 @@ How SigRank actually runs in production. The split between open-source layers an
 │ VERCEL (frontend hosting)                                        │
 ├──────────────────────────────────────────────────────────────────┤
 │ • Next.js app — public-facing leaderboard                        │
-│ • Components from components/sigrank/                            │
+│ • Components from Sigrank/components/sigrank/                            │
 │ • Reads from Supabase (public schema)                            │
 │ • Realtime subscription for live updates                         │
 └──────────────────────────────────────────────────────────────────┘
@@ -114,9 +114,9 @@ How SigRank actually runs in production. The split between open-source layers an
 ```
 github.com/SunrisesIllNeverSee/rns           ← this repo
   - components/                                ← UI components
-  - primary/agent/                             ← local agent specs
-  - primary/scoring/architecture/             ← public-facing specs
-  - primary/scoring/metrics/                  ← metric definitions
+  - Sigrank/agent/                             ← local agent specs
+  - Sigrank/layer-2-mechanics/             ← public-facing specs
+  - Sigrank/layer-1-foundation/metrics/                  ← metric definitions
   - secondary/                                 ← web app
 
 github.com/SunrisesIllNeverSee/sigrank-cli   ← (future) local Python agent
@@ -126,7 +126,7 @@ github.com/SunrisesIllNeverSee/sigrank-cli   ← (future) local Python agent
 
 github.com/SunrisesIllNeverSee/sigrank-web   ← (future) public Next.js app
   - app/
-  - components/  (imports from rns/components/sigrank)
+  - components/  (imports from rns/Sigrank/components/sigrank)
   - lib/
 ```
 
@@ -272,7 +272,7 @@ The privacy claim is **independently verifiable** because the agent is open sour
 5. Deploy — worker starts LISTENing for new submissions
 
 ### Week 3: Public web frontend on Vercel
-1. Build Next.js app importing `components/sigrank/`
+1. Build Next.js app importing `Sigrank/components/sigrank/`
 2. Connect to Supabase (anon key, RLS-protected reads)
 3. Deploy to Vercel
 4. Configure custom domain

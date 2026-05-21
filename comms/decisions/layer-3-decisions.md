@@ -20,7 +20,7 @@ Append-only record of decisions affecting the frontend layer (site architecture,
 ## 2026-05-19 · 12 TSX components shipped
 
 **Decided by:** VSClaude-OPUS47-LEAD
-**Decision:** Built 12 components in `components/sigrank/`:
+**Decision:** Built 12 components in `Sigrank/components/sigrank/`:
 - LeaderboardTable, ProfilePanel, AnalyticsDashboard, K2IndexSnapshot, WrappedStats, CrossPlatformLeaderboard, SignalSystemBoard, MetricTabs, SignalClassBadge, tokens, types, index
 **Reversal cost:** Low — TSX components can be reworked anytime.
 

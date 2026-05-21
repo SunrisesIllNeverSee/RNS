@@ -319,7 +319,7 @@ This one is essentially done — the qualitative ranges in the K.xx table ARE th
 
 **What's needed**:
 - [ ] Set up Modal account + private repo `sigrank-sig-army`
-- [ ] Port the word_vault from `primary/word_vault/words_user/` (4,900 token files) into the classifier
+- [ ] Port the word_vault from `Sigrank/word_vault/words_user/` (4,900 token files) into the classifier
 - [ ] Build the classifier: token → signal/noise binary classification
 - [ ] Build sub-score extractors for PC (instruction_layers, recursion_logic, etc.)
 - [ ] Build drift detection (semantic vector deviation)

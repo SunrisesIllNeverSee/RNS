@@ -26,7 +26,7 @@ philosophical              COMMITMENT THEORY      Why signal is preserved at all
 
 word-level                 SIGSYSTEM              Signal vs noise per word, in context
                                                   Token-per-word resolution
-                                                  Lives in: primary/sig_army/ + primary/word_vault/
+                                                  Lives in: Sigrank/sig_army/ + Sigrank/word_vault/
 
 behavioral                 OG SIGRANK             SNR of language → behavioral coherence → tokens
                                                   THE OPERATOR IS OG SIGRANK
@@ -41,7 +41,7 @@ token-total resolution     rns-sigrank            What we're building now
 token-per-word resolution  REFINERY               Future build
                                                   SigSystem-grade signal/noise per token
                                                   Powers routing decisions
-                                                  Lives in: primary/sig_army/ at this scale
+                                                  Lives in: Sigrank/sig_army/ at this scale
 
 routing layer              SWITCHBOARD            Existing build, depends on Refinery
                                                   ~/Desktop/hermes/moses/switchboard/

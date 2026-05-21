@@ -66,7 +66,7 @@ Append-only record of decisions affecting the ground foundation (root numbers, c
 ## 2026-05-21 · CANON.md location
 
 **Decided by:** operator
-**Decision:** CANON.md moved from `primary/scoring/CANON.md` to `primary/scoring/layer-0-ground/build/CANON.md`.
+**Decision:** CANON.md moved from `Sigrank/layer-0-ground/build/CANON.md` to `Sigrank/layer-0-ground/build/CANON.md`.
 **Reversal cost:** Low — `git mv` preserves history.
 
 ---
