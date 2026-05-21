@@ -18,8 +18,9 @@ The v4 mockup pages (`intro.html`, `index.html`, `profile.html`) contain a mix o
 |---|---|---|
 | Core 5 metric names | Compression Ratio, Prompt Complexity, Cross-Thread, Session Depth, Token Throughput | `1_sigrank/1.2_layer-1-foundation/metrics/00_README.md` |
 | Background 3 metrics | Message Volume, Account Age, Total Messages | spec |
-| Composites (3) | SIGNA RATE, Signal Force, Drift Ratio | spec (SDOT/SDRM retired) |
-| Total active metrics | 11 | spec |
+| Big 3 (composites inside the 11 core) | SIGNA RATE, SDOT, SDRM | spec (corrected 2026-05-21 — SDOT/SDRM restored) |
+| Extras (outside the 11 core) | Signal Force (E.01 · sigalpha), Drift Ratio (E.02 · sigdrift / Sig Delta) | spec |
+| Total active metrics | 11 core + 2 extras | spec |
 | 9 class tier names | TRANSMITTER, ARCHITECT+, ARCHITECT, POWER, BASE, SEEKER, REFINER, BEARER, IGNITER | v1 codex + spec |
 | Compression formula concept | `Signal / (Signal + Noise)` bounded [0,1] | screenshot arithmetic |
 | Compression example: 703,944 / 822,902 = 0.8554 | Real arithmetic | screenshot in GPT thread-0369 |
@@ -100,7 +101,9 @@ Note: the turn counts are **real values** from `summary.json` but the **labels a
 | Session Depth: 26.1 | 🟡 illustrative | Real SD avg is 348.9 turns/session (poster) — not the same scale |
 | Token Throughput: 18.4k | 🟡 illustrative | Output volume is real but TT normalization not applied |
 | PC: ~92 | 🔴 placeholder | Requires sig_army — not computed |
-| Signal Force: 12.8 | 🔴 placeholder | Formula real, real values not plugged in |
+| SDOT: +4.2 | 🔴 placeholder | Trajectory delta — formula provisional, status locked |
+| SDRM: 81 | 🔴 placeholder | Coherence score — formula provisional, status locked |
+| Signal Force: 12.8 (extra, not core) | 🔴 placeholder | Now extras layer — formula real, values not plugged in |
 | Streak: 38 days | 🔴 placeholder | Not computed |
 | Best Ever rank: #1 since 2026-05-14 | 🔴 placeholder | No actual rank history |
 | Audit Verified status | 🔴 placeholder | No audit performed |
@@ -225,7 +228,7 @@ The badge **system** exists in spec (`1_sigrank/1.3_layer-2-mechanics/db_schema.
 ## Build guidance
 
 ### Numbers that ARE safe to architect around
-- The metric stack itself (Core 5, Background 3, Composites)
+- The metric stack itself (Core 5, Background 3, Big 3, Extras)
 - Compression Ratio formula concept (Signal / Signal+Noise)
 - The 9 class hierarchy and ordering
 - TRANSMITTER threshold concept (≥ 0.85 Compression)

@@ -1,10 +1,11 @@
 # SDOT (Signal Delta Over Time)
 
-**Status:** provisional — definition stable, formula not locked
-**Layer:** Composite (Big 3, advanced)
+**Status:** 🟢 LOCKED (structure) · 🟡 PROVISIONAL (formula — operator to lock later)
+**Layer:** Composite (Big 3, inside the 11 core)
 **Public label:** SDOT
 **Short label:** SDOT
 **DB field:** `sdot_score`
+**Locked 2026-05-21 by:** operator (chat directive: "lock in sdot and sdrm i'll do the math later")
 
 ---
 

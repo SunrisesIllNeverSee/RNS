@@ -1,10 +1,11 @@
 # SDRM (Signal Density Resonance Metric)
 
-**Status:** provisional — definition stable, formula still under recovery
-**Layer:** Composite (advanced)
+**Status:** 🟢 LOCKED (structure) · 🟡 PROVISIONAL (formula — operator to lock later)
+**Layer:** Composite (Big 3, inside the 11 core)
 **Public label:** SDRM
 **Short label:** SDRM
 **DB field:** `sdrm_score`
+**Locked 2026-05-21 by:** operator (chat directive: "lock in sdot and sdrm i'll do the math later")
 
 ---
 

@@ -227,9 +227,10 @@ The three composite metrics that complete the 11-core stack: Core 5 + Background
 |---|---|
 | **Canonical ID** | **C.02** |
 | **DB column** | `metric_snapshots.sdot_score` |
+| **Role** | Trajectory metric — how the operator's composite signal changes across windows |
 | **Formula (provisional)** | `SIGNA_RATE(window_n) - SIGNA_RATE(window_n-1)` (self-delta) — population-relative variant under consideration |
 | **Domain** | `[-100, +100]` (signed delta) |
-| **Status** | 🟡 PROVISIONAL — formula not locked |
+| **Status** | 🟢 LOCKED (structure: in Big 3, role fixed) · 🟡 PROVISIONAL (formula — operator to lock later) |
 | **Required inputs** | SIGNA RATE history (min 2 windows) |
 | **MO§ES reference** | `[TBD]` ← needs multi-window scoring history |
 | **Spec doc** | `metrics/composites/02_sdot.md` |
@@ -240,9 +241,10 @@ The three composite metrics that complete the 11-core stack: Core 5 + Background
 |---|---|
 | **Canonical ID** | **C.03** |
 | **DB column** | `metric_snapshots.sdrm_score` |
+| **Role** | Coherence detector — whether Core 5 are mutually reinforcing (real Transmitter) or one carrying others (gameable) |
 | **Formula (provisional)** | `(Compression × (SD + PC)) × Thread_Rate` where `Thread_Rate = CT / Total_Messages` |
 | **Domain** | `[0, 100]` (scoring normalization TBD) |
-| **Status** | 🟡 PROVISIONAL — formula carried from v2 prototype, not locked |
+| **Status** | 🟢 LOCKED (structure: in Big 3, role fixed) · 🟡 PROVISIONAL (formula — operator to lock later) |
 | **Required inputs** | M.01, M.04, M.02, M.03, B.03 |
 | **MO§ES reference** | `[TBD]` |
 | **Spec doc** | `metrics/composites/03_sdrm.md` |

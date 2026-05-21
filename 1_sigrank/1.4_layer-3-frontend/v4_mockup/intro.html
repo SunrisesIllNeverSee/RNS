@@ -1213,7 +1213,7 @@
   <!-- THE CORE 5 METRICS -->
   <section>
     <div class="section-eyebrow">⊙ The metrics</div>
-    <h2 class="section-h2">Five signals. One composite. Nine classes.</h2>
+    <h2 class="section-h2">Five signals. Three composites. Nine classes.</h2>
     <p class="section-lede">
       Inputs are simple. The math is locked. The interpretation runs deep. Below is the operator performance stack.
     </p>
@@ -1266,6 +1266,22 @@
         </div>
         <p>The flagship. The composite. The number that owns your profile and drives your rank. Computed from the Core 5 with locked weights.</p>
         <div class="formula"><span class="op">w₁·</span><span class="var">Comp</span> <span class="op">+ w₂·</span><span class="var">SD</span> <span class="op">+ w₃·</span><span class="var">PC</span> <span class="op">+ w₄·</span><span class="var">CT</span> <span class="op">+ w₅·</span><span class="var">TT</span> <span class="op">· weights = </span><span class="var">RS.01</span></div>
+      </div>
+      <div class="metric-tile">
+        <div class="tile-head">
+          <span class="ticker">SDOT</span>
+          <h3>Signal Delta Over Time<span class="canon-id real">C.02</span></h3>
+        </div>
+        <p>The trajectory metric. How your composite signal is moving across windows — accelerating, flat, or decaying. Sustained vs. single-spike.</p>
+        <div class="formula"><span class="var">SIGNA_RATE(t)</span> <span class="op">−</span> <span class="var">SIGNA_RATE(t−1)</span></div>
+      </div>
+      <div class="metric-tile">
+        <div class="tile-head">
+          <span class="ticker">SDRM</span>
+          <h3>Signal Density Resonance<span class="canon-id real">C.03</span></h3>
+        </div>
+        <p>The coherence detector. Whether your Core 5 metrics are mutually reinforcing (real signal) or one is propping up the others (gameable).</p>
+        <div class="formula"><span class="op">(</span><span class="var">Comp</span> <span class="op">·</span> <span class="op">(</span><span class="var">SD</span> <span class="op">+</span> <span class="var">PC</span><span class="op">))</span> <span class="op">·</span> <span class="var">Thread_Rate</span></div>
       </div>
     </div>
   </section>
